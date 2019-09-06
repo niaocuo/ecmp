@@ -68,40 +68,40 @@
           <li>新闻8</li>
         </ul>
       </div>
-      <div class="show2"></div>
+      <div class="show2" />
     </div>
   </div>
 </template>
 <script>
 export default {
   mounted() {
-    this.scrollInfinite();
+    this.scrollInfinite()
   },
   methods: {
     scrollInfinite() {
-      var main = document.getElementsByClassName("main")[0];
-      var show1 = document.getElementsByClassName("show1")[0];
-      var show2 = document.getElementsByClassName("show2")[0];
-      var timeId;
-      show2.innerHTML = show1.innerHTML;
-      timeId = setInterval(play, 25);
+      var main = document.getElementsByClassName('main')[0]
+      var show1 = document.getElementsByClassName('show1')[0]
+      var show2 = document.getElementsByClassName('show2')[0]
+      var timeId
+      show2.innerHTML = show1.innerHTML
+      timeId = setInterval(play, 25)
       function play() {
         if (main.scrollTop >= show1.offsetHeight) {
-          main.scrollTop = 0;
+          main.scrollTop = 0
         } else {
-          main.scrollTop++;
+          main.scrollTop++
         }
       }
-      play();
+      play()
       main.onmouseover = function() {
-        clearInterval(timeId);
-      };
+        clearInterval(timeId)
+      }
       main.onmouseout = function() {
-        timeId = setInterval(play, 25);
-      };
+        timeId = setInterval(play, 25)
+      }
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 * {

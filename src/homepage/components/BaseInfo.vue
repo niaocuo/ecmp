@@ -14,13 +14,13 @@
       </div>
     </div>
     <div class="bot-item">
-        <div style="border-bottom: 2px solid #bc7724;">变压器数量 <span class="fr">756台</span></div>
-        <div>总额定容量<span class="fr">2500kVA</span></div>
+      <div style="border-bottom: 2px solid #bc7724;">变压器数量 <span class="fr">756台</span></div>
+      <div>总额定容量<span class="fr">2500kVA</span></div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {}
 </script>
 <style lang="scss" scoped>
 .top-item {

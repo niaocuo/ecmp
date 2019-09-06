@@ -1,52 +1,52 @@
 <template>
-    <div>
-        <p class="title">{{title}}</p>
-        <div class="item-content" :style="styleType()">
-           <slot name="content"></slot>
-        </div>
+  <div>
+    <p class="title">{{ title }}</p>
+    <div class="item-content" :style="styleType()">
+      <slot name="content" />
     </div>
+  </div>
 </template>
 <script>
 import bigbg from '../../assets/dapiimg/bg-big.png'
 import smallbg from '../../assets/dapiimg/bg-small.png'
 export default {
-    name:'EchartItem',
-    props:{
-        title:{
-            type:String,
-            default:'基本信息'
-        },
-        size:{
-            type:String,
-            default:''
-        }
+  name: 'EchartItem',
+  props: {
+    title: {
+      type: String,
+      default: '基本信息'
     },
-    mounted(){
-    },
-    methods:{
-        styleType (){
-            if(this.size === 'small'){
-                return {
-                    height: '108px',
-                    minHeight:'108px',
-                     background: `url(${smallbg}) no-repeat`,
-                     backgroundSize: '100%'
-                }
-            } else if(this.size === 'big'){
-                 return {
-                    height: '434px',
-                    minHeight:'434px',
-                    background: `url(${bigbg}) no-repeat`,
-                    backgroundSize: '100%'
-                }
-            } else if(this.size === 'midden'){
-                 return {
-                    height: '280px',
-                    minHeight:'280px'
-                }
-            }
-        }
+    size: {
+      type: String,
+      default: ''
     }
+  },
+  mounted() {
+  },
+  methods: {
+    styleType() {
+      if (this.size === 'small') {
+        return {
+          height: '108px',
+          minHeight: '108px',
+          background: `url(${smallbg}) no-repeat`,
+          backgroundSize: '100%'
+        }
+      } else if (this.size === 'big') {
+        return {
+          height: '434px',
+          minHeight: '434px',
+          background: `url(${bigbg}) no-repeat`,
+          backgroundSize: '100%'
+        }
+      } else if (this.size === 'midden') {
+        return {
+          height: '280px',
+          minHeight: '280px'
+        }
+      }
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
