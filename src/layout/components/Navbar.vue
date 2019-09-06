@@ -16,10 +16,10 @@
               Home
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
+          <a target="_blank" href="https://github.com/niaocuo/ecmp/">
             <el-dropdown-item>Github</el-dropdown-item>
           </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
+          <a target="_blank" href="https://github.com/niaocuo/ecmp/#/">
             <el-dropdown-item>Docs</el-dropdown-item>
           </a>
           <el-dropdown-item divided>
@@ -34,12 +34,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
+// import Hamburger from '@/components/Hamburger'
 
 export default {
   components: {
-    Breadcrumb,
-    Hamburger
+    Breadcrumb
+    // Hamburger
   },
   computed: {
     ...mapGetters([
