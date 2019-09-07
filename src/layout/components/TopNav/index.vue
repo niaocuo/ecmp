@@ -33,7 +33,7 @@ export default {
         meta: { title: '表单父级', icon: 'example' },
         'children': [
           {
-            'path': 'index',
+            'path': '/form',
             'name': 'Form',
             'meta': {
               'title': '表单',
@@ -43,26 +43,43 @@ export default {
         ]
       },
       {
-        path: '/nested',
-        'meta': {
-          'title': '菜单3'
-        },
+        path: '/example',
+        'meta': { 'title': '菜单3' },
         'children': [
           {
-            'path': '/menu1',
+            'path': '/table',
             'name': 'Menu1-1',
-            'meta': {
-              'title': '菜单2'
-            }
+            'meta': { 'title': '菜单2' }
           },
           {
-            'path': '/menu2',
+            'path': '/tree',
             'name': 'Menu1-2',
-            'meta': {
-              'title': '菜单2'
-            }
+            'meta': { 'title': '菜单2' }
           }
-        ] }]
+        ]
+      },
+      {
+        path: '/sysManage',
+        'meta': { 'title': '系统管理' },
+        'children': [
+          {
+            'path': '/userManage',
+            'name': 'UserManage',
+            'meta': { 'title': '用户管理' }
+          },
+          {
+            'path': '/roleManage',
+            'name': 'RoleManage',
+            'meta': { 'title': '角色管理' }
+          },
+          {
+            'path': '/menuManage',
+            'name': 'MenuManage',
+            'meta': { 'title': '角色管理' }
+          }
+        ]
+      }
+      ]
     }
   },
   computed: {

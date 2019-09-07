@@ -57,7 +57,6 @@ export default {
     return {}
   },
   mounted(){
-         console.log(this.item)
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
@@ -81,7 +80,7 @@ export default {
         this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
         return true
       }
-       
+
       return false
     },
     resolvePath(routePath) {

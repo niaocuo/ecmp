@@ -49,15 +49,49 @@ export const constantRoutes = [
 
   {
     path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [{
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
-    }]
+    component: Layout
   },
+
+  {
+    path: '/dashboard',
+    component: Layout,
+    children: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '首页', icon: 'dashboard' }
+      }
+    ]
+  },
+
+  {
+    path: '/sysManage',
+    component: Layout,
+    name: 'SysManage',
+    meta: { title: '系统管理', icon: 'sysManage' },
+    children: [
+      {
+        path: '/userManage',
+        name: 'UserManage',
+        component: () => import('@/views/sysManage/userManage'),
+        meta: { title: '用户管理', icon: 'userManage' }
+      },
+      {
+        path: '/roleManage',
+        name: 'RoleManage',
+        component: () => import('@/views/sysManage/roleManage'),
+        meta: { title: '角色管理', icon: 'roleManage' }
+      },
+      {
+        path: '/menuManage',
+        name: 'MenuManage',
+        component: () => import('@/views/sysManage/menuManage'),
+        meta: { title: '菜单管理', icon: 'menuManage' }
+      }
+    ]
+  },
+
   {
     path: '/example',
     component: Layout,

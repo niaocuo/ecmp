@@ -73,7 +73,7 @@ export default {
             },
             symbolSize: 16,
             data: [{
-              symbol: (item.type == 'warning') ? mtPath : serverPath,
+              symbol: (item.type === 'warning') ? mtPath : serverPath,
 
               itemStyle: {
                 normal: { color: item.type ? 'red' : color[0] }
