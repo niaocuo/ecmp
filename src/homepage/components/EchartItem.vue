@@ -62,7 +62,7 @@ export default {
 }
 .item-content{
     background: url('../../assets/dapiimg/echart-item-bg.png') no-repeat;
-    min-height: 257px;
+    min-height: 268px;
     background-size: 100% 100%;
     margin-top: 5px;
     margin-bottom: 15px;

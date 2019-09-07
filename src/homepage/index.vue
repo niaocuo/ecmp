@@ -35,7 +35,7 @@
           <ServiceException slot="content" />
         </echart-item>
       </div>
-      <div style="padding-left: 10px;position:absolute;right: 0px;top: -175px;">
+      <div style="padding-left: 10px;position:absolute;right: 0px;top: -164px;">
         <echart-item title="告警事件" size="big">
           <AlarmStatus slot="content" />
         </echart-item>
