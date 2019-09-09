@@ -12,7 +12,13 @@
         :collapse-transition="false"
         mode="horizontal"
       >
-        <top-nav-item v-for="route in navList" :key="route.path" :item="route" :base-path="route.path" />
+        <top-nav-item
+          v-for="route in permission_routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+          style="display: inline-block"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -84,11 +90,12 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar',
+      'permission_routes'
     ]),
-    routes() {
-      return this.$router.options.routes
-    },
+    // routes() {
+    //   return this.$router.options.routes
+    // },
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
@@ -107,6 +114,9 @@ export default {
     isCollapse() {
       return !this.sidebar.opened
     }
+  },
+  mounted() {
+    // console.log(this.permission_routes)
   }
 }
 </script>

@@ -14,8 +14,8 @@
       </div>
     </div>
     <div class="bot-item">
-      <div style="border-bottom: 2px solid #bc7724;">变压器数量 <span class="fr">756台</span></div>
-      <div>总额定容量<span class="fr">2500kVA</span></div>
+      <div style="border-bottom: 2px solid #bc7724;"><img src="@/assets/dapiimg/icon1.png">变压器数量 <span class="fr">756台</span></div>
+      <div><img src="@/assets/dapiimg/icon2.png">总额定容量<span class="fr">2500kVA</span></div>
     </div>
   </div>
 </template>
@@ -55,6 +55,11 @@ export default {}
         text-align: left;
         padding: 0 20px;
         padding-right: 40px
+    }
+    img{
+      vertical-align: sub;
+      width: 20px;
+      margin-right: 5px
     }
 }
 

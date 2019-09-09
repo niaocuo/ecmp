@@ -1,5 +1,5 @@
 <template>
-  <div class="home-main clearfix row">
+  <div class="home-main clearfix row" :style="fluStyle">
     <div class="clo clo-side" style="margin-top:100px">
       <echart-item title="基本信息">
         <base-info slot="content" />
@@ -68,6 +68,37 @@ export default {
     ContextLoader,
     ServiceException,
     AlarmStatus
+  },
+
+  data() {
+    return {
+
+    }
+  },
+  computed: {
+    fluStyle() {
+      var scale, marginTop, marginLeft, screenWidth, domWidth, domHeight
+      screenWidth = document.body.clientWidth
+      domWidth = 1920
+      domHeight = 1080
+      // if (screenWidth >= 1440) {
+      //   screenWidth = 1440
+      // }
+      scale = screenWidth / 1920
+      marginTop = (domHeight - (domHeight * scale)) / 2 * (-1)
+      marginLeft = (domWidth - (domWidth * scale)) / 2 * (-1)
+      return {
+        transform: `scale(${scale})`,
+        marginTop: marginTop + 'px',
+        marginLeft: marginLeft + 'px'
+      }
+    }
+  },
+  mounted() {
+
+  },
+  methods: {
+
   }
 }
 </script>
@@ -82,6 +113,7 @@ export default {
     margin: 0 auto;
     background: url('../assets/main-bg.png') no-repeat;
     background-size: cover;
+    transform: scale()
 }
 .row{
     .clo{

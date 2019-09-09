@@ -75,7 +75,7 @@
 <script>
 export default {
   mounted() {
-    this.scrollInfinite()
+    // this.scrollInfinite()
   },
   methods: {
     scrollInfinite() {
@@ -84,7 +84,7 @@ export default {
       var show2 = document.getElementsByClassName('show2')[0]
       var timeId
       show2.innerHTML = show1.innerHTML
-      timeId = setInterval(play, 25)
+      timeId = setInterval(play, 50)
       function play() {
         if (main.scrollTop >= show1.offsetHeight) {
           main.scrollTop = 0
@@ -97,7 +97,7 @@ export default {
         clearInterval(timeId)
       }
       main.onmouseout = function() {
-        timeId = setInterval(play, 25)
+        timeId = setInterval(play, 50)
       }
     }
   }

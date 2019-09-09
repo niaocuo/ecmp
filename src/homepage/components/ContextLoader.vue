@@ -33,13 +33,13 @@ export default {
           data: ['变压器轻载数量', '变压器轻载数量2', '平均负载率'],
           textStyle: {// 图例文字的样式
             color: '#fff'
-          },
+          }
         },
         grid: [{
-            left: '10%',
-            bottom: '10%',
-            top: '30%',
-            right: '10%'
+          left: '10%',
+          bottom: '10%',
+          top: '30%',
+          right: '10%'
         }],
         xAxis: [
           {

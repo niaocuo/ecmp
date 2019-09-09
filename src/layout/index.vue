@@ -14,14 +14,13 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain, TopNav, FooterBottom } from './components'
+import { Navbar, AppMain, TopNav, FooterBottom } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
   name: 'Layout',
   components: {
     Navbar,
-    Sidebar,
     AppMain,
     TopNav,
     FooterBottom
