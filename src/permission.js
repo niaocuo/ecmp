@@ -41,7 +41,16 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           await store.dispatch('user/getInfo')
-          next()
+          // 角色必须是对象数组！例如：['admin']或，['developer'，'editor']
+          // const { roles } = await store.dispatch('user/getInfo')
+          // 基于角色生成可访问路由图
+          const accessRoutes = await store.dispatch('permission/generateRoutes', ['admin'])
+          // 动态添加可访问路由
+          router.addRoutes(accessRoutes)
+          // hack方法以确保addroutes是完整的
+          // 设置replace:true，这样导航就不会留下历史记录
+          next({ ...to, replace: true })
+          // next()
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

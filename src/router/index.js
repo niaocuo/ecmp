@@ -27,8 +27,8 @@ import Layout from '@/layout'
 
 /**
  * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
+ * 没有权限要求的基页
+ * 可以访问所有角色
  */
 export const constantRoutes = [
   {
@@ -39,17 +39,19 @@ export const constantRoutes = [
   {
     path: '/home',
     component: () => import('@/homepage/index'),
-    meta: { title: '大屏', icon: 'dashboard' }
+    meta: { title: '大屏', icon: 'dashboard' },
+    hidden: true
   },
   {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
-
   {
     path: '/',
-    component: Layout
+    component: Layout,
+    hidden: true,
+    redirect: '/dashboard'
   },
 
   {
@@ -64,7 +66,71 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'Example',
+    meta: { title: '例子', icon: 'example' },
+    children: [
+      // {
+      //   path: '/table',
+      //   name: 'Table',
+      //   component: () => import('@/views/table/index'),
+      //   meta: { title: '表格', icon: 'table' }
+      // },
+      {
+        path: '/tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '树', icon: 'tree' }
+      }
+    ]
+  },
 
+  {
+    path: '/form',
+    component: Layout,
+    children: [
+      {
+        path: '/form',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: '表单', icon: 'form' }
+      }
+    ]
+  }
+
+  // {
+  //   path: '/nested',
+  //   component: Layout,
+  //   redirect: '/nested/menu1',
+  //   name: 'Nested',
+  //   meta: {
+  //     title: '菜单',
+  //     icon: 'nested'
+  //   },
+  //   children: [
+  //     {
+  //       path: '/menu1',
+  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
+  //       name: 'Menu1',
+  //       meta: { title: '菜单1' }
+  //     },
+  //     {
+  //       path: '/menu2',
+  //       component: () => import('@/views/nested/menu2/index'),
+  //       meta: { title: '菜单2' }
+  //     }
+  //   ]
+  // },
+
+]
+/**
+ * asyncRoutes
+ * 需要根据用户角色动态加载的路由
+ */
+export const asyncRoutes = [
   {
     path: '/sysManage',
     component: Layout,
@@ -91,66 +157,6 @@ export const constantRoutes = [
       }
     ]
   },
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: '例子', icon: 'example' },
-    children: [
-      {
-        path: '/table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '表格', icon: 'table' }
-      },
-      {
-        path: '/tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '树', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: '/form',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '表单', icon: 'form' }
-      }
-    ]
-  },
-
-  // {
-  //   path: '/nested',
-  //   component: Layout,
-  //   redirect: '/nested/menu1',
-  //   name: 'Nested',
-  //   meta: {
-  //     title: '菜单',
-  //     icon: 'nested'
-  //   },
-  //   children: [
-  //     {
-  //       path: '/menu1',
-  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
-  //       name: 'Menu1',
-  //       meta: { title: '菜单1' }
-  //     },
-  //     {
-  //       path: '/menu2',
-  //       component: () => import('@/views/nested/menu2/index'),
-  //       meta: { title: '菜单2' }
-  //     }
-  //   ]
-  // },
-
   {
     path: 'external-link',
     component: Layout,
@@ -161,11 +167,9 @@ export const constantRoutes = [
       }
     ]
   },
-
-  // 404 page must be placed at the end !!!
+  // 所有角色都可以访问404页必须放在末尾！！！
   { path: '*', redirect: '/404', hidden: true }
 ]
-
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),

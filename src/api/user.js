@@ -22,20 +22,18 @@ export function logout() {
     method: 'post'
   })
 }
+
 export function getUsers() {
   return request({
     url: '/systemManage/getUsers',
     method: 'get'
   })
 }
-
-export function getRoles(id) {
-  if (!id) {
-    id = -1
-  }
+export function removeUser(id) {
   return request({
-    url: `/systemManage/getUserById?id=${id}`,
-    method: 'get'
+    url: '/systemManage/removeUser',
+    method: 'get',
+    params: { id }
   })
 }
 
@@ -46,3 +44,14 @@ export function deleteAndupdateRole(data) {
     data
   })
 }
+
+export function getUserById(id) {
+  if (!id) {
+    id = -1
+  }
+  return request({
+    url: `/systemManage/getUserById?id=${id}`,
+    method: 'get'
+  })
+}
+
