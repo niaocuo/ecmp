@@ -54,9 +54,11 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { trueName, avatar, roles, introduction } = data
+        const { trueName, avatar } = data.user
+        const { menus, introduction } = data
+        console.log(menus)
         // roles must be a non-empty array
-        if (!roles || roles.length <= 0) {
+        if (!menus || menus.length <= 0) {
           reject('getInfo: 角色菜单不能为空')
         }
         commit('SET_NAME', trueName)
@@ -74,6 +76,8 @@ const actions = {
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
+        commit('SET_NAME', '')
+        commit('SET_AVATAR', '')
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         removeToken()

@@ -61,7 +61,7 @@ export default {
         isLeaf: 'leaf'
       },
       isUpdatMenu: false,
-      operationNode: {},
+      operationNode: '',
       tmpResolve: {},
       menuVisibleGroup: false, // 打开右键弹框
       menuForm: {
@@ -114,8 +114,12 @@ export default {
       }
     },
     rightClick(e, data, node) {
-      this.$refs.tree.setCurrentKey(node.data.id)
-      this.operationNode = node.parent
+      this.$refs.tree.setCurrentKey(data.id)
+      if (data.id === -1) {
+        this.operationNode = node
+      } else {
+        this.operationNode = node.parent
+      }
       this.menuVisibleGroup = true
       this.menuId = data.id
       const menuD = document.querySelector('#groupMune')
@@ -133,7 +137,12 @@ export default {
       this.$confirm('确认删除？').then(() => {
         removeMenu(this.menuId).then((respone) => {
           if (respone.success) {
-            this.tmpResolve[this.operationNode.data.id](respone.data)
+            if (this.operationNode === '') {
+              this.operationNode === -1
+            }
+            getMenuByParentId(this.operationNode.data.id).then((respone) => {
+              this.tmpResolve[this.operationNode.data.id](respone.data)
+            })
             this.$refs['menuForm'].resetFields()
           }
         })
@@ -157,7 +166,11 @@ export default {
           saveMenu(menu).then((respone) => {
             if (respone.success && !this.isUpdatMenu) {
               getMenuByParentId(this.operationNode.data.id).then((respone) => {
-                this.tmpResolve[this.operationNode.data.id](respone.data)
+                if (this.operationNode === '') {
+                  this.tmpResolve[-1](respone.data)
+                } else {
+                  this.tmpResolve[this.operationNode.data.id](respone.data)
+                }
               })
               this.$refs['menuForm'].resetFields()
             } else if (respone.success && this.isUpdatMenu) {

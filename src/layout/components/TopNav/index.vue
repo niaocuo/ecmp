@@ -12,13 +12,7 @@
         :collapse-transition="false"
         mode="horizontal"
       >
-        <top-nav-item
-          v-for="route in permission_routes"
-          :key="route.path"
-          :item="route"
-          :base-path="route.path"
-          style="display: inline-block"
-        />
+        <top-nav-item v-for="route in navList" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -81,7 +75,7 @@ export default {
           {
             'path': '/menuManage',
             'name': 'MenuManage',
-            'meta': { 'title': '角色管理' }
+            'meta': { 'title': '菜单管理' }
           }
         ]
       }
