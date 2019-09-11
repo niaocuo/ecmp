@@ -95,6 +95,9 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-
+<style >
+.menu-wrapper .el-submenu__icon-arrow{
+    top: 55%;
+    right: 0px;
+}
 </style>

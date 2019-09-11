@@ -12,7 +12,7 @@
         :collapse-transition="false"
         mode="horizontal"
       >
-        <top-nav-item v-for="route in navList" :key="route.path" :item="route" :base-path="route.path" />
+        <top-nav-item v-for="route in navList" :key="route.path" :item="route" :base-path="route.path" style="display:inline-block" />
       </el-menu>
     </el-scrollbar>
   </div>

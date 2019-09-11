@@ -103,7 +103,7 @@ import { deepClone } from '@/utils'
 import { getUsers, getUserById, deleteAndupdateRole, removeUser } from '@/api/user'
 const defaultUser = {
   id: '',
-  trueName: 'sd',
+  trueName: '',
   loginName: '',
   password: '',
   phone: '',
