@@ -1,13 +1,12 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import router, { resetRouter } from '@/router'
+import { asyncRoutes } from '@/router'
 
 const state = {
   token: getToken(),
   name: '',
   avatar: '',
-  introduction: '',
-  roles: []
+  introduction: ''
 }
 
 const mutations = {
@@ -19,9 +18,6 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
-  },
-  SET_ROLES: (state, roles) => {
-    state.roles = roles
   },
   SET_INTRODUCTION: (state, introduction) => {
     state.introduction = introduction
@@ -56,16 +52,15 @@ const actions = {
 
         const { trueName, avatar } = data.user
         const { menus, introduction } = data
-        console.log(menus)
-        // roles must be a non-empty array
+
+        commit('SET_NAME', trueName)
+        commit('SET_AVATAR', avatar)
+        commit('SET_INTRODUCTION', introduction)
         if (!menus || menus.length <= 0) {
           reject('getInfo: 角色菜单不能为空')
         }
-        commit('SET_NAME', trueName)
-        commit('SET_AVATAR', avatar)
-        commit('SET_ROLES', ['admin'])
-        commit('SET_INTRODUCTION', introduction)
-        resolve(data)
+        const accessedRoutes = filterAsyncRoutes(asyncRoutes, menus)
+        resolve(accessedRoutes)
       }).catch(error => {
         reject(error)
       })
@@ -79,9 +74,7 @@ const actions = {
         commit('SET_NAME', '')
         commit('SET_AVATAR', '')
         commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
         removeToken()
-        resetRouter()
         resolve()
       }).catch(error => {
         reject(error)
@@ -96,30 +89,42 @@ const actions = {
       removeToken()
       resolve()
     })
-  },
-  // 动态修改权限
-  changeRoles({ commit, dispatch }, role) {
-    return new Promise(async resolve => {
-      const token = role + '-token'
+  }
+}
 
-      commit('SET_TOKEN', token)
-      setToken(token)
+/**
+ * 递归过滤异步路由表
+ * @param routes asyncRoutes
+ * @param roles
+ */
+export function filterAsyncRoutes(routes, menus) {
+  const res = []
+  routes.forEach(route => {
+    const tmp = { ...route }
+    if (hasPermission(tmp, menus)) {
+      if (tmp.children) {
+        tmp.children = filterAsyncRoutes(tmp.children, menus)
+      }
+      res.push(tmp)
+    }
+  })
+  return res
+}
 
-      const { roles } = await dispatch('getInfo')
-
-      resetRouter()
-
-      // 基于角色生成可访问路由图
-      const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
-
-      // 动态添加可访问路由
-      router.addRoutes(accessRoutes)
-
-      // 重置访问的视图和缓存的视图
-      dispatch('tagsView/delAllViews', null, { root: true })
-
-      resolve()
-    })
+/**
+ * 使用meta.role确定当前用户是否具有权限
+ * @param roles
+ * @param route
+ */
+function hasPermission(route, menus) {
+  if (route.path) {
+    if (menus.concat(['*']).includes(route.path)) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return true
   }
 }
 

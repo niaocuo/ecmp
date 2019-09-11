@@ -40,12 +40,8 @@ router.beforeEach(async(to, from, next) => {
       } else {
         try {
           // get user info
-          await store.dispatch('user/getInfo')
-          // 角色必须是对象数组！例如：['admin']或，['developer'，'editor']
-          // const { roles } = await store.dispatch('user/getInfo')
-          // 基于角色生成可访问路由图
-          const accessRoutes = await store.dispatch('permission/generateRoutes', ['admin'])
-          // 动态添加可访问路由
+          const accessRoutes = await store.dispatch('user/getInfo')
+          console.log(accessRoutes)
           router.addRoutes(accessRoutes)
           // hack方法以确保addroutes是完整的
           // 设置replace:true，这样导航就不会留下历史记录

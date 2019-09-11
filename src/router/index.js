@@ -73,12 +73,6 @@ export const constantRoutes = [
     name: 'Example',
     meta: { title: '例子', icon: 'example' },
     children: [
-      // {
-      //   path: '/table',
-      //   name: 'Table',
-      //   component: () => import('@/views/table/index'),
-      //   meta: { title: '表格', icon: 'table' }
-      // },
       {
         path: '/tree',
         name: 'Tree',
@@ -100,30 +94,6 @@ export const constantRoutes = [
       }
     ]
   }
-
-  // {
-  //   path: '/nested',
-  //   component: Layout,
-  //   redirect: '/nested/menu1',
-  //   name: 'Nested',
-  //   meta: {
-  //     title: '菜单',
-  //     icon: 'nested'
-  //   },
-  //   children: [
-  //     {
-  //       path: '/menu1',
-  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
-  //       name: 'Menu1',
-  //       meta: { title: '菜单1' }
-  //     },
-  //     {
-  //       path: '/menu2',
-  //       component: () => import('@/views/nested/menu2/index'),
-  //       meta: { title: '菜单2' }
-  //     }
-  //   ]
-  // },
 
 ]
 /**
