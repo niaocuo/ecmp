@@ -56,9 +56,6 @@ const actions = {
         commit('SET_NAME', trueName)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)
-        if (!menus || menus.length <= 0) {
-          reject('getInfo: 角色菜单不能为空')
-        }
         const accessedRoutes = filterAsyncRoutes(asyncRoutes, menus)
         resolve(accessedRoutes)
       }).catch(error => {

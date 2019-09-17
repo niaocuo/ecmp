@@ -73,11 +73,7 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: '菜单名称不能为空', trigger: 'blur' },
-          { min: 2, max: 8, message: '长度在 2 到 8 个字符', trigger: 'blur' }
-        ],
-        link: [
-          { required: true, message: '链接地址不能为空', trigger: 'blur' }
+          { required: true, message: '菜单名称不能为空', trigger: 'blur' }
         ]
       }
     }

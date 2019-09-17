@@ -65,36 +65,7 @@ export const constantRoutes = [
         meta: { title: '首页', icon: 'dashboard' }
       }
     ]
-  },
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: '例子', icon: 'example' },
-    children: [
-      {
-        path: '/tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '树', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: '/form',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '表单', icon: 'form' }
-      }
-    ]
   }
-
 ]
 /**
  * asyncRoutes
@@ -102,7 +73,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
-    path: '/sysManage',
+    path: '',
     component: Layout,
     name: 'SysManage',
     meta: { title: '系统管理', icon: 'sysManage' },
@@ -124,16 +95,6 @@ export const asyncRoutes = [
         name: 'MenuManage',
         component: () => import('@/views/sysManage/menuManage'),
         meta: { title: '菜单管理', icon: 'menuManage' }
-      }
-    ]
-  },
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://www.baidu.com',
-        meta: { title: '外部链接', icon: 'link' }
       }
     ]
   },

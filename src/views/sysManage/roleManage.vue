@@ -6,7 +6,7 @@
           <el-input v-model="formInline.roleName" size="small" placeholder="角色名称" />
         </el-form-item>
         <el-form-item label="创建人">
-          <el-select v-model="formInline.creator" placeholder="请选择">
+          <el-select v-model="formInline.creator" filterable clearable placeholder="请选择">
             <el-option
               v-for="item in creators"
               :key="item.value"
@@ -16,7 +16,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="更新人">
-          <el-select v-model="formInline.updator" placeholder="请选择">
+          <el-select v-model="formInline.updator" filterable clearable placeholder="请选择">
             <el-option
               v-for="item in updators"
               :key="item.value"
@@ -34,7 +34,7 @@
       </el-form>
     </el-row>
     <el-row>
-      <el-table v-loading="loading" :data="tableData" border stripe style="width: 100%">
+      <el-table v-loading="loading" :data="tableData" style="width: 100%;margin-top:30px;" border>
         <el-table-column prop="name" label="角色名称" />
         <el-table-column prop="creatorName" label="创建人" width="150" />
         <el-table-column prop="createTime" label="创建日期" width="180" />

@@ -23,10 +23,11 @@ export function logout() {
   })
 }
 
-export function getUsers() {
+export function getUsers(user) {
   return request({
     url: '/systemManage/getUsers',
-    method: 'get'
+    method: 'get',
+    params: user
   })
 }
 export function removeUser(id) {
@@ -34,14 +35,6 @@ export function removeUser(id) {
     url: '/systemManage/removeUser',
     method: 'get',
     params: { id }
-  })
-}
-
-export function deleteAndupdateRole(data) {
-  return request({
-    url: '/systemManage/saveUser',
-    method: 'post',
-    data
   })
 }
 
@@ -55,3 +48,17 @@ export function getUserById(id) {
   })
 }
 
+export function getRoleIds() {
+  return request({
+    url: `/systemManage/getRoleIds`,
+    method: 'get'
+  })
+}
+
+export function saveUser(user) {
+  return request({
+    url: `/systemManage/saveUser`,
+    method: 'post',
+    data: user
+  })
+}

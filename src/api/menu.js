@@ -24,3 +24,10 @@ export function removeMenu(id) {
   })
 }
 
+export function getMenuTree() {
+  return request({
+    url: '/systemManage/getMenuTree',
+    method: 'get'
+  })
+}
+

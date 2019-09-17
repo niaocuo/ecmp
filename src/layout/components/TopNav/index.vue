@@ -12,7 +12,7 @@
         :collapse-transition="false"
         mode="horizontal"
       >
-        <top-nav-item v-for="route in navList" :key="route.path" :item="route" :base-path="route.path" style="display:inline-block" />
+        <top-nav-item v-for="(route,index) in navList" :key="index" :item="route" :base-path="route.link" style="display:inline-block" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -23,63 +23,45 @@ import { mapGetters } from 'vuex'
 import Logo from '../Sidebar/Logo'
 import TopNavItem from '../Sidebar/TopNavItem'
 import variables from '@/styles/variables.scss'
+import { getMenuTree } from '@/api/menu'
 
 export default {
   components: { TopNavItem, Logo },
   data() {
     return {
-      navList: [{
-        'path': '/form',
-        meta: { title: '表单父级', icon: 'example' },
-        'children': [
-          {
-            'path': '/form',
-            'name': 'Form',
-            'meta': {
-              'title': '表单',
-              'icon': 'form'
+      navList: [
+        {
+          path: '/sysManage',
+          'meta': { 'title': '系统管理' },
+          'children': [
+            {
+              'path': '/userManage',
+              'name': 'UserManage',
+              'meta': { 'title': '用户管理' }
+            },
+            {
+              'path': '/roleManage',
+              'name': 'RoleManage',
+              'meta': { 'title': '角色管理' }
+            },
+            {
+              'path': '/menuManage',
+              'name': 'MenuManage',
+              'meta': { 'title': '菜单管理' }
             }
-          }
-        ]
-      },
-      {
-        path: '/example',
-        'meta': { 'title': '菜单3' },
-        'children': [
-          {
-            'path': '/table',
-            'name': 'Menu1-1',
-            'meta': { 'title': '菜单2' }
-          },
-          {
-            'path': '/tree',
-            'name': 'Menu1-2',
-            'meta': { 'title': '菜单2' }
-          }
-        ]
-      },
-      {
-        path: '/sysManage',
-        'meta': { 'title': '系统管理' },
-        'children': [
-          {
-            'path': '/userManage',
-            'name': 'UserManage',
-            'meta': { 'title': '用户管理' }
-          },
-          {
-            'path': '/roleManage',
-            'name': 'RoleManage',
-            'meta': { 'title': '角色管理' }
-          },
-          {
-            'path': '/menuManage',
-            'name': 'MenuManage',
-            'meta': { 'title': '菜单管理' }
-          }
-        ]
-      }
+          ]
+        }
       ]
+    }
+  },
+  created() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      const res = await getMenuTree()
+      this.navList = res.data
+      console.log(this.navList)
     }
   },
   computed: {
