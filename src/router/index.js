@@ -55,7 +55,7 @@ export const constantRoutes = [
   },
 
   {
-    path: '/dashboard',
+    path: '/',
     component: Layout,
     children: [
       {
@@ -74,7 +74,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
-    path: '/sysManage',
+    path: '/',
     component: Layout,
     name: 'SysManage',
     meta: { title: '系统管理', icon: 'sysManage' },
@@ -96,6 +96,19 @@ export const asyncRoutes = [
         name: 'MenuManage',
         component: () => import('@/views/sysManage/menuManage'),
         meta: { title: '菜单管理', icon: 'menuManage' }
+      }
+    ]
+  },
+  { path: '/',
+    component: Layout,
+    name: 'construction',
+    meta: { title: '系统管理', icon: 'sysManage' },
+    children: [
+      {
+        path: '/construction',
+        name: 'Construction',
+        component: () => import('@/views/construction/index'),
+        meta: { title: '建设中...', icon: 'construction' }
       }
     ]
   },
