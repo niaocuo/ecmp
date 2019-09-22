@@ -84,7 +84,6 @@ export default {
       // if (screenWidth >= 1440) {
       //   screenWidth = 1440
       // }
-      alert(screenWidth)
       if (screenWidth === 1920) {
         scale = 1
       } else {
