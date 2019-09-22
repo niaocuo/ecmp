@@ -8,7 +8,6 @@ export function getRoles(data) {
 }
 
 export function saveRole(role) {
-  console.log(role)
   return request({
     url: '/systemManage/saveRole',
     method: 'post',

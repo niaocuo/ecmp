@@ -8,7 +8,7 @@
       </app-link>
     </template>
 
-    <el-submenu v-else ref="subMenu" :index="resolvePath(item.link)" popper-append-to-body>
+    <el-submenu v-else ref="subMenu" :index="ind" popper-append-to-body>
       <template slot="title">
         <item :icon="item.icon" :title="item.name" />
       </template>
@@ -46,6 +46,10 @@ export default {
       default: false
     },
     basePath: {
+      type: String,
+      default: ''
+    },
+    ind: {
       type: String,
       default: ''
     }

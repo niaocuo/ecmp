@@ -12,7 +12,7 @@
         :collapse-transition="false"
         mode="horizontal"
       >
-        <top-nav-item v-for="(route,index) in navList" :key="index" :item="route" :base-path="route.link" style="display:inline-block" />
+        <top-nav-item v-for="(route,index) in navList" :key="index" :ind="index.toString()" :item="route" :base-path="route.link" style="display:inline-block" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -29,29 +29,7 @@ export default {
   components: { TopNavItem, Logo },
   data() {
     return {
-      navList: [
-        {
-          path: '/sysManage',
-          'meta': { 'title': '系统管理' },
-          'children': [
-            {
-              'path': '/userManage',
-              'name': 'UserManage',
-              'meta': { 'title': '用户管理' }
-            },
-            {
-              'path': '/roleManage',
-              'name': 'RoleManage',
-              'meta': { 'title': '角色管理' }
-            },
-            {
-              'path': '/menuManage',
-              'name': 'MenuManage',
-              'meta': { 'title': '菜单管理' }
-            }
-          ]
-        }
-      ]
+      navList: []
     }
   },
   computed: {
@@ -91,7 +69,6 @@ export default {
     async init() {
       const res = await getMenuTree()
       this.navList = constantRoutes.concat(res.data)
-      console.log(res.data)
     }
   }
 
