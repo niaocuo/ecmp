@@ -34,15 +34,15 @@ export default {
         }
       } else if (this.size === 'big') {
         return {
-          height: '434px',
-          minHeight: '434px',
+          height: '405px',
+          minHeight: '405px',
           background: `url(${bigbg}) no-repeat`,
-          backgroundSize: '100%'
+          backgroundSize: '100% 100%'
         }
       } else if (this.size === 'midden') {
         return {
-          height: '280px',
-          minHeight: '280px'
+          height: '250px',
+          minHeight: '250px'
         }
       }
     }
@@ -62,10 +62,10 @@ export default {
 }
 .item-content{
     background: url('../../assets/dapiimg/echart-item-bg.png') no-repeat;
-    min-height: 268px;
+    min-height: 240px;
     background-size: 100% 100%;
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     color: #fff;
 }
 </style>

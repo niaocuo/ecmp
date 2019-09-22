@@ -146,10 +146,10 @@ export default {
     padding: 20px
 }
 .top-item{
-	height: 79px;
+	height: 60px;
 	border: solid 1px #639efc;
-    padding: 30px;
-    padding-top:20px;
+    padding: 10px 30px;
+    // padding-top:20px;
 }
 .info{
     margin-top: 5px;
@@ -157,8 +157,8 @@ export default {
     font-size: 20px;
 }
 #caiji,#zhengduan{
-    height: 129px;
-    width: 129px;
+    height: 119px;
+    width: 119px;
     margin: 0 auto;
     margin-top: 20px;
 }

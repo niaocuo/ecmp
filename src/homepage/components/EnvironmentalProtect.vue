@@ -92,6 +92,6 @@ export default {
 </script>
 <style scoped>
 #echart-envir{
-    height:280px;
+    height:250px;
 }
 </style>

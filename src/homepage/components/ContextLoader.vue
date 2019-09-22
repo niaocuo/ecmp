@@ -124,6 +124,6 @@ export default {
 </script>
 <style scoped>
 #echart-context{
-    height:257px;
+    height:230px;
 }
 </style>

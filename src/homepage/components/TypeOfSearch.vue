@@ -147,7 +147,7 @@ a {
     li {
       display: inline-block;
       color: #fff;
-      font-size: 14px;
+      font-size: 13px;
       text-align: center;
       overflow: hidden;
       white-space: nowrap;

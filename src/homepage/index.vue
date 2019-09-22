@@ -1,6 +1,6 @@
 <template>
   <div class="home-main clearfix row" :style="fluStyle">
-    <div class="clo clo-side" style="margin-top:100px">
+    <div class="clo clo-side" style="margin-top:50px">
       <echart-item title="基本信息">
         <base-info slot="content" />
       </echart-item>
@@ -11,11 +11,11 @@
     <div class="clo">
       <Map />
     </div>
-    <div class="clo clo-side" style="margin-top:100px">
+    <div class="clo clo-side" style="margin-top:50px">
       <echart-item title="电量分析" size="small">
         <MaLowPowerp slot="content" />
       </echart-item>
-      <echart-item title="实时负荷">
+      <echart-item title="实时负荷" size="midden">
         <InfoPanelLoadGraph slot="content" />
       </echart-item>
     </div>
@@ -80,11 +80,16 @@ export default {
       var scale, marginTop, marginLeft, screenWidth, domWidth, domHeight
       screenWidth = document.body.clientWidth
       domWidth = 1920
-      domHeight = 1080
+      domHeight = 960
       // if (screenWidth >= 1440) {
       //   screenWidth = 1440
       // }
-      scale = screenWidth / 1920
+      alert(screenWidth)
+      if (screenWidth === 1920) {
+        scale = 1
+      } else {
+        scale = screenWidth / 1890
+      }
       marginTop = (domHeight - (domHeight * scale)) / 2 * (-1)
       marginLeft = (domWidth - (domWidth * scale)) / 2 * (-1)
       return {
@@ -109,7 +114,7 @@ export default {
     max-width: 1920px;
     min-width: 1900px;
     padding: 20px;
-    height: 1080px;
+    height: 960px;
     margin: 0 auto;
     background: url('../assets/main-bg.png') no-repeat;
     background-size: cover;
