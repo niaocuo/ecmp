@@ -18,13 +18,13 @@ export default {
   methods: {
     drawEchart() {
       const chart = echarts.init(document.getElementById('echart-serve'))
-      // const seriesLabel = {
-      //   normal: {
-      //     show: true,
-      //     textBorderColor: '#333',
-      //     textBorderWidth: 2
-      //   }
-      // }
+      const seriesLabel = {
+        normal: {
+          show: true,
+          textBorderColor: '#333',
+          textBorderWidth: 2
+        }
+      }
       const option = {
         // backgroundColor: '#2c343c',
 
@@ -104,6 +104,6 @@ export default {
 </script>
 <style scoped>
 #echart-serve{
-    height:230px;
+    height:257px;
 }
 </style>

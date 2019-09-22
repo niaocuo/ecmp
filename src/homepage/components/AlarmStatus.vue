@@ -80,6 +80,6 @@ export default {
     overflow: hidden;
 }
 #echartsAlarm{
-    height: 180px;
+    height: 200px;
 }
 </style>

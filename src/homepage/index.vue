@@ -1,6 +1,6 @@
 <template>
   <div class="home-main clearfix row" :style="fluStyle">
-    <div class="clo clo-side" style="margin-top:50px">
+    <div class="clo clo-side" style="margin-top:100px">
       <echart-item title="基本信息">
         <base-info slot="content" />
       </echart-item>
@@ -11,11 +11,11 @@
     <div class="clo">
       <Map />
     </div>
-    <div class="clo clo-side" style="margin-top:50px">
+    <div class="clo clo-side" style="margin-top:100px">
       <echart-item title="电量分析" size="small">
         <MaLowPowerp slot="content" />
       </echart-item>
-      <echart-item title="实时负荷" size="midden">
+      <echart-item title="实时负荷">
         <InfoPanelLoadGraph slot="content" />
       </echart-item>
     </div>
@@ -77,20 +77,25 @@ export default {
   },
   computed: {
     fluStyle() {
-      var scale, marginTop, marginLeft, screenWidth, domWidth, domHeight
+      var scale, marginTop, marginLeft, screenWidth, domWidth, domHeight, styleWidth
       screenWidth = document.body.clientWidth
       domWidth = 1920
-      domHeight = 960
-      // if (screenWidth >= 1440) {
-      //   screenWidth = 1440
+      domHeight = 1080
+
+      // if (screenWidth === 1920) {
+      //   styleWidth = 1920
+      // } else {
+      //   styleWidth = 1920
       // }
-      if (screenWidth === 1920) {
-        scale = 1
-      } else {
-        scale = screenWidth / 1890
-      }
+      scale = screenWidth / 1920
       marginTop = (domHeight - (domHeight * scale)) / 2 * (-1)
       marginLeft = (domWidth - (domWidth * scale)) / 2 * (-1)
+      document.body.style.overflowX = 'hidden'
+      // if (screenWidth === 1920) {
+      //   marginLeft = (domWidth - (domWidth * scale)) / 2 * (-1)
+      // } else {
+      //   marginLeft = (domWidth - (domWidth * scale)) / 2 * (-1) + 10
+      // }
       return {
         transform: `scale(${scale})`,
         marginTop: marginTop + 'px',
@@ -109,11 +114,11 @@ export default {
 
 <style lang="scss" scoped>
 .home-main{
-    width: 100%;
-    max-width: 1920px;
-    min-width: 1900px;
+    // width: 100%;
+    width: 1920px;
+    // min-width: 1900px;
     padding: 20px;
-    height: 960px;
+    height: 1080px;
     margin: 0 auto;
     background: url('../assets/main-bg.png') no-repeat;
     background-size: cover;

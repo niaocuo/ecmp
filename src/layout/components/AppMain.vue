@@ -21,8 +21,8 @@ export default {
 .app-main {
   /*61 = topnavbar  */
   /*50 = footer  */
-  /* 150 = footer */
-  min-height: calc(100vh - 50px - 150px - 61px);
+  /* 20 = footer */
+  min-height: calc(100vh - 50px - 20px - 61px);
   /* width: 100%; */
   width: 1200px;
   margin:0 auto;
