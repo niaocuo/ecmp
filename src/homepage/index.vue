@@ -77,25 +77,14 @@ export default {
   },
   computed: {
     fluStyle() {
-      var scale, marginTop, marginLeft, screenWidth, domWidth, domHeight, styleWidth
+      var scale, marginTop, marginLeft, screenWidth, domWidth, domHeight
       screenWidth = document.body.clientWidth
       domWidth = 1920
       domHeight = 1080
-
-      // if (screenWidth === 1920) {
-      //   styleWidth = 1920
-      // } else {
-      //   styleWidth = 1920
-      // }
       scale = screenWidth / 1920
       marginTop = (domHeight - (domHeight * scale)) / 2 * (-1)
       marginLeft = (domWidth - (domWidth * scale)) / 2 * (-1)
       document.body.style.overflowX = 'hidden'
-      // if (screenWidth === 1920) {
-      //   marginLeft = (domWidth - (domWidth * scale)) / 2 * (-1)
-      // } else {
-      //   marginLeft = (domWidth - (domWidth * scale)) / 2 * (-1) + 10
-      // }
       return {
         transform: `scale(${scale})`,
         marginTop: marginTop + 'px',
@@ -114,9 +103,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-main{
-    // width: 100%;
     width: 1920px;
-    // min-width: 1900px;
     padding: 20px;
     height: 1080px;
     margin: 0 auto;
