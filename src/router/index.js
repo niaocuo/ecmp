@@ -60,7 +60,8 @@ export const constantRoutes = [
     children: [
       {
         path: '/dashboard',
-        name: 'Dashboard',
+        link: '/dashboard',
+        name: '首页',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '首页', icon: 'dashboard' }
       }
@@ -73,7 +74,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
-    path: '',
+    path: '/sysManage',
     component: Layout,
     name: 'SysManage',
     meta: { title: '系统管理', icon: 'sysManage' },

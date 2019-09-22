@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-wrapper">
+  <div v-if="!item.hidden" class="menu-wrapper">
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)">
       <app-link :to="resolvePath(onlyOneChild.link)">
         <el-menu-item :index="resolvePath(onlyOneChild.link)" :class="{'submenu-title-noDropdown':!isNest}">
@@ -80,6 +80,9 @@ export default {
       return false
     },
     resolvePath(routePath) {
+      if (routePath === undefined) {
+        return ''
+      }
       if (isExternal(routePath)) {
         return routePath
       }

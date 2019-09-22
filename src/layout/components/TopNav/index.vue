@@ -24,7 +24,7 @@ import Logo from '../Sidebar/Logo'
 import TopNavItem from '../Sidebar/TopNavItem'
 import variables from '@/styles/variables.scss'
 import { getMenuTree } from '@/api/menu'
-
+import { constantRoutes } from '@/router'
 export default {
   components: { TopNavItem, Logo },
   data() {
@@ -52,16 +52,6 @@ export default {
           ]
         }
       ]
-    }
-  },
-  created() {
-    this.init()
-  },
-  methods: {
-    async init() {
-      const res = await getMenuTree()
-      this.navList = res.data
-      console.log(this.navList)
     }
   },
   computed: {
@@ -93,6 +83,17 @@ export default {
   },
   mounted() {
     // console.log(this.permission_routes)
+  },
+  created() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      const res = await getMenuTree()
+      this.navList = constantRoutes.concat(res.data)
+      console.log(res.data)
+    }
   }
+
 }
 </script>
