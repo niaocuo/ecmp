@@ -13,8 +13,8 @@
         <item :icon="item.icon" :title="item.name" />
       </template>
       <top-nav-item
-        v-for="child in item.children"
-        :key="child.link"
+        v-for="(child,index) in item.children"
+        :key="index"
         :is-nest="true"
         :item="child"
         :base-path="resolvePath(child.link)"
