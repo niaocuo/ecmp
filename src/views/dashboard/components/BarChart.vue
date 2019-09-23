@@ -48,7 +48,7 @@ export default {
             name: '总数',
             type: 'bar',
             stack: 'vistors',
-            barWidth: '10%',
+            barWidth: '20%',
             data: [79, 52, 200],
             animationDuration
           }
@@ -59,7 +59,7 @@ export default {
             name: '总数',
             type: 'bar',
             stack: 'vistors',
-            barWidth: '10%',
+            barWidth: '30%',
             data: [79, 52, 200, 334, 390],
             animationDuration
           },

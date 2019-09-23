@@ -119,7 +119,7 @@ export default {
             name: '今天',
             smooth: true,
             type: 'bar',
-            barWidth: '30%',
+            barWidth: '50%',
             itemStyle: {
               color: '#3888fa' // 柱子颜色
             },

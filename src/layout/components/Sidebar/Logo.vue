@@ -46,7 +46,7 @@ export default {
   // width: 100%;
   height: 50px;
   line-height: 50px;
-  left: 0;
+  left: 20px;
   // background: #2b2f3a;
   z-index: 2;
   text-align: center;

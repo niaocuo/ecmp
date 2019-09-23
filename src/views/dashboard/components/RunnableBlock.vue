@@ -16,7 +16,7 @@
             <!-- <el-table-column label="设备" width="80" prop="equipment" align="center" /> -->
             <el-table-column label="告警类型" prop="alarmtype" align="center" />
             <!-- <el-table-column label="描述" prop="describe" align="center" /> -->
-            <el-table-column label="发生时间" prop="occurrencetime" align="center" />
+            <el-table-column label="发生时间" :show-overflow-tooltip="true" prop="occurrencetime" align="center" />
             <el-table-column label="处理状态" prop="processingstate" align="center" />
           </el-table>
         </el-col>

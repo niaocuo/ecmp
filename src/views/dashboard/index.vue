@@ -1,48 +1,51 @@
 <template>
   <div class="dashboard-editor-container">
-    <!-- <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
-    <el-row :gutter="20">
-      <el-col :span="16" class="box-item">
-        <div class="dataMonth">
-          <el-date-picker
-            v-model="value2"
-            type="month"
-            size="mini"
-            placeholder="请选择月份"
-          />
-        </div>
-        <dowble-bar-chart :chart-data="lineChartData" />
-      </el-col>
-      <el-col :span="8">
-        <div class="chart-wrapper">
-          <user-info />
-        </div>
-      </el-col>
-      <el-col :span="16" class="box-item">
-        <div class="dataMonth">
-          <el-date-picker
-            v-model="value3"
-            size="mini"
-            placeholder="请选择日期"
-          />
-        </div>
-        <line-chart :chart-data="lineChartData" />
-      </el-col>
-      <el-col :span="8">
-        <div class="chart-wrapper">
-          <bar-chart />
-        </div>
-      </el-col>
-      <el-col :span="16" class="box-item">
-        <table-sechar style="padding-left:10px" />
-      </el-col>
-      <el-col :span="8">
-        <div class="chart-wrapper">
-          <RunnableBlock />
-        </div>
-      </el-col>
-    </el-row>
+    <div style="padding-left:10px">
+      <!-- <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
+      <el-row :gutter="20">
+        <el-col :span="16" class="box-item">
+          <div class="dataMonth">
+            <el-date-picker
+              v-model="value2"
+              type="month"
+              size="mini"
+              placeholder="请选择月份"
+            />
+          </div>
+          <dowble-bar-chart :chart-data="lineChartData" />
+        </el-col>
+        <el-col :span="8">
+          <div class="chart-wrapper">
+            <user-info />
+          </div>
+        </el-col>
+        <el-col :span="16" class="box-item">
+          <div class="dataMonth">
+            <el-date-picker
+              v-model="value3"
+              size="mini"
+              placeholder="请选择日期"
+            />
+          </div>
+          <line-chart :chart-data="lineChartData" />
+        </el-col>
+        <el-col :span="8">
+          <div class="chart-wrapper">
+            <bar-chart />
+          </div>
+        </el-col>
+        <el-col :span="16" class="box-item">
+          <table-sechar style="padding-left:10px" />
+        </el-col>
+        <el-col :span="8">
+          <div class="chart-wrapper">
+            <RunnableBlock />
+          </div>
+        </el-col>
+      </el-row>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -85,7 +88,7 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard-editor-container {
-  padding: 10px 0;
+  padding: 10px;
   background-color: rgb(240, 242, 245);
   position: relative;
 

@@ -79,8 +79,8 @@ export default {
 @import '@/styles/variables.scss';
 .el-scrollbar{
   width: 100%;
-  min-width: 1400px;
-  margin: 0 auto;
+  // min-width: 1400px;
+  // margin: 0 auto;
 
 }
 .topscrollbarauto{

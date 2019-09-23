@@ -24,7 +24,7 @@ export default {
   /* 20 = footer */
   min-height: calc(100vh - 50px - 20px - 61px);
   width: 100%;
-  min-width: 1400px;
+  /* min-width: 1400px; */
   margin:0 auto;
   position: relative;
   overflow: hidden;
