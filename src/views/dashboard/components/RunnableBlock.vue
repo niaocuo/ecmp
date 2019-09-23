@@ -11,11 +11,11 @@
         <el-col :span="24" style="margin-top:10px">
           <el-table :data="tableData" size="mini" border style="margin-bottom:10px">
             <!-- <el-table-column label="序号" width="50" type="index" /> -->
-            <el-table-column label="用户" width="100" prop="name" align="center" />
-            <el-table-column label="配电所" width="70" prop="substation" align="center" />
-            <el-table-column label="设备" width="80" prop="equipment" align="center" />
+            <el-table-column label="用户" width="120" prop="name" align="center" />
+            <!-- <el-table-column label="配电所" width="70" prop="substation" align="center" /> -->
+            <!-- <el-table-column label="设备" width="80" prop="equipment" align="center" /> -->
             <el-table-column label="告警类型" width="100" prop="alarmtype" align="center" />
-            <el-table-column label="描述" prop="describe" align="center" />
+            <!-- <el-table-column label="描述" prop="describe" align="center" /> -->
             <el-table-column label="发生时间" width="100" prop="occurrencetime" align="center" />
             <el-table-column label="处理状态" width="100" prop="processingstate" align="center" />
           </el-table>
@@ -33,9 +33,7 @@ export default {
         { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' },
         { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' },
         { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' },
-        { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' },
         { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' }
-
       ]
     }
   },

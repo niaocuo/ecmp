@@ -117,7 +117,7 @@ export default {
           //     }
           //   }
           // },
-          // smooth: true,
+          smooth: true,
           type: 'bar',
           data: expectedData,
           animationDuration: 2800,
@@ -125,7 +125,7 @@ export default {
         },
         {
           name: '今天',
-          // smooth: true,
+          smooth: true,
           type: 'bar',
           itemStyle: {
             color: '#e2557e' // 柱子颜色

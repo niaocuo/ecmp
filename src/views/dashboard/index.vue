@@ -18,7 +18,7 @@
           <user-info />
         </div>
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="10" class="box-item">
+      <el-col :xs="24" :sm="24" :lg="16" class="box-item">
         <div class="dataMonth">
           <el-date-picker
             v-model="value3"
@@ -28,9 +28,9 @@
         </div>
         <line-chart :chart-data="lineChartData" />
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="14">
+      <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <RunnableBlock />
+          <bar-chart />
         </div>
       </el-col>
       <el-col :span="16" class="box-item">
@@ -38,7 +38,7 @@
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <bar-chart />
+          <RunnableBlock />
         </div>
       </el-col>
     </el-row>

@@ -20,7 +20,7 @@ export default {
     },
     height: {
       type: String,
-      default: '337px'
+      default: '300px'
     },
     autoResize: {
       type: Boolean,
@@ -91,6 +91,9 @@ export default {
           name: 'KW',
           axisTick: {
             show: false
+          },
+          splitLine: {
+            show: false // 背景网格
           }
         },
         legend: {
