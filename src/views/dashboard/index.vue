@@ -1,60 +1,45 @@
 <template>
   <div class="dashboard-editor-container">
     <!-- <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
-    <el-row class="box-item">
-      <div class="dataMonth">
-        <el-date-picker
-          v-model="value2"
-          type="month"
-          size="mini"
-          placeholder="请选择月份"
-        />
-      </div>
-      <dowble-bar-chart :chart-data="lineChartData" />
-
-    </el-row>
-    <el-row class="box-item">
-      <table-sechar />
-    </el-row>
-    <el-row :gutter="10">
-      <el-col :xs="24" :sm="24" :lg="12">
-        <div class="chart-wrapper">
-          <div class="dataMonth">
-            <el-date-picker
-              v-model="value3"
-              size="mini"
-              placeholder="请选择日期"
-            />
-          </div>
-          <line-chart :chart-data="lineChartData" />
+    <el-row :gutter="20">
+      <el-col :span="16" class="box-item">
+        <div class="dataMonth">
+          <el-date-picker
+            v-model="value2"
+            type="month"
+            size="mini"
+            placeholder="请选择月份"
+          />
         </div>
+        <dowble-bar-chart :chart-data="lineChartData" />
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="12">
-        <div class="chart-wrapper">
-          <bar-chart />
-        </div>
-      </el-col>
-      <el-col :xs="24" :sm="24" :lg="10">
+      <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
           <user-info />
         </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="10" class="box-item">
+        <div class="dataMonth">
+          <el-date-picker
+            v-model="value3"
+            size="mini"
+            placeholder="请选择日期"
+          />
+        </div>
+        <line-chart :chart-data="lineChartData" />
       </el-col>
       <el-col :xs="24" :sm="24" :lg="14">
         <div class="chart-wrapper">
           <RunnableBlock />
         </div>
       </el-col>
-    </el-row>
-
-    <el-row :gutter="8">
-      <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
-        <!-- <transaction-table /> -->
+      <el-col :span="16" class="box-item">
+        <table-sechar style="padding-left:10px" />
       </el-col>
-      <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
-        <!-- <todo-list /> -->
-      </el-col>
-      <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
-        <!-- <box-card /> -->
+      <el-col :xs="24" :sm="24" :lg="8">
+        <div class="chart-wrapper">
+          <bar-chart />
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -69,22 +54,8 @@ import RunnableBlock from './components/RunnableBlock'
 import BarChart from './components/BarChart'
 
 const lineChartData = {
-  newVisitis: {
-    expectedData: [100, 120, 161, 134, 105, 160, 165], // 昨天数据
-    actualData: [120, 82, 91, 154, 162, 140, 145]// 今天数据
-  },
-  messages: {
-    expectedData: [200, 192, 120, 144, 160, 130, 140],
-    actualData: [180, 160, 151, 106, 145, 150, 130]
-  },
-  purchases: {
-    expectedData: [80, 100, 121, 104, 105, 90, 100],
-    actualData: [120, 90, 100, 138, 142, 130, 130]
-  },
-  shoppings: {
-    expectedData: [130, 140, 141, 142, 145, 150, 160],
-    actualData: [120, 82, 91, 154, 162, 140, 130]
-  }
+  expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91], // 昨天数据
+  actualData: [120, 82, 91, 154, 162, 140, 145, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160]// 今天数据
 }
 
 export default {
@@ -101,20 +72,20 @@ export default {
     return {
       value2: '',
       value3: '',
-      lineChartData: lineChartData.newVisitis
+      lineChartData: lineChartData
     }
   },
   methods: {
-    handleSetLineChartData(type) {
-      this.lineChartData = lineChartData[type]
-    }
+    // handleSetLineChartData(type) {
+    //   this.lineChartData = lineChartData[type]
+    // }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .dashboard-editor-container {
-  padding: 32px;
+  padding: 10px 0;
   background-color: rgb(240, 242, 245);
   position: relative;
 
@@ -129,7 +100,7 @@ export default {
     background: #fff;
     padding: 16px 16px 0;
     position: relative;
-    margin-bottom: 32px;
+    margin-bottom: 5px;
   }
 }
 .dataMonth{
@@ -141,7 +112,8 @@ export default {
 .box-item{
   background:#fff;
   padding:16px 16px 0;
-  margin-bottom:32px;
+  margin-bottom:10px;
+  position: relative;
 }
 @media (max-width:1024px) {
   .chart-wrapper {

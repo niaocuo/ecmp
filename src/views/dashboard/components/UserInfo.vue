@@ -20,7 +20,7 @@
         </div>
       </el-col>
       <el-col :span="24">
-        <bar-chart :axis-data="xAxisData" height="200px" bar-number="tow" />
+        <bar-chart :axis-data="xAxisData" height="288px" bar-number="tow" />
       </el-col>
     </el-row>
   </div>
@@ -38,10 +38,9 @@ export default {
 </script>
 <style lang="scss" scoped>
     .content-item{
-        padding: 8px 16px;
         .item{
             text-align: center;
-            height: 82px;
+            height: 62px;
             // background-image: linear-gradient(90deg,
             //     rgba(100, 18, 250, 0.58) 0%,
             //     rgba(24, 152, 216, 0.58) 100%),

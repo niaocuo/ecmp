@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      title: 'Vue Admin Template',
+      title: '电力运维系统',
       logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
   }
@@ -42,11 +42,13 @@ export default {
 }
 
 .sidebar-logo-container {
-  position: relative;
-  width: 100%;
+  position: absolute;
+  // width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #2b2f3a;
+  left: 0;
+  // background: #2b2f3a;
+  z-index: 2;
   text-align: center;
   overflow: hidden;
 
@@ -66,8 +68,8 @@ export default {
       margin: 0;
       color: #fff;
       font-weight: 600;
-      line-height: 50px;
-      font-size: 14px;
+      line-height: 57px;
+      font-size: 16px;
       font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
       vertical-align: middle;
     }

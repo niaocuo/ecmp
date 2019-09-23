@@ -1,7 +1,7 @@
 <template>
-  <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+  <div :class="{'has-logo':showLogo}" class="topscrollbarauto">
+    <el-scrollbar wrap-class="scrollbar-wrapper" class="topmenuBar">
+      <logo :collapse="isCollapse" />
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
@@ -74,3 +74,19 @@ export default {
 
 }
 </script>
+
+<style  lang="scss" scoped>
+@import '@/styles/variables.scss';
+.el-scrollbar{
+  width: 1400px;
+  margin: 0 auto;
+
+}
+.topscrollbarauto{
+  height: 56px;
+  background: $menuBg;
+  .topmenuBar{
+    padding-left: 200px
+  }
+}
+</style>

@@ -64,9 +64,11 @@ export default {
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+          data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
+            '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
           // boundaryGap: false,
-          name: 'KWH',
+          name: '日',
           type: 'category',
           axisPointer: {
             type: 'shadow'
@@ -78,7 +80,7 @@ export default {
         },
         grid: {
           left: 10,
-          right: 10,
+          right: 25,
           bottom: 20,
           top: 30,
           containLabel: true
@@ -92,6 +94,7 @@ export default {
         },
         yAxis: {
           min: 0,
+          name: 'Kwh',
           axisTick: {
             show: false
           }

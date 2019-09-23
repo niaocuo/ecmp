@@ -3,8 +3,8 @@
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <!-- <sidebar class="sidebar-container" /> -->
     <div class="main-container">
-      <top-nav />
-      <div :class="{'fixed-header':fixedHeader}">
+      <div :class="{'fixed-header':fixedHeader}" class="topauto">
+        <top-nav />
         <navbar />
       </div>
       <app-main />
@@ -56,7 +56,10 @@ export default {
 <style lang="scss" scoped>
   @import "~@/styles/mixin.scss";
   @import "~@/styles/variables.scss";
-
+  .topauto{
+    box-shadow: 0 1px 4px rgba(0,21,41,0.08);
+    background: #fff;
+  }
   .app-wrapper {
     @include clearfix;
     position: relative;

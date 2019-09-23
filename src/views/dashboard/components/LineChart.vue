@@ -20,7 +20,7 @@ export default {
     },
     height: {
       type: String,
-      default: '300px'
+      default: '337px'
     },
     autoResize: {
       type: Boolean,
@@ -64,7 +64,10 @@ export default {
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: ['1', '2', '3', '4', '5', '6', '7'],
+          name: 'h',
+          data: ['1', '2', '3', '4', '5', '6', '7',
+            '8', '9', '10', '11', '12', '13', '14',
+            '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
           boundaryGap: false,
           axisTick: {
             show: false
@@ -72,7 +75,7 @@ export default {
         },
         grid: {
           left: 10,
-          right: 10,
+          right: 25,
           bottom: 20,
           top: 30,
           containLabel: true
@@ -85,13 +88,14 @@ export default {
           padding: [5, 10]
         },
         yAxis: {
+          name: 'KW',
           axisTick: {
             show: false
           }
         },
         legend: {
           data: ['今天', '昨天'],
-          x: '100'
+          x: '80'
         },
         series: [{
           name: '今天', // expected

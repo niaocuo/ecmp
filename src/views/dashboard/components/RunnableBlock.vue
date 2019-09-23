@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- 运行概况 -->
     <div class="top">
       <el-row :gutter="10">
         <el-col :span="12">
@@ -9,16 +8,16 @@
         <el-col :span="12">
           <div id="zhengduan" />
         </el-col>
-        <el-col :span="24">
-          <el-table>
-            <el-table-column label="序号" width="50" />
-            <el-table-column label="用户" width="50" />
-            <el-table-column label="配电所" width="70" />
-            <el-table-column label="设备" width="50" />
-            <el-table-column label="告警类型" width="100" />
-            <el-table-column label="描述" />
-            <el-table-column label="发生时间" width="100" />
-            <el-table-column label="处理状态" width="100" />
+        <el-col :span="24" style="margin-top:10px">
+          <el-table :data="tableData" size="mini" border style="margin-bottom:10px">
+            <!-- <el-table-column label="序号" width="50" type="index" /> -->
+            <el-table-column label="用户" width="100" prop="name" align="center" />
+            <el-table-column label="配电所" width="70" prop="substation" align="center" />
+            <el-table-column label="设备" width="80" prop="equipment" align="center" />
+            <el-table-column label="告警类型" width="100" prop="alarmtype" align="center" />
+            <el-table-column label="描述" prop="describe" align="center" />
+            <el-table-column label="发生时间" width="100" prop="occurrencetime" align="center" />
+            <el-table-column label="处理状态" width="100" prop="processingstate" align="center" />
           </el-table>
         </el-col>
       </el-row>
@@ -30,7 +29,14 @@ var echarts = require('echarts')
 export default {
   data() {
     return {
+      tableData: [
+        { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' },
+        { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' },
+        { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' },
+        { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' },
+        { id: '1', name: '测试用户名称', substation: '南京', equipment: '测试类型', alarmtype: '一般告警', describe: '来呢西人', occurrencetime: '2019-09-30', processingstate: '已处理' }
 
+      ]
     }
   },
   mounted() {
@@ -67,7 +73,7 @@ export default {
                 textStyle: {
                   color: '#000',
                   top: -20,
-                  fontSize: 16
+                  fontSize: 14
                 }
               }
             }
@@ -80,7 +86,7 @@ export default {
                 textStyle: {
                   color: '#e1e869',
                   lineHeight: 30,
-                  fontSize: 24
+                  fontSize: 20
                 }
               }
             }
@@ -114,7 +120,7 @@ export default {
                 textStyle: {
                   color: '#000',
                   top: -20,
-                  fontSize: 16
+                  fontSize: 14
                 }
               }
             }
@@ -127,7 +133,7 @@ export default {
                 textStyle: {
                   color: '#00ffdb',
                   lineHeight: 30,
-                  fontSize: 24
+                  fontSize: 20
                 }
               }
             }
@@ -157,8 +163,8 @@ export default {
     font-size: 20px;
 }
 #caiji,#zhengduan{
-    height: 129px;
-    width: 129px;
+    height: 100px;
+    width: 100px;
     margin: 0 auto;
 }
 </style>
