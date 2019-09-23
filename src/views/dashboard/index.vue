@@ -13,12 +13,12 @@
         </div>
         <dowble-bar-chart :chart-data="lineChartData" />
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
+      <el-col :span="8">
         <div class="chart-wrapper">
           <user-info />
         </div>
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="16" class="box-item">
+      <el-col :span="16" class="box-item">
         <div class="dataMonth">
           <el-date-picker
             v-model="value3"
@@ -28,7 +28,7 @@
         </div>
         <line-chart :chart-data="lineChartData" />
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
+      <el-col :span="8">
         <div class="chart-wrapper">
           <bar-chart />
         </div>
@@ -36,7 +36,7 @@
       <el-col :span="16" class="box-item">
         <table-sechar style="padding-left:10px" />
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
+      <el-col :span="8">
         <div class="chart-wrapper">
           <RunnableBlock />
         </div>

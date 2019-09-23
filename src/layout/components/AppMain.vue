@@ -23,8 +23,8 @@ export default {
   /*50 = footer  */
   /* 20 = footer */
   min-height: calc(100vh - 50px - 20px - 61px);
-  /* width: 100%; */
-  width: 1400px;
+  width: 100%;
+  min-width: 1400px;
   margin:0 auto;
   position: relative;
   overflow: hidden;

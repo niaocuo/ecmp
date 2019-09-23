@@ -48,6 +48,7 @@ export default {
             name: '总数',
             type: 'bar',
             stack: 'vistors',
+            barWidth: '10%',
             data: [79, 52, 200],
             animationDuration
           }
@@ -58,6 +59,7 @@ export default {
             name: '总数',
             type: 'bar',
             stack: 'vistors',
+            barWidth: '10%',
             data: [79, 52, 200, 334, 390],
             animationDuration
           },
@@ -65,10 +67,10 @@ export default {
             name: '故障数',
             type: 'bar',
             stack: 'vistors',
-            // itemStyle: {
-            //   barBorderColor: 'tomato',
-            //   color: 'rgba(0,0,0, 0)' // 柱子颜色
-            // },
+            itemStyle: {
+              // barBorderColor: 'tomato',
+              color: '#e2557e' // 柱子颜色
+            },
             data: [79, 52, 200, 334, 390],
             animationDuration
           }

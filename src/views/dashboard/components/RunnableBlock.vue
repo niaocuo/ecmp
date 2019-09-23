@@ -14,10 +14,10 @@
             <el-table-column label="用户" width="120" prop="name" align="center" />
             <!-- <el-table-column label="配电所" width="70" prop="substation" align="center" /> -->
             <!-- <el-table-column label="设备" width="80" prop="equipment" align="center" /> -->
-            <el-table-column label="告警类型" width="100" prop="alarmtype" align="center" />
+            <el-table-column label="告警类型" prop="alarmtype" align="center" />
             <!-- <el-table-column label="描述" prop="describe" align="center" /> -->
-            <el-table-column label="发生时间" width="100" prop="occurrencetime" align="center" />
-            <el-table-column label="处理状态" width="100" prop="processingstate" align="center" />
+            <el-table-column label="发生时间" prop="occurrencetime" align="center" />
+            <el-table-column label="处理状态" prop="processingstate" align="center" />
           </el-table>
         </el-col>
       </el-row>

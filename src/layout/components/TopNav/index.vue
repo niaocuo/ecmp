@@ -78,7 +78,8 @@ export default {
 <style  lang="scss" scoped>
 @import '@/styles/variables.scss';
 .el-scrollbar{
-  width: 1400px;
+  width: 100%;
+  min-width: 1400px;
   margin: 0 auto;
 
 }

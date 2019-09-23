@@ -102,51 +102,44 @@ export default {
         legend: {
           data: ['昨天', '今天']
         },
-        series: [{
-          name: '昨天',
+        series: [
+          // {
+          //   name: '昨天',
 
-          itemStyle: {
-            color: '#3ce8fc' // 柱子颜色
-          },
-          // itemStyle: {
-          //   normal: {
-          //     color: '#FF005A',
-          //     lineStyle: {
-          //       color: '#FF005A',
-          //       width: 2
-          //     }
-          //   }
+          //   itemStyle: {
+          //     color: '#3ce8fc' // 柱子颜色
+          //   },
+          //   smooth: true,
+          //   type: 'bar',
+          //   data: expectedData,
+          //   animationDuration: 2800,
+          //   animationEasing: 'cubicInOut'
           // },
-          smooth: true,
-          type: 'bar',
-          data: expectedData,
-          animationDuration: 2800,
-          animationEasing: 'cubicInOut'
-        },
-        {
-          name: '今天',
-          smooth: true,
-          type: 'bar',
-          itemStyle: {
-            color: '#e2557e' // 柱子颜色
-          },
+          {
+            name: '今天',
+            smooth: true,
+            type: 'bar',
+            barWidth: '30%',
+            itemStyle: {
+              color: '#3888fa' // 柱子颜色
+            },
 
-          // itemStyle: {
-          //   normal: {
-          //     color: '#3888fa',
-          //     lineStyle: {
-          //       color: '#3888fa',
-          //       width: 2
-          //     },
-          //     areaStyle: {
-          //       color: '#f3f8ff'
-          //     }
-          //   }
-          // },
-          data: actualData,
-          animationDuration: 2800,
-          animationEasing: 'quadraticOut'
-        }
+            // itemStyle: {
+            //   normal: {
+            //     color: '#3888fa',
+            //     lineStyle: {
+            //       color: '#3888fa',
+            //       width: 2
+            //     },
+            //     areaStyle: {
+            //       color: '#f3f8ff'
+            //     }
+            //   }
+            // },
+            data: actualData,
+            animationDuration: 2800,
+            animationEasing: 'quadraticOut'
+          }
         ]
       })
     }
