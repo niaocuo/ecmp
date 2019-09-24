@@ -102,12 +102,16 @@ export default {
         },
         series: [{
           name: '今天', // expected
+          symbol: 'none', // 去掉折线图中的节点
           itemStyle: {
             normal: {
               color: '#FF005A',
               lineStyle: {
                 color: '#FF005A',
                 width: 2
+              },
+              areaStyle: {
+                color: 'rgba(226,85,126,0.5)'
               }
             }
           },
@@ -120,6 +124,7 @@ export default {
         {
           name: '昨天', // actual
           smooth: true,
+          symbol: 'none', // 去掉折线图中的节点
           type: 'line',
           itemStyle: {
             normal: {
@@ -129,7 +134,7 @@ export default {
                 width: 2
               },
               areaStyle: {
-                color: '#f3f8ff'
+                color: 'rgba(56,136,250,0.5)'
               }
             }
           },

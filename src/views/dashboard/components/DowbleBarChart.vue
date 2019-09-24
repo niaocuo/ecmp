@@ -94,7 +94,7 @@ export default {
         },
         yAxis: {
           min: 0,
-          name: 'Kwh',
+          name: 'kWh',
           axisTick: {
             show: false
           }

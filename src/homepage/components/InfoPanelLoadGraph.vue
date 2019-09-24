@@ -18,13 +18,6 @@ export default {
   methods: {
     drawEchart() {
       const chart = echarts.init(document.getElementById('echart-pan'))
-      // var seriesLabel = {
-      //   normal: {
-      //     show: true,
-      //     textBorderColor: '#333',
-      //     textBorderWidth: 2
-      //   }
-      // }
       const option = {
         tooltip: {
           trigger: 'axis',
@@ -45,7 +38,7 @@ export default {
         },
         yAxis: {
           type: 'value',
-          name: 'KW',
+          name: 'kW',
           axisLine: {
             lineStyle: {
               color: '#fff' // 更改坐标轴颜色
