@@ -4,11 +4,8 @@
 
 <script>
 import echarts from 'echarts'
-require('echarts/theme/macarons') // echarts theme
 import resize from './mixins/resize'
-
-const animationDuration = 3000
-
+import 'echarts-liquidfill'// 在这里引入
 export default {
   mixins: [resize],
   props: {
@@ -47,67 +44,36 @@ export default {
       this.chart = echarts.init(this.$el, 'macarons')
 
       this.chart.setOption({
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-          }
-        },
-        radar: {
-          radius: '66%',
-          center: ['50%', '42%'],
-          splitNumber: 8,
-          splitArea: {
-            areaStyle: {
-              color: 'rgba(127,95,132,.3)',
-              opacity: 1,
-              shadowBlur: 45,
-              shadowColor: 'rgba(0,0,0,.5)',
-              shadowOffsetX: 0,
-              shadowOffsetY: 15
-            }
-          },
-          indicator: [
-            { name: 'Sales', max: 10000 },
-            { name: 'Administration', max: 20000 },
-            { name: 'Information Techology', max: 20000 },
-            { name: 'Customer Support', max: 20000 },
-            { name: 'Development', max: 20000 },
-            { name: 'Marketing', max: 20000 }
-          ]
-        },
-        legend: {
-          left: 'center',
-          bottom: '10',
-          data: ['Allocated Budget', 'Expected Spending', 'Actual Spending']
-        },
         series: [{
-          type: 'radar',
-          symbolSize: 0,
-          areaStyle: {
+          type: 'liquidFill',
+          radius: '70%',
+          name: 'Liquid Fill',
+          data: [0.9],
+          itemStyle: {
             normal: {
-              shadowBlur: 13,
-              shadowColor: 'rgba(0,0,0,.2)',
-              shadowOffsetX: 0,
-              shadowOffsetY: 10,
-              opacity: 1
+              color: '#2ec7c9'
             }
           },
-          data: [
-            {
-              value: [5000, 7000, 12000, 11000, 15000, 14000],
-              name: 'Allocated Budget'
-            },
-            {
-              value: [4000, 9000, 15000, 15000, 13000, 11000],
-              name: 'Expected Spending'
-            },
-            {
-              value: [5500, 11000, 12000, 15000, 12000, 12000],
-              name: 'Actual Spending'
+          label: {
+            normal: {
+              color: '#2fc3e1', // transprant
+              show: true,
+              fontSize: 18,
+              formatter: function(params) {
+                const str = '采集成功率: ' + params.data * 100 + '%'
+                return str
+              }
             }
-          ],
-          animationDuration: animationDuration
+          },
+          outline: {
+            borderDistance: 0,
+            itemStyle: {
+              borderWidth: 5,
+              borderColor: '#2ec7c9',
+              shadowBlur: 20,
+              shadowColor: 'rgba(46, 199, 201, 0.5)'
+            }
+          }
         }]
       })
     }

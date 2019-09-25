@@ -56,13 +56,15 @@ export const constantRoutes = [
 
   {
     path: '/',
+    name: '首页管理',
     component: Layout,
+    meta: { title: '首页管理', icon: 'sysManage' },
     children: [
       {
-        path: '/dashboard',
-        link: '/dashboard',
+        path: '/newdashboard',
+        link: '/newdashboard',
         name: '首页',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/dashboard/newindex'),
         meta: { title: '首页', icon: 'dashboard' }
       }
     ]

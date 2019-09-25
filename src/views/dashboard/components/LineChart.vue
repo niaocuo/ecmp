@@ -1,5 +1,15 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" />
+  <div>
+    <div class="dataMonth">
+      <el-date-picker
+        v-model="value3"
+        size="mini"
+        class="dataMonth"
+        placeholder="请选择日期"
+      />
+    </div>
+    <div ref="chart" :class="className" :style="{height:height,width:width}" />
+  </div>
 </template>
 
 <script>
@@ -33,7 +43,8 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      value3: ''
     }
   },
   watch: {
@@ -58,8 +69,11 @@ export default {
   },
   methods: {
     initChart() {
-      this.chart = echarts.init(this.$el, 'macarons')
+      this.chart = echarts.init(this.$refs.chart, 'macarons')
       this.setOptions(this.chartData)
+    },
+    onSubmit() {
+
     },
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
@@ -98,7 +112,7 @@ export default {
         },
         legend: {
           data: ['今天', '昨天'],
-          x: '80'
+          x: '45%'
         },
         series: [{
           name: '今天', // expected
@@ -147,3 +161,11 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.dataMonth{
+  position: absolute;
+  right: 90px;
+  top: 5px;
+  z-index: 9;
+}
+</style>

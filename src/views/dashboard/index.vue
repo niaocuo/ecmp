@@ -20,13 +20,6 @@
           </div>
         </el-col>
         <el-col :span="16" class="box-item">
-          <div class="dataMonth">
-            <el-date-picker
-              v-model="value3"
-              size="mini"
-              placeholder="请选择日期"
-            />
-          </div>
           <line-chart :chart-data="lineChartData" />
         </el-col>
         <el-col :span="8">
