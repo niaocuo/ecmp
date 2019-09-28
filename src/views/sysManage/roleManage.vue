@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-row>
+  <div >
+    <el-row class="app-container">
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="角色名称">
           <el-input v-model="formInline.roleName" size="small" placeholder="角色名称" />
@@ -85,7 +85,6 @@
         <el-button size="small" type="primary" @click="submitForm('form')">确 定</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 
@@ -156,7 +155,7 @@ export default {
       if (node.level === 0) {
         return resolve([{
           id: -1,
-          name: 'XX管理系统',
+          name: '电力运维系统',
           leaf: false
         }])
       }
@@ -241,6 +240,13 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .app-container {
+    .roles-table {
+      margin-top: 30px;
+    }
+    .permission-tree {
+      margin-bottom: 30px;
+    }
+  }
 </style>

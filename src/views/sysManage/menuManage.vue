@@ -1,50 +1,52 @@
 <template>
-  <el-row :gutter="10">
-    <el-col :span="6">
-      <div>
-        <el-tree
-          ref="tree"
-          node-key="id"
-          :load="loadNode"
-          lazy
-          highlight-current
-          :props="defaultProps"
-          :expand-on-click-node="false"
-          @node-click="handleNodeClick"
-          @node-contextmenu="rightClick"
-        />
-        <div v-show="menuVisibleGroup">
-          <div id="groupMune" class="nodeMenu">
-            <a><div class="node-menu-item" @click="addGroup"><i class="el-icon-folder-add" />&nbsp;新增菜单</div></a>
-            <a><div class="node-menu-item" @click="removeGroup"><i class="el-icon-delete" />&nbsp;删除菜单</div></a>
+  <div class="app-container">
+    <el-row :gutter="10">
+      <el-col :span="6">
+        <div>
+          <el-tree
+            ref="tree"
+            node-key="id"
+            :load="loadNode"
+            lazy
+            highlight-current
+            :props="defaultProps"
+            :expand-on-click-node="false"
+            @node-click="handleNodeClick"
+            @node-contextmenu="rightClick"
+          />
+          <div v-show="menuVisibleGroup">
+            <div id="groupMune" class="nodeMenu">
+              <a><div class="node-menu-item" @click="addGroup"><i class="el-icon-folder-add" />&nbsp;新增菜单</div></a>
+              <a><div class="node-menu-item" @click="removeGroup"><i class="el-icon-delete" />&nbsp;删除菜单</div></a>
+            </div>
           </div>
         </div>
-      </div>
-    </el-col>
-    <el-col :span="18">
-      <el-form ref="menuForm" :model="menuForm" :rules="rules" label-width="100px">
-        <el-form-item label="菜单名称" prop="name">
-          <el-input v-model="menuForm.name" />
-        </el-form-item>
-        <el-form-item label="链接地址" prop="link">
-          <el-input v-model="menuForm.link" />
-        </el-form-item>
-        <el-form-item label="图片" prop="iconUrl">
-          <el-input v-model="menuForm.iconUrl" />
-        </el-form-item>
-        <el-form-item v-show="isUpdatMenu" label="同级序号" prop="menuOrder">
-          <el-input v-model="menuForm.menuOrder" />
-        </el-form-item>
-        <el-form-item label="描述" prop="description">
-          <el-input v-model="menuForm.description" type="textarea" />
-        </el-form-item>
-        <el-form-item>
-          <el-button size="small" type="primary" @click="submitForm('menuForm')">确定</el-button>
-          <el-button size="small" @click="resetForm('menuForm')">重置</el-button>
-        </el-form-item>
-      </el-form>
-    </el-col>
-  </el-row>
+      </el-col>
+      <el-col :span="18">
+        <el-form ref="menuForm" :model="menuForm" :rules="rules" label-width="100px">
+          <el-form-item label="菜单名称" prop="name">
+            <el-input v-model="menuForm.name" />
+          </el-form-item>
+          <el-form-item label="链接地址" prop="link">
+            <el-input v-model="menuForm.link" />
+          </el-form-item>
+          <el-form-item label="图片" prop="iconUrl">
+            <el-input v-model="menuForm.iconUrl" />
+          </el-form-item>
+          <el-form-item v-show="isUpdatMenu" label="同级序号" prop="menuOrder">
+            <el-input v-model="menuForm.menuOrder" />
+          </el-form-item>
+          <el-form-item label="描述" prop="description">
+            <el-input v-model="menuForm.description" type="textarea" />
+          </el-form-item>
+          <el-form-item>
+            <el-button size="small" type="primary" @click="submitForm('menuForm')">确定</el-button>
+            <el-button size="small" @click="resetForm('menuForm')">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -84,7 +86,7 @@ export default {
         this.tmpResolve['-1'] = resolve
         return resolve([{
           id: -1,
-          name: 'XX管理系统',
+          name: '电力运维系统',
           leaf: false
         }])
       }
@@ -189,16 +191,13 @@ export default {
 }
 </script>
 
-<style scoped>
-  .nodeMenu{
-    background: #fff;
-    position: fixed;
-    border: 1px solid #ccc;
-    z-index: 10;
-  }
-  .custom-tree-node{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+<style lang="scss" scoped>
+  .app-container {
+    .roles-table {
+      margin-top: 30px;
+    }
+    .permission-tree {
+      margin-bottom: 30px;
+    }
   }
 </style>
