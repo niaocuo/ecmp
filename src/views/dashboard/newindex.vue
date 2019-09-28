@@ -31,6 +31,7 @@
     <el-row style="background:#fff;padding:16px 16px 0;">
       <table-sechar style="padding-left:10px" />
     </el-row>
+    <Notification :warning-message="notifyWarningMessage" />
   </div>
 </template>
 
@@ -41,6 +42,7 @@ import RaddarChart from './components/RaddarChart'
 import PieChart from './components/PieChart'
 import BarChart from './components/BarChart'
 import TableSechar from './components/TableSechar'
+import Notification from '@/components/Notification'
 // import TransactionTable from './components/TransactionTable'
 // import TodoList from './components/TodoList'
 // import BoxCard from './components/BoxCard'
@@ -64,7 +66,8 @@ export default {
     RaddarChart,
     PieChart,
     BarChart,
-    TableSechar
+    TableSechar,
+    Notification
     // TransactionTable,
     // TodoList
     // BoxCard
@@ -73,7 +76,8 @@ export default {
     return {
       value2: '',
       radio: 'newVisitis',
-      lineChartData: lineChartData.newVisitis
+      lineChartData: lineChartData.newVisitis,
+      notifyWarningMessage: '特重大告警，实时，路灯管理所23号路灯故障，路灯管理所23号路灯故障，23号次总开关发生通信中断变为。' // 告警通知信息
     }
   },
   methods: {

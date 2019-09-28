@@ -51,7 +51,7 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     hidden: true,
-    redirect: '/dashboard'
+    redirect: '/newdashboard'
   },
 
   {
