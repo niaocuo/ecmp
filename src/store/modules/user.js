@@ -5,6 +5,7 @@ import { asyncRoutes } from '@/router'
 const state = {
   token: getToken(),
   name: '',
+  loginTime: '',
   avatar: '',
   introduction: ''
 }
@@ -15,6 +16,9 @@ const mutations = {
   },
   SET_NAME: (state, name) => {
     state.name = name
+  },
+  SET_LOGINTIME: (state, loginTime) => {
+    state.loginTime = loginTime
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
@@ -50,10 +54,10 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { trueName, avatar } = data.user
+        const { trueName, avatar, loginTime } = data.user
         const { menus, introduction } = data
-
         commit('SET_NAME', trueName)
+        commit('SET_LOGINTIME', loginTime)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)
         const accessedRoutes = filterAsyncRoutes(asyncRoutes, menus)

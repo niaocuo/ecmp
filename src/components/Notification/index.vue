@@ -9,12 +9,20 @@ export default {
       default: '重大警告测试'
     }
   },
+  data() {
+    return {
+      notifyInstance: ''
+    }
+  },
   created() {
     this.openNotify()
   },
+  destroyed() {
+    this.notifyInstance.close()
+  },
   methods: {
     openNotify() {
-      this.$notify({
+      this.notifyInstance = this.$notify({
         title: '告警窗口',
         position: 'bottom-right',
         duration: 0,
