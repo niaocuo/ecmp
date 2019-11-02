@@ -87,7 +87,7 @@ export default {
   height: 56px;
   background: $menuBg;
   .topmenuBar{
-    padding-left: 200px
+    padding-left: 240px
   }
 }
 </style>

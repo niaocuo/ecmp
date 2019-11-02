@@ -40,7 +40,7 @@ export default {
     &.el-notification{
       padding: 0;
       &.right{
-        right: 30px;
+        right: 20px;
       }
     }
     .el-notification__group{
