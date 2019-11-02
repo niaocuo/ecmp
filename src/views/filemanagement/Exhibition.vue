@@ -25,9 +25,11 @@
       </el-col>
       <el-col :span="18" class="rightFix">
         <div style="margin-bottom:10px" class="item">
+          <!-- 设备档案 -->
           <ExhArchives />
         </div>
         <div class="item">
+          <!-- 测点数据 -->
           <MeasuringPointData />
         </div>
       </el-col>
