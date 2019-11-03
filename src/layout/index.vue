@@ -7,6 +7,7 @@
         <top-nav />
         <navbar />
       </div>
+      <breadcrumb class="breadcrumb-container" />
       <app-main />
       <footer-bottom />
     </div>
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import Breadcrumb from '@/components/Breadcrumb'
 import { Navbar, AppMain, TopNav, FooterBottom } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
@@ -23,7 +25,8 @@ export default {
     Navbar,
     AppMain,
     TopNav,
-    FooterBottom
+    FooterBottom,
+    Breadcrumb
   },
   mixins: [ResizeMixin],
   computed: {

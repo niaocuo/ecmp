@@ -53,7 +53,6 @@ export const constantRoutes = [
     hidden: true,
     redirect: '/newdashboard'
   },
-
   {
     path: '/',
     name: '首页管理',
@@ -66,6 +65,21 @@ export const constantRoutes = [
         name: '首页',
         component: () => import('@/views/dashboard/newindex'),
         meta: { title: '首页', icon: 'dashboard' }
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: '展示页面',
+    meta: { title: '展示页面', icon: 'sysManage' },
+    hidden: true,
+    children: [
+      {
+        path: '/Exhibition',
+        name: '展示页面',
+        component: () => import('@/views/filemanagement/Exhibition'),
+        hidden: true
       }
     ]
   }

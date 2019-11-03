@@ -3,7 +3,7 @@
 
     <panel-group />
 
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:20px;">
       <el-radio-group v-model="radio" class="line-radio-group" size="mini" @change="handleSetLineChartData(radio)">
         <el-radio-button label="messages">负荷 </el-radio-button>
         <el-radio-button label="newVisitis">电量 </el-radio-button>
@@ -11,7 +11,7 @@
       <line-chart :chart-data="lineChartData" />
     </el-row>
 
-    <el-row :gutter="32">
+    <el-row :gutter="20">
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
           <raddar-chart />
@@ -28,7 +28,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-row style="background:#fff;padding:16px 16px 0;">
+    <el-row style="background:#fff;padding:10px 10px 0;">
       <table-sechar style="padding-left:10px" />
     </el-row>
     <Notification :warning-message="notifyWarningMessage" />
@@ -90,7 +90,8 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard-editor-container {
-  padding: 32px;
+  padding: 20px;
+  padding-top:0;
   background-color: rgb(240, 242, 245);
   position: relative;
 
@@ -104,7 +105,7 @@ export default {
   .chart-wrapper {
     background: #fff;
     padding: 16px 16px 0;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
 }
 .dataMonth{
