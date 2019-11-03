@@ -1,39 +1,35 @@
 <template>
-  <div class="app-container">
-    <el-row :gutter="10">
-      <el-col :span="6">
-        <div class="item leftFix">
-          <el-form :inline="true" :model="formInline" class="demo-form-inline">
-            <el-form-item label="用户名称">
-              <el-input v-model="formInline.name" size="small" placeholder="用户名称" />
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" size="small" @click="onSubmit">查询</el-button>
-            </el-form-item>
-          </el-form>
-          <el-tree
-            ref="tree"
-            class="filter-tree"
-            :data="data"
-            node-key="id"
-            :props="defaultProps"
-            :highlight-current="true"
-            default-expand-all
-            @node-click="handleNodeClick"
-          />
-        </div>
-      </el-col>
-      <el-col :span="18" class="rightFix">
-        <div style="margin-bottom:10px" class="item">
-          <!-- 设备档案 -->
-          <ExhArchives />
-        </div>
-        <div class="item">
-          <!-- 测点数据 -->
-          <MeasuringPointData />
-        </div>
-      </el-col>
-    </el-row>
+  <div class="app-container clearfix">
+    <div class="item leftFix">
+      <el-form :inline="true" :model="formInline" class="demo-form-inline">
+        <el-form-item label="用户名称">
+          <el-input v-model="formInline.name" size="small" style="width:150px" placeholder="用户名称" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" size="small" @click="onSubmit">查询</el-button>
+        </el-form-item>
+      </el-form>
+      <el-tree
+        ref="tree"
+        class="filter-tree"
+        :data="data"
+        node-key="id"
+        :props="defaultProps"
+        :highlight-current="true"
+        default-expand-all
+        @node-click="handleNodeClick"
+      />
+    </div>
+    <div class="rightFix">
+      <div style="margin-bottom:10px" class="item">
+        <!-- 设备档案 -->
+        <ExhArchives />
+      </div>
+      <div class="item">
+        <!-- 测点数据 -->
+        <MeasuringPointData />
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -133,10 +129,14 @@ export default {
 }
 .leftFix{
   height: calc(100vh - 50px - 20px - 61px);
+  float: left;
+  width: 340px;
 }
 </style>
 <style lang="scss">
 .rightFix{
+   float: right;
+    width: calc(100% - 350px);
   h2{
     font-size: 17px;
     margin-top: 0;
