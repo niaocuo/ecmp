@@ -2,69 +2,129 @@
   <div style="margin-bottom:20px;">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="用户名">
-        <el-input v-model="formInline.loginName" size="mini" placeholder="用途" />
+        <el-input v-model="formInline.subdistrictName" size="mini" placeholder="用户名" />
       </el-form-item>
       <el-form-item label="行业">
-        <el-select v-model="formInline.userId" filterable clearable size="mini" placeholder="请选择">
+        <el-select v-model="formInline.industry" filterable clearable size="mini" placeholder="请选择">
           <el-option
-            v-for="item in option"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            v-for="item in industrys"
+            :key="item.codeId"
+            :label="item.codeName"
+            :value="item.codeValue"
           />
         </el-select>
       </el-form-item>
       <el-form-item label="地区">
-        <el-input v-model="formInline.loginName" size="mini" placeholder="地区" />
+        <el-select v-model="formInline.areaId" filterable clearable size="mini" placeholder="请选择">
+          <el-option
+            v-for="item in areas"
+            :key="item.areaId"
+            :label="item.areaName"
+            :value="item.areaId"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="mini" @click="onSubmit">查询</el-button>
+        <el-button type="primary" size="mini" @click="getRsubdistricts">查询</el-button>
       </el-form-item>
     </el-form>
-    <el-table :data="tableData" border size="mini">
+    <el-table v-loading="listLoading" :data="tableData" border size="mini">
       <el-table-column label="序号" width="100" type="index" align="center" />
-      <el-table-column label="地区" prop="name" align="center" />
-      <el-table-column label="用户名" prop="type" align="center" />
+      <el-table-column label="户号" prop="consNo" align="center" />
+      <el-table-column label="用户名" prop="subdistrictName" align="center">
+        <template slot-scope="scope">
+          <el-link type="primary" @click="jumpExhibition(scope.row.subdistrictId)">{{ scope.row.subdistrictName }}</el-link>
+        </template>
+      </el-table-column>
       <el-table-column label="行业" prop="industry" align="center" />
-      <el-table-column label="类型" prop="capacity" align="center" />
-      <el-table-column label="容量" prop="capacity" align="center" />
-      <el-table-column label="联系人" prop="contacts" align="center" />
-      <el-table-column label="电话" prop="telephone" align="center" />
-      <el-table-column label="坐标" prop="telephone" align="center" />
+      <el-table-column label="容量" prop="decCapacity" align="center" />
+      <el-table-column label="联系人" prop="linkmanName" align="center" />
+      <el-table-column label="电话" prop="linkmanPhone" align="center" />
+      <el-table-column label="地区" prop="rarea.areaName" align="center" />
+      <el-table-column label="坐标" prop="lng" align="center" />
     </el-table>
+    <div style="float: right">
+      <el-pagination
+        :current-page="page.currentPage"
+        :page-sizes="[5, 10, 20, 50]"
+        :page-size="page.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import { getRsubdistricts } from '@/api/subdistricts'
+import { getCodeByCodeSortId } from '@/api/pcode'
+import { getAreaByAreaId } from '@/api/area'
 export default {
   data() {
     return {
       // 下拉表
-      option: '',
+      industrys: [],
+      areas: [],
       // 查询条件表单
       formInline: {
-        userId: '',
-        loginName: '',
-        createTime: ''
+        areaId: '',
+        subdistrictName: '',
+        industry: ''
       },
-      tableData: [
-        { id: '1', name: '测试用户名称', industry: '纺织制造行业', type: '测试类型', capacity: '15613Kwh', contacts: '来呢西人', telephone: '18324938847' },
-        { id: '1', name: '测试用户名称', industry: '纺织制造行业', type: '测试类型', capacity: '15613Kwh', contacts: '来呢西人', telephone: '18324938847' },
-        { id: '1', name: '测试用户名称', industry: '纺织制造行业', type: '测试类型', capacity: '15613Kwh', contacts: '来呢西人', telephone: '18324938847' },
-        { id: '1', name: '测试用户名称', industry: '纺织制造行业', type: '测试类型', capacity: '15613Kwh', contacts: '来呢西人', telephone: '18324938847' },
-        { id: '1', name: '测试用户名称', industry: '纺织制造行业', type: '测试类型', capacity: '15613Kwh', contacts: '来呢西人', telephone: '18324938847' }
-
-      ]
+      listLoading: true,
+      page: {
+        currentPage: 1,
+        pageSize: 5
+      },
+      total: 0,
+      tableData: []
     }
   },
+  watch: {
+    page: {
+      handler(val, oldVal) {
+        this.getRsubdistricts()
+      }, deep: true
+    }
+  },
+  mounted() {
+    this.getCodeByCodeSortId()
+    this.getRsubdistricts()
+    this.getAreaByAreaId()
+  },
   methods: {
-    onSubmit() {
-
+    async getCodeByCodeSortId() {
+      const res = await getCodeByCodeSortId(10084)
+      this.industrys = res.data
+    },
+    async getAreaByAreaId() {
+      const result = await getAreaByAreaId(1)
+      this.areas = result.data
+    },
+    async getRsubdistricts() {
+      this.listLoading = true
+      const rsubdistrict = Object.assign(this.page, this.formInline)
+      const res = await getRsubdistricts(rsubdistrict)
+      this.listLoading = false
+      this.tableData = res.data.listData
+      this.total = res.data.total
+    },
+    jumpExhibition(id) {
+      this.$router.push({
+        name: 'Exhibition',
+        params: {
+          id: id
+        }
+      })
+    },
+    handleSizeChange(val) {
+      this.page.pageSize = val
+    },
+    handleCurrentChange(val) {
+      this.page.currentPage = val
     }
   }
 }
 </script>
-
-<style>
-
-</style>

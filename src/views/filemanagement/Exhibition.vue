@@ -1,14 +1,6 @@
 <template>
   <div class="app-container clearfix">
     <div class="item leftFix">
-      <el-form :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="用户名称">
-          <el-input v-model="formInline.name" size="small" style="width:150px" placeholder="用户名称" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" size="small" @click="onSubmit">查询</el-button>
-        </el-form-item>
-      </el-form>
       <el-tree
         ref="tree"
         class="filter-tree"
@@ -23,11 +15,11 @@
     <div class="rightFix">
       <div style="margin-bottom:10px" class="item">
         <!-- 设备档案 -->
-        <ExhArchives />
+        <ExhArchives :equipment="equipment" :title="title" />
       </div>
       <div class="item">
         <!-- 测点数据 -->
-        <MeasuringPointData />
+        <MeasuringPointData :mt-id="mtId" />
       </div>
     </div>
   </div>
@@ -35,87 +27,174 @@
 <script>
 import ExhArchives from './components/ExhArchives'
 import MeasuringPointData from './components/MeasuringPointData'
-// 获取第一条数据
-const getFirstNode = (tree) => {
-  var temp = []
-  var forFn = function(arr) {
-    if (arr && arr.length > 0) {
-      temp.push(arr[0])
-      if (arr[0].children) {
-        forFn(arr[0].children)
-      }
-    }
-  }
-  forFn(tree)
-  return temp[temp.length - 1]
-}
+import { getStationTree } from '@/api/station'
+import { getTransformerByTrId } from '@/api/transformer'
+import { getRbsByBsId } from '@/api/rbs'
+import { getRBreakerByBreakerId } from '@/api/rBreaker'
+
 export default {
   name: 'Exhibition',
   components: { ExhArchives, MeasuringPointData },
   data() {
     return {
       filterText: '',
+      title: '变压器容量',
       formInline: {
         name: ''
       },
-      data: [{
-        id: 1,
-        label: '一级 1',
-        children: [{
-          id: 4,
-          label: '二级 1-1',
-          children: [{
-            id: 9,
-            label: '三级 1-1-1'
-          }, {
-            id: 10,
-            label: '三级 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: '一级 2',
-        children: [{
-          id: 5,
-          label: '二级 2-1'
-        }, {
-          id: 6,
-          label: '二级 2-2'
-        }]
-      }, {
-        id: 3,
-        label: '一级 3',
-        children: [{
-          id: 7,
-          label: '二级 3-1'
-        }, {
-          id: 8,
-          label: '二级 3-2'
-        }]
-      }],
+      subdistrictId: this.$route.params.id,
+      data: [],
       defaultProps: {
         children: 'children',
         label: 'label'
+      },
+      mtId: 0,
+      equipment: {
+        category: '',
+        name: '',
+        serialNumber: '',
+        type: '',
+        vendor: '',
+        capacity: '',
+        gatewayIp: '',
+        number: ''
       }
     }
   },
   mounted() {
-    const lastNode = getFirstNode(this.data) // 第一条数据 最小子集
-    // 数据加载完成后默认选择一条数据
-    this.$nextTick(() => {
-      this.$refs.tree.setCurrentKey(lastNode.id) // 传入节点ID
-      this.handleNodeClick(lastNode)
-    })
+    this.getStationTree()
   },
   methods: {
     // 查询树节点
     onSubmit() {
-      console.log(this.formInline.name)
+    },
+    // 获取第一条数据
+    getFirstNode(tree) {
+      const temp = []
+      const forFn = function(arr) {
+        if (arr && arr.length > 0) {
+          temp.push(arr[0])
+          if (arr[0].children) {
+            forFn(arr[0].children)
+          }
+        }
+      }
+      forFn(tree)
+      return temp[temp.length - 1]
+    },
+    async getStationTree() {
+      const result = await getStationTree(this.subdistrictId)
+      this.data = result.data
+      const lastNode = this.getFirstNode(this.data) // 第一条数据 最小子集
+      // 数据加载完成后默认选择一条数据
+      this.$nextTick(() => {
+        this.$refs.tree.setCurrentKey(lastNode.id) // 传入节点ID
+        this.handleNodeClick(lastNode)
+      })
     },
     // 树节点 点击
-    handleNodeClick(data) {
-      if (!data.children) { // 只有最小子集可触发 & !data.children.length
-        console.log(data)
+    async handleNodeClick(data) {
+      let result = {}
+      switch (data.type) {
+        case 3:
+          result = await getTransformerByTrId(data.entityId)
+          this.equipment.name = result.data.trName
+          this.equipment.category = '变压器'
+          this.title = '变压器容量'
+          this.equipment.serialNumber = result.data.trNo
+          this.equipment.type = result.data.trType === '1' ? '干式' : '油浸式'
+          this.equipment.vendor = result.data.rfactory.facName
+          this.equipment.capacity = result.data.trCapacity
+          if (result.data.rmeteruseinfo != null) {
+            this.mtId = result.data.rmeteruseinfo.mtId
+            this.equipment.gatewayIp = result.data.rmeteruseinfo.rtmnl.tmnlIp
+            this.equipment.number = result.data.rmeteruseinfo.mtCode
+          } else {
+            this.equipment.gatewayIp = ''
+            this.equipment.number = ''
+            this.mtId = 0
+          }
+          break
+        case 4:
+          result = await getRbsByBsId(data.entityId)
+          this.equipment.name = result.data.bsName
+          this.equipment.category = '母线'
+          this.title = '电压等级'
+          this.equipment.serialNumber = result.data.bsNo
+          switch (result.data.voltType) {
+            case '1':
+              this.equipment.capacity = '10kV'
+              break
+            case '2':
+              this.equipment.capacity = '0.4kV'
+              break
+            case '3':
+              this.equipment.capacity = '0.38kV'
+              break
+            case '4':
+              this.equipment.capacity = '0.22kV'
+              break
+          }
+          switch (result.data.bsType) {
+            case '1':
+              this.equipment.type = '母线'
+              break
+            case '2':
+              this.equipment.type = '进线'
+              break
+            case '3':
+              this.equipment.type = '出线'
+              break
+            case '4':
+              this.equipment.type = '电网线路'
+              break
+          }
+          this.equipment.vendor = ''
+          if (result.data.rmeteruseinfo != null) {
+            this.mtId = result.data.rmeteruseinfo.mtId
+            this.equipment.gatewayIp = result.data.rmeteruseinfo.rtmnl.tmnlIp
+            this.equipment.number = result.data.rmeteruseinfo.mtCode
+          } else {
+            this.equipment.gatewayIp = ''
+            this.equipment.number = ''
+            this.mtId = 0
+          }
+          break
+        case 5:
+          result = await getRBreakerByBreakerId(data.entityId)
+          this.equipment.name = result.data.breakerName
+          this.equipment.category = '开关'
+          this.title = '分合闸状态'
+          this.equipment.serialNumber = result.data.bkNo
+          switch (result.data.breakerType) {
+            case '1':
+              this.equipment.type = '普通开关'
+              break
+            case '2':
+              this.equipment.type = '小车开关'
+              break
+            case '3':
+              this.equipment.type = '母联/分段/旁路开关'
+              break
+            case '4':
+              this.equipment.type = '变压器分支'
+              break
+            case '5':
+              this.equipment.type = '电容器'
+              break
+          }
+          this.equipment.vendor = result.data.rfactory.facName
+          this.equipment.capacity = result.data.status === '0' ? '分闸' : '合闸'
+          if (result.data.rmeteruseinfo != null) {
+            this.mtId = result.data.rmeteruseinfo.mtId
+            this.equipment.gatewayIp = result.data.rmeteruseinfo.rtmnl.tmnlIp
+            this.equipment.number = result.data.rmeteruseinfo.mtCode
+          } else {
+            this.equipment.gatewayIp = ''
+            this.equipment.number = ''
+            this.mtId = 0
+          }
+          break
       }
     }
   }

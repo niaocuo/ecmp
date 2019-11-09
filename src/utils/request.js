@@ -52,7 +52,7 @@ service.interceptors.response.use(
         duration: 5 * 1000
       })
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.errorCode === '40010' || res.errorCode === '40020') {
+      if (res.errorCode === '40010') {
         // to re-login
         MessageBox.confirm('你已经注销了,你可以取消在这个页面,或再次登录', '请重新登陆', {
           confirmButtonText: '重新登陆',

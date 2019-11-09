@@ -209,7 +209,8 @@ export default {
       const user = Object.assign(this.page, this.formInline)
       const res = await getUsers(user)
       this.listLoading = false
-      this.userList = res.data
+      this.userList = res.data.listData
+      this.total = res.data.total
     },
     // 新增用户
     handleAddRole() {

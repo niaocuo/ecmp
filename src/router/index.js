@@ -76,8 +76,8 @@ export const constantRoutes = [
     hidden: true,
     children: [
       {
-        path: '/Exhibition',
-        name: '展示页面',
+        path: '/exhibition/:id',
+        name: 'Exhibition',
         component: () => import('@/views/filemanagement/Exhibition'),
         hidden: true
       }
