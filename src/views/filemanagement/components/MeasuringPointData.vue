@@ -19,9 +19,9 @@
     <el-table
       :data="tableData"
       border
-      :height="tableHeight"
       :header-cell-style="headerStyle"
-      style="width: 100%"
+      :cell-style="headerStyle"
+      :style="`width:100%l; min-height:${tableHeight}`"
     >
       <el-table-column
         type="index"
@@ -31,7 +31,7 @@
       <el-table-column
         prop="mpName"
         label="测点名称"
-        width="180"
+        show-overflow-tooltip
       />
       <el-table-column
         prop="mpCode"
@@ -44,19 +44,22 @@
       <el-table-column
         prop="rMpData.collDataTime"
         label="数据时间"
+        show-overflow-tooltip
       />
       <el-table-column
         prop="rMpData.dataValue"
         label="当前数值"
+        width="100"
       />
       <el-table-column
         prop="modulus"
         label="系数"
-        width="180"
+        width="100"
       />
       <el-table-column
         prop="mpType"
         label="测点类型"
+        width="100"
       >
         <template slot-scope="scope">
           <span v-if="scope.row.mpType==='2'">遥信</span>
@@ -86,6 +89,7 @@ export default {
   },
   computed: {
     tableHeight() {
+      // :header-cell-style="headerStyle"
       const clientHeight = document.body.clientHeight
       const tableh = clientHeight - 470
       return tableh + 'px'
@@ -104,6 +108,9 @@ export default {
       this.formInline.mtId = this.mtId
       const result = await getRMpDefinInfos(this.formInline)
       this.tableData = result.data
+      this.$nextTick(() => {
+        this.$emit('upmounted')
+      })
     },
     headerStyle() {
       return {

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container clearfix">
-    <div class="item leftFix">
+    <div class="item leftFix" :style="`height:${asildHeight}`">
       <el-tree
         ref="tree"
         class="filter-tree"
@@ -19,7 +19,7 @@
       </div>
       <div class="item">
         <!-- 测点数据 -->
-        <MeasuringPointData :mt-id="mtId" />
+        <MeasuringPointData :mt-id="mtId" @upmounted="upmounted" />
       </div>
     </div>
   </div>
@@ -37,6 +37,7 @@ export default {
   components: { ExhArchives, MeasuringPointData },
   data() {
     return {
+      scrollHeight: '', // 网页高度
       filterText: '',
       title: '变压器容量',
       formInline: {
@@ -61,12 +62,25 @@ export default {
       }
     }
   },
+  computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
+    asildHeight() {
+      if (this.scrollHeight) {
+        const asildh = this.scrollHeight - 151
+        return asildh + 'px'
+      }
+    }
+  },
+
   mounted() {
     this.getStationTree()
   },
   methods: {
     // 查询树节点
     onSubmit() {
+    },
+    upmounted() {
+      this.scrollHeight = document.body.scrollHeight
     },
     // 获取第一条数据
     getFirstNode(tree) {
@@ -209,13 +223,13 @@ export default {
 .leftFix{
   height: calc(100vh - 50px - 20px - 61px);
   float: left;
-  width: 340px;
+  width: 300px;
 }
 </style>
 <style lang="scss">
 .rightFix{
    float: right;
-    width: calc(100% - 350px);
+    width: calc(100% - 310px);
   h2{
     font-size: 17px;
     margin-top: 0;
