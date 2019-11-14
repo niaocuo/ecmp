@@ -10,16 +10,41 @@
       class="filter-tree"
       default-expand-all
     />
-
+    <treeselect
+      v-model="value"
+      :multiple="true"
+      :options="options"
+      value-consists-of="LEAF_PRIORITY"
+    />
   </div>
 </template>
 
 <script>
+import Treeselect from '@riophae/vue-treeselect'
+// import the styles
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 export default {
-
+  components: { Treeselect },
   data() {
     return {
       filterText: '',
+      options: [{
+        id: 'a',
+        label: 'a',
+        children: [{
+          id: 'aa',
+          label: 'aa'
+        }, {
+          id: 'ab',
+          label: 'ab'
+        }]
+      }, {
+        id: 'b',
+        label: 'b'
+      }, {
+        id: 'c',
+        label: 'c'
+      }],
       data2: [{
         id: 1,
         label: 'Level one 1',
