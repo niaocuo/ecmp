@@ -48,6 +48,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/tree',
+    component: () => import('@/views/tree'),
+    hidden: true
+  },
+  {
     path: '/',
     component: Layout,
     hidden: true,
