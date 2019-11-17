@@ -29,20 +29,20 @@
       </el-form-item>
     </el-form>
     <el-table v-loading="listLoading" border :header-cell-style="headerStyle" :cell-style="headerStyle" :data="tableData" size="mini">
-      <el-table-column label="序号" width="50" type="index" align="center" />
-      <el-table-column label="户号" prop="consNo" align="center" />
-      <el-table-column label="用户名" prop="subdistrictName" align="center">
+      <el-table-column label="序号" width="80" type="index" />
+      <el-table-column label="户号" prop="consNo" />
+      <el-table-column label="用户名">
         <template slot-scope="scope">
           <el-link type="primary" @click="jumpExhibition(scope.row.subdistrictId)">{{ scope.row.subdistrictName }}</el-link>
         </template>
       </el-table-column>
-      <el-table-column label="行业" prop="industry" align="center" />
-      <el-table-column label="申报需量" prop="decCapacity" align="center" width="120" />
-      <el-table-column label="联系人" prop="linkmanName" align="center" width="120" />
-      <el-table-column label="电话" prop="linkmanPhone" align="center" />
-      <el-table-column label="地区" prop="rarea.areaName" align="center" width="80" />
-      <el-table-column label="用电地址" prop="subdistrictAddress" align="center" />
-      <el-table-column label="坐标" prop="lng" align="center" width="80" />
+      <el-table-column label="行业" prop="industry" />
+      <el-table-column label="申报需量" prop="decCapacity" width="120" />
+      <el-table-column label="联系人" prop="linkmanName" width="120" />
+      <el-table-column label="电话" prop="linkmanPhone" />
+      <el-table-column label="地区" prop="rarea.areaName" width="80" />
+      <el-table-column label="用电地址" prop="subdistrictAddress" />
+      <el-table-column label="坐标" prop="lng" width="80" />
     </el-table>
     <div style="float: right">
       <el-pagination
