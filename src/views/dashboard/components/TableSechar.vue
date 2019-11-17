@@ -28,8 +28,8 @@
         <el-button type="primary" size="mini" @click="getRsubdistricts">查询</el-button>
       </el-form-item>
     </el-form>
-    <el-table v-loading="listLoading" :data="tableData" border size="mini">
-      <el-table-column label="序号" width="100" type="index" align="center" />
+    <el-table v-loading="listLoading" border :header-cell-style="headerStyle" :cell-style="headerStyle" :data="tableData" size="mini">
+      <el-table-column label="序号" width="50" type="index" align="center" />
       <el-table-column label="户号" prop="consNo" align="center" />
       <el-table-column label="用户名" prop="subdistrictName" align="center">
         <template slot-scope="scope">
@@ -37,11 +37,12 @@
         </template>
       </el-table-column>
       <el-table-column label="行业" prop="industry" align="center" />
-      <el-table-column label="容量" prop="decCapacity" align="center" />
-      <el-table-column label="联系人" prop="linkmanName" align="center" />
+      <el-table-column label="申报需量" prop="decCapacity" align="center" width="120" />
+      <el-table-column label="联系人" prop="linkmanName" align="center" width="120" />
       <el-table-column label="电话" prop="linkmanPhone" align="center" />
-      <el-table-column label="地区" prop="rarea.areaName" align="center" />
-      <el-table-column label="坐标" prop="lng" align="center" />
+      <el-table-column label="地区" prop="rarea.areaName" align="center" width="80" />
+      <el-table-column label="用电地址" prop="subdistrictAddress" align="center" />
+      <el-table-column label="坐标" prop="lng" align="center" width="80" />
     </el-table>
     <div style="float: right">
       <el-pagination
@@ -124,6 +125,12 @@ export default {
     },
     handleCurrentChange(val) {
       this.page.currentPage = val
+    },
+    headerStyle() {
+      return {
+        color: '#000',
+        textAlign: 'center'
+      }
     }
   }
 }
