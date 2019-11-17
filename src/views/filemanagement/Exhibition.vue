@@ -3,6 +3,7 @@
     <div class="item leftFix" :style="`height:${asildHeight}`">
       <el-tree
         ref="tree"
+        :expand-on-click-node="false"
         class="filter-tree"
         :data="data"
         node-key="id"
