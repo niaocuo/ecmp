@@ -91,6 +91,42 @@ export const constantRoutes = [
         name: 'alarmLog',
         component: () => import('@/views/alarmLog/index'),
         hidden: true
+      },
+      {
+        path: '/transformerMonitoring', // 配变监测
+        name: 'transformerMonitoring',
+        component: () => import('@/views/transformerMonitoring/index'),
+        hidden: true
+      },
+      {
+        path: '/linemonitoring', // 线路监测
+        name: 'linemonitoring',
+        component: () => import('@/views/transformerMonitoring/index'),
+        hidden: true
+      },
+      {
+        path: '/switchMonitoring', // 开关监测
+        name: 'switchMonitoring',
+        component: () => import('@/views/transformerMonitoring/index'),
+        hidden: true
+      },
+      {
+        path: '/primarywiringdiagram', // 一次接线图
+        name: 'primarywiringdiagram',
+        component: () => import('@/views/primarywiringdiagram/index'),
+        hidden: true
+      },
+      {
+        path: '/panoramic3Dview', // 全景3D视图
+        name: 'panoramic3Dview',
+        component: () => import('@/views/panoramic3Dview/index'),
+        hidden: true
+      },
+      {
+        path: '/coulometricanalysis', // 电量分析
+        name: 'coulometricanalysis',
+        component: () => import('@/views/coulometricanalysis/index'),
+        hidden: true
       }
     ]
   }
