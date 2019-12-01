@@ -1,5 +1,9 @@
 <template>
-  <!-- 配变监测 -->
+  <!--
+    path:transformerMonitoring:配变监测
+    path:linemonitoring:线路监测
+    path:switchMonitoring:开关监测
+     -->
   <PageLayout :tree-data="treeData" @handleNodeClick="handleNodeClick">
     <div slot="leftTree">
       <el-form ref="treeform" :inline="true" :model="formInline" class="demo-form-inline">
