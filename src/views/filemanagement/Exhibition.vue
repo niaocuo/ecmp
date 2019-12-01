@@ -1,6 +1,6 @@
 <template>
   <div class="app-container clearfix">
-    <div class="item leftFix" :style="`height:${asildHeight}`">
+    <div class="item leftFix" :style="`min-height:${asildHeight}`">
       <el-tree
         ref="tree"
         :expand-on-click-node="false"
@@ -222,7 +222,7 @@ export default {
   border-radius: 10px;
 }
 .leftFix{
-  height: calc(100vh - 50px - 20px - 61px);
+  min-height: calc(100vh - 50px - 20px - 61px);
   float: left;
   width: 300px;
 }

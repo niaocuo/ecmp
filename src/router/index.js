@@ -85,6 +85,12 @@ export const constantRoutes = [
         name: 'Exhibition',
         component: () => import('@/views/filemanagement/Exhibition'),
         hidden: true
+      },
+      {
+        path: '/alarmLog', // 告警记录
+        name: 'alarmLog',
+        component: () => import('@/views/alarmLog/index'),
+        hidden: true
       }
     ]
   }

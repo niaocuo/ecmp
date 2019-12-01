@@ -21,7 +21,7 @@
       border
       :header-cell-style="headerStyle"
       :cell-style="headerStyle"
-      :style="`width:100%l; min-height:${tableHeight}`"
+      :style="`width:100%; min-height:${tableHeight}`"
     >
       <el-table-column
         type="index"
