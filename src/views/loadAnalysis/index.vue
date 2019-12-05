@@ -92,7 +92,6 @@ export default {
     },
     // 树节点点击
     handleNodeClick(nodedata) {
-      console.log(nodedata)
       this.Treenodeid = nodedata.id
     }
   }

@@ -25,16 +25,12 @@ const lineChartData = {
   }
 }
 // 查询折线数据
-const getlineChartData = (activeName, time, treenodeid) => {
+const getlineChartData = (time, treenodeid) => {
   if (treenodeid >= 0) {
     console.log('查询折线数据')
     console.log(`当前时间：默认今天:${time}`)
     console.log(`树节点ID:${treenodeid}`)
-    if (activeName === '1') {
-      return lineChartData.newVisitis
-    } else {
-      return lineChartData.messages
-    }
+    return lineChartData.newVisitis
   } else {
     return {}
   }
@@ -42,26 +38,6 @@ const getlineChartData = (activeName, time, treenodeid) => {
 export default {
   components: { LineChart },
   props: {
-    tabsOption: {
-      type: Array,
-      default: () => {
-        const defaultOPtion = [
-          {
-            label: '油温',
-            name: '1'
-          },
-          {
-            label: '功率因数',
-            name: '2'
-          },
-          {
-            label: '功率',
-            name: '3'
-          }
-        ]
-        return defaultOPtion
-      }
-    },
     treeNodeId: {
       type: Number,
       default: null
@@ -71,31 +47,16 @@ export default {
     return {
       formInline: {
         timer: new Date()
-      },
-      tabActiveName: '', // 折线图切换默认选中
-      pathName: this.$route.name
+      }
     }
   },
   computed: {
     // （tabs切换 || 时间变化）  数据跟着变化
     lineChartData() {
       const time = this.formInline.timer || new Date()
-      return getlineChartData(this.tabActiveName, time, this.treeNodeId)
+      return getlineChartData(time, this.treeNodeId)
     }
 
-  },
-  beforeMount() {
-    switch (this.pathName) {
-      case 'transformerMonitoring': // 配变监测
-        this.tabActiveName = '1'
-        break
-      case 'linemonitoring': // 线路监测
-        this.tabActiveName = '4'
-        break
-      case 'switchMonitoring': // 开关监测
-        this.tabActiveName = '7'
-        break
-    }
   },
   methods: {
     onSubmit() {
