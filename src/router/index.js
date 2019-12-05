@@ -127,6 +127,12 @@ export const constantRoutes = [
         name: 'coulometricanalysis',
         component: () => import('@/views/coulometricanalysis/index'),
         hidden: true
+      },
+      {
+        path: '/loadAnalysis', // 负荷分析
+        name: 'loadAnalysis',
+        component: () => import('@/views/loadAnalysis/index'),
+        hidden: true
       }
     ]
   }
