@@ -6,3 +6,10 @@ export function getStationTree(subdistrictId) {
     params: { subdistrictId }
   })
 }
+
+export function getAreaToEquipmentTree() {
+  return request({
+    url: '/station/getAreaToEquipmentTree',
+    method: 'get'
+  })
+}

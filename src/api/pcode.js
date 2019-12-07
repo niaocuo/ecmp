@@ -6,3 +6,11 @@ export function getCodeByCodeSortId(codeSortId) {
     params: { codeSortId }
   })
 }
+
+export function getLabesByCodeSortId(codeSortId) {
+  return request({
+    url: '/code/getLabesByCodeSortId',
+    method: 'get',
+    params: { codeSortId }
+  })
+}

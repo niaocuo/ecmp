@@ -14,17 +14,20 @@
     <div slot="rightContent" class="rightContent">
       <div ref="topsearch" class="top-search-form">
         <el-form ref="rightform" :inline="true" :model="rightformInline" class="demo-form-inline">
-          <el-form-item label="用户名称">
-            <el-input v-model="rightformInline.name" size="mini" style="width:150px" placeholder="客户名称" />
+          <el-form-item label="告警级别">
+            <el-select v-model="rightformInline.alarmLevel" size="mini" style="width: 150px;" placeholder="告警级别">
+              <el-option label="全部" value="all" />
+              <el-option v-for="item in equipmentLevelList" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
           </el-form-item>
           <el-form-item label="告警类别">
-            <el-select v-model="rightformInline.logType" size="mini" style="width: 150px;" placeholder="活动区域">
+            <el-select v-model="rightformInline.alarmType " size="mini" style="width: 150px;" placeholder="告警类别">
               <el-option label="全部" value="all" />
               <el-option v-for="item in logTypeList" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
           </el-form-item>
           <el-form-item label="设备类型">
-            <el-select v-model="rightformInline.equipmentType" size="mini" style="width: 150px;" placeholder="活动区域">
+            <el-select v-model="rightformInline.deviceType" size="mini" style="width: 150px;" placeholder="设备类型">
               <el-option label="全部" value="all" />
               <el-option v-for="item in equipmentTypeList" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
@@ -33,7 +36,7 @@
             <el-date-picker v-model="rightformInline.happenTimer" size="mini" placeholder="发生时间" style="width: 150px;" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" size="mini" @click="onSubmit('rightform')">查询</el-button>
+            <el-button type="primary" size="mini" @click="onSubmit()">查询</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -78,7 +81,9 @@
 </template>
 <script>
 import PageLayout from '@/components/PageLayout'
-import { getStationTree } from '@/api/station'
+import { getAreaToEquipmentTree } from '@/api/station'
+import { getLabesByCodeSortId } from '@/api/pcode'
+import { getRAlarmInfo } from '@/api/rAlarmInfo'
 export default {
   components: { PageLayout },
   filters: {
@@ -86,7 +91,6 @@ export default {
       switch (level) {
         case 1:
           return 'color:#909399'
-
         case 2:
           return 'color:#e6a23c;'
         case 3:
@@ -106,37 +110,20 @@ export default {
   },
   data() {
     return {
-      logPageId: 1, // 告警id
       treeData: [],
       formInline: {
         name: '' // 客户名称
       },
       rightformInline: {
-        name: '', // 用户名称
-        logType: 'all', // 告警类别
-        equipmentType: 'all', // 设备类型
+        deviceId: 0,
+        alarmLevel: '', // 告警级别
+        alarmType: '', // 告警类别
+        deviceType: '', // 设备类型
         happenTimer: '' // 发生时间
       },
-      logTypeList: [
-        {
-          label: '告警类别1',
-          value: '告警类别1'
-        },
-        {
-          label: '告警类别2',
-          value: '告警类别2'
-        }
-      ],
-      equipmentTypeList: [
-        {
-          label: '设备类型1',
-          value: '设备类型1'
-        },
-        {
-          label: '设备类型2',
-          value: '设备类型2'
-        }
-      ],
+      logTypeList: [],
+      equipmentTypeList: [],
+      equipmentLevelList: [],
       topsearchHeight: 71,
       logTableList: [
         {
@@ -159,31 +146,70 @@ export default {
   computed: {
     tableHeight() {
       // :header-cell-style="headerStyle"
-
       const clientHeight = document.body.clientHeight
       const tableh = clientHeight - this.topsearchHeight - 176
       return tableh + 'px'
     }
   },
   mounted() {
-    this.getStationTree()
+    this.init()
+    this.getAreaToEquipmentTree()
     this.topsearchHeight = this.$refs['topsearch'].clientHeight
     // 表格数据Loading
     this.logTableListLoading = false
   },
   methods: {
+    init() {
+      getLabesByCodeSortId(10049).then((result) => {
+        this.equipmentTypeList = result.data
+      })
+      getLabesByCodeSortId(10027).then((result) => {
+        this.equipmentLevelList = result.data
+      })
+      getLabesByCodeSortId(10035).then((result) => {
+        this.logTypeList = result.data
+      })
+    },
     // 搜索 ref=formName：表单名称
-    onSubmit(formName) {
-      console.log(formName)
+    onSubmit() {
+      getRAlarmInfo(this.rightformInline).then((result) => {
+        console.log(result)
+      })
     },
     // 查询左侧树数据
-    async getStationTree() {
-      const result = await getStationTree(this.logPageId)
+    async getAreaToEquipmentTree() {
+      const result = await getAreaToEquipmentTree()
       this.treeData = result.data
     },
     // 树节点点击
-    handleNodeClick(nodedata) {
-      console.log(nodedata)
+    handleNodeClick(data) {
+      this.rightformInline.deviceId = data.entityId
+      switch (data.type) {
+        // 区划
+        case 0:
+          break
+        // 用户
+        case 1:
+          break
+        // 配电所
+        case 2:
+          break
+        // 变压器
+        case 3:
+          this.rightformInline.deviceType = '3'
+          this.onSubmit()
+          break
+        // 母线
+        case 4:
+          this.rightformInline.deviceType = '1'
+          this.onSubmit()
+          break
+        // 开关
+        case 5:
+          this.rightformInline.deviceType = '2'
+          this.onSubmit()
+          break
+      }
     },
     // 表格操作
     // leaflets: 派单
