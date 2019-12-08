@@ -7,9 +7,10 @@ export function getStationTree(subdistrictId) {
   })
 }
 
-export function getAreaToEquipmentTree() {
+export function getAreaToEquipmentTree(deviceType) {
   return request({
     url: '/station/getAreaToEquipmentTree',
-    method: 'get'
+    method: 'get',
+    params: { deviceType }
   })
 }

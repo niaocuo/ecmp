@@ -4,22 +4,19 @@
     <h2>设备档案</h2>
     <el-row>
       <el-col :span="8">
-        <span>设备名称:</span>
+        <span>设备名称:{{ equipment.name }}</span>
       </el-col>
       <el-col :span="8">
-        <span>变压器类型:</span>
+        <span>设备编号:{{ equipment.serialNumber }}</span>
       </el-col>
       <el-col :span="8">
-        <span>设备编号:</span>
+        <span>设备类型:{{ equipment.type }}</span>
       </el-col>
       <el-col :span="8">
-        <span>设备型号:</span>
+        <span>厂家名称:{{ equipment.vendor }}</span>
       </el-col>
       <el-col :span="8">
-        <span>变压器容量:</span>
-      </el-col>
-      <el-col :span="8">
-        <span>运行状态:</span>
+        <span>{{ title }}:{{ equipment.capacity }}</span>
       </el-col>
     </el-row>
   </div>

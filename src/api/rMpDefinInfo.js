@@ -6,3 +6,11 @@ export function getRMpDefinInfos(rmeteruseinfo) {
     params: rmeteruseinfo
   })
 }
+
+export function getFiveMinuteData(data) {
+  return request({
+    url: '/rMpDefinInfo/getFiveMinuteData',
+    method: 'get',
+    params: data
+  })
+}

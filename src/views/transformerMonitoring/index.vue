@@ -18,11 +18,11 @@
     <div slot="rightContent" class="rightContent">
       <div ref="topsearch" class="top-search-form">
         <!-- 设备档案 -->
-        <ExhArchives />
+        <ExhArchives :equipment="equipment" :title="title" />
       </div>
       <div class="top-search-form rightContent-item">
         <!-- tab 折线图 -->
-        <TablineEcharts :tabs-option="tabsOption" :tree-node-id="Treenodeid" />
+        <TablineEcharts :tabs-option="tabsOption" :mt-id="mtId" />
       </div>
     </div>
   </PageLayout>
@@ -31,8 +31,10 @@
 import PageLayout from '@/components/PageLayout'
 import ExhArchives from './component/ExhArchives'
 import TablineEcharts from './component/TablineEcharts'
-
-import { getStationTree } from '@/api/station'
+import { getTransformerByTrId } from '@/api/transformer'
+import { getRbsByBsId } from '@/api/rbs'
+import { getRBreakerByBreakerId } from '@/api/rBreaker'
+import { getAreaToEquipmentTree } from '@/api/station'
 export default {
   components: { PageLayout, ExhArchives, TablineEcharts },
   data() {
@@ -43,7 +45,14 @@ export default {
         name: '' // 客户名称
       },
       pathName: this.$route.name,
-      Treenodeid: -1
+      mtId: 0,
+      equipment: {
+        name: '',
+        serialNumber: '',
+        type: '',
+        capacity: ''
+      },
+      title: '变压器容量'
     }
   },
   computed: {
@@ -94,20 +103,19 @@ export default {
       switch (this.pathName) {
         case 'transformerMonitoring': // 配变监测
           tabsOption = transformerMonitoringTabOption
+          this.getAreaToEquipmentTree(3)
           break
         case 'linemonitoring': // 线路监测
           tabsOption = linemonitoringTabOption
+          this.getAreaToEquipmentTree(1)
           break
         case 'switchMonitoring': // 开关监测
           tabsOption = switchMonitoringTabOption
+          this.getAreaToEquipmentTree(2)
           break
       }
       return tabsOption
     }
-  },
-
-  mounted() {
-    this.getStationTree()
   },
   methods: {
     // 搜索 ref=formName：表单名称
@@ -115,13 +123,96 @@ export default {
       console.log(formName)
     },
     // 查询左侧树数据
-    async getStationTree() {
-      const result = await getStationTree(this.logPageId)
+    async getAreaToEquipmentTree(deviceType) {
+      const result = await getAreaToEquipmentTree(deviceType)
       this.treeData = result.data
     },
     // 树节点点击
-    handleNodeClick(nodedata) {
-      this.Treenodeid = nodedata.id
+    async handleNodeClick(data) {
+      let result = {}
+      switch (data.type) {
+        case 3:
+          result = await getTransformerByTrId(data.entityId)
+          this.equipment.name = result.data.trName
+          this.title = '变压器容量'
+          this.equipment.serialNumber = result.data.trNo
+          this.equipment.type = result.data.trType === '1' ? '干式' : '油浸式'
+          this.equipment.capacity = result.data.trCapacity
+          if (result.data.rmeteruseinfo != null) {
+            this.mtId = result.data.rmeteruseinfo.mtId
+          } else {
+            this.mtId = 0
+          }
+          break
+        case 4:
+          result = await getRbsByBsId(data.entityId)
+          this.equipment.name = result.data.bsName
+          this.title = '电压等级'
+          this.equipment.serialNumber = result.data.bsNo
+          switch (result.data.voltType) {
+            case '1':
+              this.equipment.capacity = '10kV'
+              break
+            case '2':
+              this.equipment.capacity = '0.4kV'
+              break
+            case '3':
+              this.equipment.capacity = '0.38kV'
+              break
+            case '4':
+              this.equipment.capacity = '0.22kV'
+              break
+          }
+          switch (result.data.bsType) {
+            case '1':
+              this.equipment.type = '母线'
+              break
+            case '2':
+              this.equipment.type = '进线'
+              break
+            case '3':
+              this.equipment.type = '出线'
+              break
+            case '4':
+              this.equipment.type = '电网线路'
+              break
+          }
+          if (result.data.rmeteruseinfo != null) {
+            this.mtId = result.data.rmeteruseinfo.mtId
+          } else {
+            this.mtId = 0
+          }
+          break
+        case 5:
+          result = await getRBreakerByBreakerId(data.entityId)
+          this.equipment.name = result.data.breakerName
+          this.title = '分合闸状态'
+          this.equipment.serialNumber = result.data.bkNo
+          switch (result.data.breakerType) {
+            case '1':
+              this.equipment.type = '普通开关'
+              break
+            case '2':
+              this.equipment.type = '小车开关'
+              break
+            case '3':
+              this.equipment.type = '母联/分段/旁路开关'
+              break
+            case '4':
+              this.equipment.type = '变压器分支'
+              break
+            case '5':
+              this.equipment.type = '电容器'
+              break
+          }
+          this.equipment.capacity = result.data.status === '0' ? '分闸' : '合闸'
+          if (result.data.rmeteruseinfo != null) {
+            this.mtId = result.data.rmeteruseinfo.mtId
+          } else {
+            this.mtId = 0
+          }
+          break
+      }
     }
   }
 }
