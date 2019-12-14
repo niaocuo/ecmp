@@ -29,6 +29,10 @@ export default {
     chartData: {
       type: Object,
       required: true
+    },
+    unit: {
+      type: String,
+      default: 'kW'
     }
   },
   data() {
@@ -42,16 +46,17 @@ export default {
     chartData: {
       deep: true,
       handler(val) {
-        console.log(val)
         const lineArr = []
-        for (const key in val) {
+        let index = 0
+        for (const key in val.data) {
           const lineArrObj = {}
-          lineArrObj.name = key
-          lineArrObj.value = val[key]
+          lineArrObj.name = val.keyNames[index]
+          lineArrObj.value = val.data[key]
           lineArr.push(lineArrObj)
+          index++
         }
         this.lineData = lineArr
-        this.setOptions(val)
+        this.setOptions()
       }
     }
   },
@@ -70,13 +75,8 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$refs.chart, 'macarons')
-      this.setOptions(this.chartData)
-    },
-    onSubmit() {
-
     },
     // 循环获取折线数据
-
     getLineDateNameAndValue() {
       const seriesArr = []
       const seriObj = {
@@ -84,9 +84,7 @@ export default {
         symbol: 'none', // 去掉折线图中的节点
         itemStyle: {
           normal: {
-            color: '',
             lineStyle: {
-              color: '',
               width: 2
             }
           }
@@ -99,22 +97,20 @@ export default {
       }
       this.lineData.forEach((item, index) => {
         const series = Object.assign({}, seriObj)
-        const color = ['red', '#aaa', '#3888fa']
         series.name = item.name
         series.data = item.value
-        series.itemStyle.normal.color = color[index]
-        series.itemStyle.normal.lineStyle.color = color[index]
-        if (series.data.length) {
+        if (series.data.length >= 0) {
           seriesArr.push(series)
         }
       })
       return seriesArr
     },
-    setOptions({ expectedData, actualData } = {}) {
+    setOptions() {
       this.chart.setOption({
         xAxis: {
-          name: 'h',
-          data: ['00:00', '00:05', '00:10', '00:15', '00:20', '00:25', '00:30', '00:35', '00:40', '00:45', '00:50', '00:55',
+          name: '',
+          data: [
+            '00:00', '00:05', '00:10', '00:15', '00:20', '00:25', '00:30', '00:35', '00:40', '00:45', '00:50', '00:55',
             '01:00', '01:05', '01:10', '01:15', '01:20', '01:25', '01:30', '01:35', '01:40', '01:45', '01:50', '01:55',
             '02:00', '02:05', '02:10', '02:15', '02:20', '02:25', '02:30', '02:35', '02:40', '02:45', '02:50', '02:55',
             '03:00', '03:05', '03:10', '03:15', '03:20', '03:25', '03:30', '03:35', '03:40', '03:45', '03:50', '03:55',
@@ -137,7 +133,8 @@ export default {
             '20:00', '20:05', '20:10', '20:15', '20:20', '20:25', '20:30', '20:35', '20:40', '20:45', '20:50', '20:55',
             '21:00', '21:05', '21:10', '21:15', '21:20', '21:25', '21:30', '21:35', '21:40', '21:45', '21:50', '21:55',
             '22:00', '22:05', '22:10', '22:15', '22:20', '22:25', '22:30', '22:35', '22:40', '22:45', '22:50', '22:55',
-            '23:00', '23:05', '23:10', '23:15', '23:20', '23:25', '23:30', '23:35', '23:40', '23:45', '23:50', '23:55'],
+            '23:00', '23:05', '23:10', '23:15', '23:20', '23:25', '23:30', '23:35', '23:40', '23:45', '23:50', '23:55'
+          ],
           boundaryGap: false,
           axisTick: {
             show: false
@@ -155,13 +152,10 @@ export default {
           axisPointer: {
             type: 'cross'
           },
-          // formatter: function(par) {
-          //   return `实际负荷</br>时间：${par[0].axisValue}</br> 负荷：${par[0].data}KW`
-          // },
           padding: [5, 10]
         },
         yAxis: {
-          name: 'KW',
+          name: this.unit,
           axisTick: {
             show: false
           },
@@ -192,7 +186,7 @@ export default {
           }
         }],
         series: this.getLineDateNameAndValue()
-      })
+      }, true)
     }
   }
 }

@@ -81,36 +81,6 @@ export const constantRoutes = [
     hidden: true,
     children: [
       {
-        path: '/exhibition/:id',
-        name: 'Exhibition',
-        component: () => import('@/views/filemanagement/Exhibition'),
-        hidden: true
-      },
-      {
-        path: '/alarmLog', // 告警记录
-        name: 'alarmLog',
-        component: () => import('@/views/alarmLog/index'),
-        hidden: true
-      },
-      {
-        path: '/transformerMonitoring', // 配变监测
-        name: 'transformerMonitoring',
-        component: () => import('@/views/transformerMonitoring/index'),
-        hidden: true
-      },
-      {
-        path: '/linemonitoring', // 线路监测
-        name: 'linemonitoring',
-        component: () => import('@/views/transformerMonitoring/index'),
-        hidden: true
-      },
-      {
-        path: '/switchMonitoring', // 开关监测
-        name: 'switchMonitoring',
-        component: () => import('@/views/transformerMonitoring/index'),
-        hidden: true
-      },
-      {
         path: '/primarywiringdiagram', // 一次接线图
         name: 'primarywiringdiagram',
         component: () => import('@/views/primarywiringdiagram/index'),
@@ -165,6 +135,36 @@ export const asyncRoutes = [
         name: 'MenuManage',
         component: () => import('@/views/sysManage/menuManage'),
         meta: { title: '菜单管理', icon: 'menuManage' }
+      },
+      {
+        path: '/exhibition/:id',
+        name: 'Exhibition',
+        component: () => import('@/views/filemanagement/Exhibition'),
+        hidden: true
+      },
+      {
+        path: '/alarmLog', // 告警记录
+        name: 'alarmLog',
+        component: () => import('@/views/alarmLog/index'),
+        hidden: true
+      },
+      {
+        path: '/transformerMonitoring', // 配变监测
+        name: 'transformerMonitoring',
+        component: () => import('@/views/transformerMonitoring/index'),
+        hidden: true
+      },
+      {
+        path: '/linemonitoring', // 线路监测
+        name: 'linemonitoring',
+        component: () => import('@/views/transformerMonitoring/index'),
+        hidden: true
+      },
+      {
+        path: '/switchMonitoring', // 开关监测
+        name: 'switchMonitoring',
+        component: () => import('@/views/transformerMonitoring/index'),
+        hidden: true
       }
     ]
   },

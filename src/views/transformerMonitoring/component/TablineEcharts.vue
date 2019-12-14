@@ -12,22 +12,12 @@
     <el-tabs v-model="tabActiveName">
       <el-tab-pane v-for="item in tabsOption" :key="item.name" :label="item.label" :name="item.name" />
     </el-tabs>
-    <LineChart :chart-data="lineChartData" />
+    <LineChart :chart-data="lineChartData" :unit="unit" />
   </div>
 </template>
 <script>
 import LineChart from './LineChart'
 import { getFiveMinuteData } from '@/api/rMpDefinInfo'
-// const lineChartData = {
-//   newVisitis: {
-//     expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91], // 昨天数据
-//     actualData: [120, 82, 91, 154, 162, 140, 145, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160]// 今天数据
-//   },
-//   messages: {
-//     expectedData: [200, 192, 120, 144, 160, 130, 140, 82, 91, 154, 162, 140, 145, 134, 105, 160, 165, 120, 82, 91, 154, 162, 140, 82],
-//     actualData: [180, 160, 151, 106, 145, 150, 130, 20, 144, 160, 130, 140, 82, 91, 154, 162, 140, 145, 134, 105, 20, 144, 160, 130]
-//   }
-// }
 export default {
   components: { LineChart },
   props: {
@@ -63,16 +53,9 @@ export default {
       },
       lineChartData: {},
       tabActiveName: '', // 折线图切换默认选中
-      pathName: this.$route.name
+      pathName: this.$route.name,
+      unit: 'kW'
     }
-  },
-  computed: {
-    // （tabs切换 || 时间变化）  数据跟着变化
-    // lineChartData() {
-    //   const time = this.formInline.timer || new Date().getTime()
-    //   // this.getlineChartData(this.tabActiveName, time, this.mtId)
-    //   // return this.lineData
-    // }
   },
   watch: {
     formInline: {
@@ -85,13 +68,15 @@ export default {
     tabActiveName: {
       deep: true,
       handler(val) {
-        this.getlineChartData(val, this.formInline.time, this.mtId)
+        const time = this.formInline.timer || new Date().getTime()
+        this.getlineChartData(val, time, this.mtId)
       }
     },
     mtId: {
       deep: true,
       handler(val) {
-        this.getlineChartData(this.tabActiveName, this.formInline.time, val)
+        const time = this.formInline.timer || new Date().getTime()
+        this.getlineChartData(this.tabActiveName, time, val)
       }
     }
   },
@@ -110,31 +95,69 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.lineChartData)
-      // const time = this.formInline.timer || new Date().getTime()
-      // return this.getlineChartData(this.tabActiveName, time, this.mtId)
+      const time = this.formInline.timer || new Date().getTime()
+      return this.getlineChartData(this.tabActiveName, time, this.mtId)
     },
     // 查询折线数据
     async getlineChartData(activeName, time, mtId) {
-      console.log('查询折线数据')
-      console.log(`当前tab name:${activeName}`)
-      console.log(`当前时间：默认今天:${time}`)
-      console.log(`mtId:${mtId}`)
       const data = {
         mtId: mtId,
         collDate: time
       }
-      // if (activeName === '1') {
-      data.mpCodes = ['YWa', 'YWb', 'YWc']
-      // }
+      let keyNames = []
+      switch (activeName) {
+        case '1':
+          data.mpCodes = ['YWa', 'YWb', 'YWc']
+          keyNames = ['配变油温A相', '配变油温B相', '配变油温C相']
+          this.unit = '℃'
+          break
+        case '2':
+          data.mpCodes = ['COSθ']
+          keyNames = ['功率因数']
+          this.unit = ''
+          break
+        case '3':
+          data.mpCodes = ['P', 'Q', 'S']
+          keyNames = ['有功功率', '无功功率', '视在功率']
+          this.unit = 'kW'
+          break
+        case '4':
+          data.mpCodes = ['Ua', 'Ub', 'Uc']
+          keyNames = ['A相电压', 'B相电压', 'C相电压']
+          this.unit = 'V'
+          break
+        case '5':
+          data.mpCodes = ['Uab', 'Ubc', 'Uca']
+          keyNames = ['A相线电压', 'B相线电压', 'C相线电压']
+          this.unit = 'V'
+          break
+        case '6':
+          data.mpCodes = ['f']
+          keyNames = ['频率']
+          this.unit = 'Hz'
+          break
+        case '7':
+          data.mpCodes = ['Ia', 'Ib', 'Ic']
+          keyNames = ['A相电流', 'B相电流', 'C相电流']
+          this.unit = 'A'
+          break
+        case '8':
+          data.mpCodes = ['P', 'Q', 'S']
+          keyNames = ['有功功率', '无功功率', '视在功率']
+          this.unit = 'kW'
+          break
+        case '9':
+          data.mpCodes = ['COSθ']
+          keyNames = ['功率因数']
+          this.unit = ''
+          break
+      }
       const result = await getFiveMinuteData(data)
-      // const newVisitis = {
-      //   value: result.data
-      // }
-      this.lineChartData =  result.data
-      // console.log(result.data)
-      // this.lineData = newVisitis
-      // return newVisitis
+      const lineChartData = {
+        keyNames: keyNames,
+        data: result.data
+      }
+      this.lineChartData = lineChartData
     }
   }
 }
