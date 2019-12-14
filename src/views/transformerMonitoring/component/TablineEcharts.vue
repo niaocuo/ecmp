@@ -62,17 +62,40 @@ export default {
       formInline: {
         timer: new Date().getTime()
       },
+      lineChartData: {},
       tabActiveName: '', // 折线图切换默认选中
       pathName: this.$route.name
     }
   },
   computed: {
     // （tabs切换 || 时间变化）  数据跟着变化
-    lineChartData() {
-      const time = this.formInline.timer || new Date().getTime()
-      return this.getlineChartData(this.tabActiveName, time, this.mtId)
-    }
+    // lineChartData() {
+    //   const time = this.formInline.timer || new Date().getTime()
+    //   // this.getlineChartData(this.tabActiveName, time, this.mtId)
+    //   // return this.lineData
+    // }
 
+  },
+  watch: {
+    formInline: {
+      deep: true,
+      handler(val) {
+        const time = val.timer || new Date().getTime()
+        this.getlineChartData(this.tabActiveName, time, this.mtId)
+      }
+    },
+    tabActiveName: {
+      deep: true,
+      handler(val) {
+        this.getlineChartData(val, this.formInline.time, this.mtId)
+      }
+    },
+    mtId: {
+      deep: true,
+      handler(val) {
+        this.getlineChartData(this.tabActiveName, this.formInline.time, val)
+      }
+    }
   },
   beforeMount() {
     switch (this.pathName) {
@@ -105,11 +128,16 @@ export default {
         collDate: time
       }
       // if (activeName === '1') {
-      data.mpCodes = ['YW_A', 'YW_B', 'YW_C']
+      data.mpCodes = ['YWa', 'YWb', 'YWc']
       // }
       const result = await getFiveMinuteData(data)
-      console.log(result.data.YW_A)
-      return result.data.YW_A
+      const newVisitis = {
+        expectedData: result.data.YWa
+      }
+      this.lineChartData = newVisitis
+      console.log(result.data)
+      // this.lineData = newVisitis
+      // return newVisitis
     }
   }
 }
