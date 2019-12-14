@@ -28,7 +28,6 @@ import { getFiveMinuteData } from '@/api/rMpDefinInfo'
 //     actualData: [180, 160, 151, 106, 145, 150, 130, 20, 144, 160, 130, 140, 82, 91, 154, 162, 140, 145, 134, 105, 20, 144, 160, 130]
 //   }
 // }
-
 export default {
   components: { LineChart },
   props: {
@@ -74,7 +73,6 @@ export default {
     //   // this.getlineChartData(this.tabActiveName, time, this.mtId)
     //   // return this.lineData
     // }
-
   },
   watch: {
     formInline: {
@@ -116,7 +114,6 @@ export default {
       // const time = this.formInline.timer || new Date().getTime()
       // return this.getlineChartData(this.tabActiveName, time, this.mtId)
     },
-
     // 查询折线数据
     async getlineChartData(activeName, time, mtId) {
       console.log('查询折线数据')
@@ -131,11 +128,11 @@ export default {
       data.mpCodes = ['YWa', 'YWb', 'YWc']
       // }
       const result = await getFiveMinuteData(data)
-      const newVisitis = {
-        expectedData: result.data.YWa
-      }
-      this.lineChartData = newVisitis
-      console.log(result.data)
+      // const newVisitis = {
+      //   value: result.data
+      // }
+      this.lineChartData =  result.data
+      // console.log(result.data)
       // this.lineData = newVisitis
       // return newVisitis
     }
@@ -143,5 +140,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 </style>

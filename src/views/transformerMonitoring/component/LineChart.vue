@@ -34,13 +34,23 @@ export default {
   data() {
     return {
       chart: null,
-      value3: ''
+      value3: '',
+      lineData: []
     }
   },
   watch: {
     chartData: {
       deep: true,
       handler(val) {
+        console.log(val)
+        const lineArr = []
+        for (const key in val) {
+          const lineArrObj = {}
+          lineArrObj.name = key
+          lineArrObj.value = val[key]
+          lineArr.push(lineArrObj)
+        }
+        this.lineData = lineArr
         this.setOptions(val)
       }
     }
@@ -64,6 +74,41 @@ export default {
     },
     onSubmit() {
 
+    },
+    // 循环获取折线数据
+
+    getLineDateNameAndValue() {
+      const seriesArr = []
+      const seriObj = {
+        name: '', // expected
+        symbol: 'none', // 去掉折线图中的节点
+        itemStyle: {
+          normal: {
+            color: '',
+            lineStyle: {
+              color: '',
+              width: 2
+            }
+          }
+        },
+        smooth: true,
+        type: 'line',
+        data: [],
+        animationDuration: 2800,
+        animationEasing: 'cubicInOut'
+      }
+      this.lineData.forEach((item, index) => {
+        const series = Object.assign({}, seriObj)
+        const color = ['red', '#aaa', '#3888fa']
+        series.name = item.name
+        series.data = item.value
+        series.itemStyle.normal.color = color[index]
+        series.itemStyle.normal.lineStyle.color = color[index]
+        if (series.data.length) {
+          seriesArr.push(series)
+        }
+      })
+      return seriesArr
     },
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
@@ -110,9 +155,9 @@ export default {
           axisPointer: {
             type: 'cross'
           },
-          formatter: function(par) {
-            return `实际负荷</br>时间：${par[0].axisValue}</br> 负荷：${par[0].data}KW`
-          },
+          // formatter: function(par) {
+          //   return `实际负荷</br>时间：${par[0].axisValue}</br> 负荷：${par[0].data}KW`
+          // },
           padding: [5, 10]
         },
         yAxis: {
@@ -146,27 +191,7 @@ export default {
             shadowOffsetY: 2
           }
         }],
-        series: [{
-          name: '实际负荷', // expected
-          symbol: 'none', // 去掉折线图中的节点
-          itemStyle: {
-            normal: {
-              color: '#3888fa',
-              lineStyle: {
-                color: '#3888fa',
-                width: 2
-              },
-              areaStyle: {
-                color: 'rgba(56,136,250,0.5)'
-              }
-            }
-          },
-          smooth: true,
-          type: 'line',
-          data: expectedData,
-          animationDuration: 2800,
-          animationEasing: 'cubicInOut'
-        }]
+        series: this.getLineDateNameAndValue()
       })
     }
   }
