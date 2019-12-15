@@ -96,6 +96,7 @@ export default {
       })
     },
     handleNodeClick(data, node) {
+      this.menuVisibleGroup = false
       if (data.id === -1) {
         this.isUpdatMenu = false
         this.$refs['menuForm'].resetFields()
@@ -198,6 +199,12 @@ export default {
     }
     .permission-tree {
       margin-bottom: 30px;
+    }
+    .nodeMenu{
+      background: #fff;
+      position: fixed;
+      border: 1px solid #ccc;
+      z-index: 10;
     }
   }
 </style>
