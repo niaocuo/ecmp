@@ -99,6 +99,13 @@ export const constantRoutes = [
         hidden: true
       },
       {
+        path: '/distribution', // 配变负载率
+        name: 'distribution',
+        component: () => import('@/views/distributionTransformerLoad/index'),
+        hidden: true
+      },
+
+      {
         path: '/loadAnalysis', // 负荷分析
         name: 'loadAnalysis',
         component: () => import('@/views/loadAnalysis/index'),

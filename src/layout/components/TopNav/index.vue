@@ -85,9 +85,10 @@ export default {
 }
 .topscrollbarauto{
   height: 56px;
+  overflow: hidden;
   background: $menuBg;
   .topmenuBar{
-    padding-left: 240px
+    padding-left: 240px;
   }
 }
 </style>
