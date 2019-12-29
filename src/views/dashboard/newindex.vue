@@ -3,7 +3,7 @@
 
     <panel-group />
 
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:20px;">
+    <el-row style="background:#264861;padding:16px 16px 0;margin-bottom:20px;">
       <el-radio-group v-model="radio" class="line-radio-group" size="mini" @change="handleSetLineChartData(radio)">
         <el-radio-button label="messages">负荷 </el-radio-button>
         <el-radio-button label="newVisitis">电量 </el-radio-button>
@@ -103,7 +103,7 @@ export default {
   }
 
   .chart-wrapper {
-    background: #fff;
+    background: #264861;
     padding: 16px 16px 0;
     margin-bottom: 20px;
   }

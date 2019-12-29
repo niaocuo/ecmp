@@ -52,6 +52,9 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
+          textStyle: {
+            color: '#fff'
+          },
           data: ['变压器', '线路', '水浸', '烟感', '门禁']
         },
         series: [

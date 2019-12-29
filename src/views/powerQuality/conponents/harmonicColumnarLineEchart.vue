@@ -1,13 +1,6 @@
 <template>
-  <div>
-    <div class="dataMonth">
-      <el-date-picker
-        v-model="value3"
-        size="mini"
-        class="dataMonth"
-        placeholder="请选择日期"
-      />
-    </div>
+  <!-- 电能质量-电压偏差 折线 -->
+  <div style="margin-top:20px;">
     <div ref="chart" :class="className" :style="{height:height,width:width}" />
   </div>
 </template>
@@ -15,10 +8,7 @@
 <script>
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
-import resize from './mixins/resize'
-
 export default {
-  mixins: [resize],
   props: {
     className: {
       type: String,
@@ -30,7 +20,7 @@ export default {
     },
     height: {
       type: String,
-      default: '300px'
+      default: '400px'
     },
     autoResize: {
       type: Boolean,
@@ -43,8 +33,7 @@ export default {
   },
   data() {
     return {
-      chart: null,
-      value3: ''
+      chart: null
     }
   },
   watch: {
@@ -75,22 +64,36 @@ export default {
     onSubmit() {
 
     },
-    setOptions({ expectedData, actualData } = {}) {
+    setOptions({ THDUa, THDUb, THDUc } = {}) {
       this.chart.setOption({
         xAxis: {
-          name: 'h',
+          // name: 'h',
           data: ['1', '2', '3', '4', '5', '6', '7',
             '8', '9', '10', '11', '12', '13', '14',
             '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
           boundaryGap: false,
+          nameTextStyle: {
+            color: '#fff'
+          },
+          /* 改变x轴颜色*/
+          axisLine: {
+            lineStyle: {
+              width: 1 // 这里是为了突出显示加上的
+            }
+          },
+          axisLabel: {
+            textStyle: {
+              color: '#fff' // 坐标的字体颜色
+            }
+          },
           axisTick: {
             show: false
           }
         },
         grid: {
-          left: 10,
+          left: 25,
           right: 25,
-          bottom: 20,
+          bottom: 40,
           top: 30,
           containLabel: true
         },
@@ -101,62 +104,90 @@ export default {
           },
           padding: [5, 10]
         },
-        yAxis: {
-          name: 'KW',
+        yAxis: [{
+          type: 'value',
+          name: '电流总谐波畸变率%',
           axisTick: {
             show: false
+          },
+          nameTextStyle: {
+            color: '#fff'
+          },
+          /* 改变y轴颜色*/
+          axisLine: {
+            lineStyle: {
+              width: 0 // 这里是为了突出显示加上的
+            }
+          },
+          axisLabel: {
+            textStyle: {
+              color: '#fff' // 坐标的字体颜色
+            }
           },
           splitLine: {
             show: false // 背景网格
           },
           splitArea: { show: false }// 网格区域
-        },
+        }],
         legend: {
-          data: ['今天', '昨天'],
-          x: '45%',
+          data: ['THDUa', 'THDUb', 'THDUc'],
+          x: '43%',
+          y: '95%',
           textStyle: {
             color: '#fff'
           }
         },
         series: [{
-          name: '今天', // expected
+          name: 'THDUa', // expected
           symbol: 'none', // 去掉折线图中的节点
           itemStyle: {
             normal: {
-              color: '#FF005A',
+              color: 'aqua',
               lineStyle: {
-                color: '#FF005A',
+                color: '#3888fa',
                 width: 2
-              },
-              areaStyle: {
-                color: 'rgba(226,85,126,0.5)'
               }
             }
           },
           smooth: true,
           type: 'line',
-          data: expectedData,
+          data: THDUa,
           animationDuration: 2800,
           animationEasing: 'cubicInOut'
         },
         {
-          name: '昨天', // actual
+          name: 'THDUb', // actual
           smooth: true,
           symbol: 'none', // 去掉折线图中的节点
           type: 'line',
           itemStyle: {
             normal: {
-              color: '#3888fa',
+              color: '#985155',
               lineStyle: {
-                color: '#3888fa',
+                color: '#985155',
                 width: 2
-              },
-              areaStyle: {
-                color: 'rgba(56,136,250,0.5)'
               }
             }
           },
-          data: actualData,
+          data: THDUb,
+          animationDuration: 2800,
+          animationEasing: 'quadraticOut'
+        },
+        {
+          name: 'THDUc', // actual
+          smooth: true,
+          symbol: 'none', // 去掉折线图中的节点
+          type: 'line',
+          itemStyle: {
+            normal: {
+              color: '#d96b2e',
+              lineStyle: {
+                color: '#d96b2e',
+                width: 2
+              }
+            }
+          },
+          data: THDUc,
           animationDuration: 2800,
           animationEasing: 'quadraticOut'
         }]
@@ -166,10 +197,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.dataMonth{
-  position: absolute;
-  right: 90px;
-  top: 5px;
-  z-index: 9;
-}
 </style>

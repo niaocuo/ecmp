@@ -1,6 +1,6 @@
 <!--谐波柱状图-->
 <template>
-  <div :class="className" :style="{height:height,width:width}" />
+  <div style="margin-top:20px" :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
@@ -27,7 +27,7 @@ export default {
     },
     height: {
       type: String,
-      default: '300px'
+      default: '400px'
     },
     axisData: {
       type: Array,
@@ -55,24 +55,24 @@ export default {
     seriesData() {
       return [
         {
-          name: '总数',
+          name: '最大A相电流总畸变率',
           type: 'bar',
-          data: [79, 52, 200, 334, 390],
+          data: this.barData.Arate,
           animationDuration
         },
         {
-          name: '总数2',
+          name: '最大B相电流总畸变率',
           type: 'bar',
-          data: [79, 52, 200, 334, 390],
+          data: this.barData.Brate,
           animationDuration
         },
         {
-          name: '故障数',
+          name: '最大C相电流总畸变率',
           type: 'bar',
           itemStyle: {
             color: '#e2557e' // 柱子颜色
           },
-          data: [80, 52, 200, 334, 390],
+          data: this.barData.Crate,
           animationDuration
         }
       ]
@@ -105,8 +105,16 @@ export default {
           top: 30,
           left: '0',
           right: '2%',
-          bottom: '3%',
+          bottom: '8%',
           containLabel: true
+        },
+        legend: {
+          data: ['最大A相电流总畸变率', '最大B相电流总畸变率', '最大C相电流总畸变率'],
+          x: '40%',
+          y: '94%',
+          textStyle: {
+            color: '#fff'
+          }
         },
         xAxis: [{
           type: 'category',
@@ -114,13 +122,15 @@ export default {
           axisTick: {
             alignWithLabel: true
           }
+
         }],
         yAxis: [{
-          name: '个',
+          name: '%',
           type: 'value',
           axisTick: {
             show: false
-          }
+          },
+          splitArea: { show: false }// 网格区域
         }],
         series: this.seriesData
       })

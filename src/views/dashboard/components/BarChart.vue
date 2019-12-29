@@ -120,7 +120,8 @@ export default {
           type: 'value',
           axisTick: {
             show: false
-          }
+          },
+          splitArea: { show: false }// 网格区域
         }],
         series: this.seriesData
       })

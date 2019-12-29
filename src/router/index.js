@@ -128,12 +128,12 @@ export const constantRoutes = [
         component: () => import('@/views/powerQuality/threePhase'),
         hidden: true
       },
-      // {
-      //   path: '/powerQualityWave', // 电能质量-三项电流不平衡
-      //   name: 'powerQualityWave',
-      //   component: () => import('@/views/powerQuality/powerQualityWave'),
-      //   hidden: true
-      // },
+      {
+        path: '/powerQualityWave', // 电能质量-三项电流不平衡
+        name: 'powerQualityWave',
+        component: () => import('@/views/powerQuality/powerQualityWave'),
+        hidden: true
+      },
       {
         path: '/loadAnalysis', // 负荷分析
         name: 'loadAnalysis',
