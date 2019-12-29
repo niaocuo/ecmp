@@ -113,25 +113,25 @@ export default {
 }
 </script>
 <style lang="scss">
-html{
-  background-color: #163548;
-}
-.el-breadcrumb__inner a{
-  color: #ffffff
-}
-.backtext{
-  .el-form-item__label{
-    color: #ffffff
-  }
-  .el-input__inner{
-    background: transparent;
-    color: #ffffff;
-    border-color: aqua
-  }
-  .el-select .el-input .el-select__caret{
-    color: #ffffff
-  }
-}
+// html{
+//   background-color: #163548;
+// }
+// .el-breadcrumb__inner a{
+//   color: #ffffff
+// }
+// .backtext{
+//   .el-form-item__label{
+//     color: #ffffff
+//   }
+//   .el-input__inner{
+//     background: transparent;
+//     color: #ffffff;
+//     border-color: aqua
+//   }
+//   .el-select .el-input .el-select__caret{
+//     color: #ffffff
+//   }
+// }
 
 </style>
 <style lang="scss" scoped>

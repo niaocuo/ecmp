@@ -104,7 +104,30 @@ export const constantRoutes = [
         component: () => import('@/views/distributionTransformerLoad/index'),
         hidden: true
       },
-
+      {
+        path: '/powerFactor', // 电能质量-功率因数
+        name: 'powerFactor',
+        component: () => import('@/views/powerQuality/powerFactor'),
+        hidden: true
+      },
+      {
+        path: '/voltageDeviation', // 电能质量-电压偏差
+        name: 'voltageDeviation',
+        component: () => import('@/views/powerQuality/voltageDeviation'),
+        hidden: true
+      },
+      {
+        path: '/threePhase', // 电能质量-三项电流不平衡
+        name: 'threePhase',
+        component: () => import('@/views/powerQuality/threePhase'),
+        hidden: true
+      },
+      // {
+      //   path: '/powerQualityWave', // 电能质量-三项电流不平衡
+      //   name: 'powerQualityWave',
+      //   component: () => import('@/views/powerQuality/powerQualityWave'),
+      //   hidden: true
+      // },
       {
         path: '/loadAnalysis', // 负荷分析
         name: 'loadAnalysis',
@@ -173,6 +196,7 @@ export const asyncRoutes = [
         component: () => import('@/views/transformerMonitoring/index'),
         hidden: true
       }
+
     ]
   },
   { path: '/',

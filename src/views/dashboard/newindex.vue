@@ -28,7 +28,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-row style="background:#fff;padding:10px 10px 0;">
+    <el-row style="padding:10px 10px 0;">
       <table-sechar style="padding-left:10px" />
     </el-row>
     <Notification :warning-message="notifyWarningMessage" />
@@ -92,7 +92,7 @@ export default {
 .dashboard-editor-container {
   padding: 20px;
   padding-top:0;
-  background-color: rgb(240, 242, 245);
+  // background-color: rgb(240, 242, 245);
   position: relative;
 
   .github-corner {

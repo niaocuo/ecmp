@@ -42,3 +42,22 @@
     display: block
   }
 }
+
+.el-form-item__label,.el-date-editor .el-range-separator,.el-breadcrumb__inner a{
+  color: #ffffff
+}
+.el-pager li,.el-pagination .btn-next, .el-pagination .btn-prev,.el-tree{
+  background-color: transparent !important;
+  color: #ffffff;
+}
+.el-input__inner,.el-date-editor .el-range-input{
+  background: transparent;
+  color: #ffffff;
+  border-color: aqua
+}
+.el-select .el-input .el-select__caret{
+  color: #ffffff
+}
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content,.el-tree-node__content:hover,.el-tree-node:focus>.el-tree-node__content {
+  background-color: #6b8098;
+}
