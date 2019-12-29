@@ -61,3 +61,28 @@
 .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content,.el-tree-node__content:hover,.el-tree-node:focus>.el-tree-node__content {
   background-color: #6b8098;
 }
+.el-tabs__item{
+  color: #fff;
+}
+.el-table{
+  color: #fff;
+  background-color: #264861;
+   tr{
+    background-color: #264861;
+   }
+   thead{
+    .is-leaf {
+      color: #fff !important;
+      background-color: #264861;
+    }
+   }
+}
+.el-table--enable-row-hover .el-table__body tr>td{
+  color: #fff !important;
+}
+.el-table--enable-row-hover .el-table__body tr:hover>td{
+  background-color: #162b3c;
+}
+// .el-table td, .el-table th.is-leaf {
+//   border-bottom: 1px solid #162b3c;
+// }
