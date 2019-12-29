@@ -32,7 +32,17 @@ export default {
     axisData: {
       type: Array,
       default() {
-        return ['0:05', '0:10', '0:15', '0:20', '0:30']
+        return ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+      }
+    },
+    barData: {
+      type: Object,
+      default() {
+        return {
+          Arate: [79, 52, 200, 334, 390],
+          Brate: [80, 52, 200, 334, 390],
+          Crate: [79, 52, 200, 334, 390]
+        }
       }
     }
   },
@@ -47,15 +57,18 @@ export default {
         {
           name: '总数',
           type: 'bar',
-          stack: 'vistors',
-          barWidth: '30%',
+          data: [79, 52, 200, 334, 390],
+          animationDuration
+        },
+        {
+          name: '总数2',
+          type: 'bar',
           data: [79, 52, 200, 334, 390],
           animationDuration
         },
         {
           name: '故障数',
           type: 'bar',
-          stack: 'vistors',
           itemStyle: {
             color: '#e2557e' // 柱子颜色
           },

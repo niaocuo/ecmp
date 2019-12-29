@@ -220,9 +220,10 @@ export default {
 <style lang="scss" scoped>
 .rightContent{
   &>div{
-    background: #fff;
+    background: #264861;
     border-radius: 10px;
     padding: 15px;
+    color: #FFF;
   }
   .rowbutton{
     cursor: pointer;
@@ -241,5 +242,8 @@ export default {
   .el-form-item{
       margin-bottom: 0
     }
+  .el-tabs__item{
+    color: #fff;
+  }
 }
 </style>

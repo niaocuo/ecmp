@@ -53,7 +53,7 @@ export default {
     color: #fff;
     border: none;
     text-align: center;
-    margin-top: 20px;
+    margin: 20px 0;
     p{
       margin: 0;
       padding:0;
