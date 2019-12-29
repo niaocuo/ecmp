@@ -70,4 +70,12 @@ div:focus {
 .app-container {
   padding: 20px;
   padding-top:0;
+  .item-block-bg{
+    background:#264861;
+    border-radius: 10px;
+    padding:10px;
+    &:not(:last-child){
+      margin-bottom: 20px;
+    }
+  }
 }

@@ -272,7 +272,7 @@ export default {
 <style lang="scss" scoped>
 .rightContent{
   &>div{
-    background: #fff;
+    background: #264861;
     border-radius: 10px;
     padding: 15px;
   }
