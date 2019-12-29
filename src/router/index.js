@@ -81,6 +81,12 @@ export const constantRoutes = [
     hidden: true,
     children: [
       {
+        path: '/exhibition/:id',
+        name: 'Exhibition',
+        component: () => import('@/views/filemanagement/Exhibition'),
+        hidden: true
+      },
+      {
         path: '/primarywiringdiagram', // 一次接线图
         name: 'primarywiringdiagram',
         component: () => import('@/views/primarywiringdiagram/index'),
@@ -165,12 +171,6 @@ export const asyncRoutes = [
         name: 'MenuManage',
         component: () => import('@/views/sysManage/menuManage'),
         meta: { title: '菜单管理', icon: 'menuManage' }
-      },
-      {
-        path: '/exhibition/:id',
-        name: 'Exhibition',
-        component: () => import('@/views/filemanagement/Exhibition'),
-        hidden: true
       },
       {
         path: '/alarmLog', // 告警记录
