@@ -3,7 +3,7 @@
   <div class="app-container backtext">
     <el-form ref="treeform" :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="站点名称">
-        <el-select v-model="formInline.statename" size="mini" placeholder="请选择">
+        <el-select v-model="formInline.statename" size="mini" placeholder="请选择" @change="changeRsubdistrict">
           <el-option
             v-for="item in stateOptions"
             :key="item.value"
@@ -13,7 +13,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="配电房">
-        <el-select v-model="formInline.distributionRoom" size="mini" placeholder="请选择">
+        <el-select v-model="formInline.distributionRoom" size="mini" placeholder="请选择" @change="changeRstation">
           <el-option
             v-for="item in distributionRoomOptions"
             :key="item.value"
@@ -33,16 +33,17 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="mini" @click="onSubmit('treeform')">查询</el-button>
+        <el-button type="primary" size="mini" @click="onSubmit">查询</el-button>
       </el-form-item>
     </el-form>
     <div class="echartBox">
       <div class="echartBoxTopInfo">
         <label>选择时间</label>
         <el-date-picker
-          v-model="value3"
+          v-model="formInline.timer"
           size="mini"
           class="dataMonth"
+          value-format="timestamp"
           placeholder="请选择日期"
         />
         <label class="info-label">变压器容量:</label>
@@ -59,6 +60,8 @@
 </template>
 <script>
 import LineChart from './components/LineChart'
+import { getRsubdistrictLaber, getRstationLaber, getRtransformerLaber } from '@/api/common'
+import { getTranLoadrateDay } from '@/api/rMpDefinInfo'
 export default {
   components: { LineChart },
   data() {
@@ -66,48 +69,56 @@ export default {
       formInline: {
         statename: '', // 站点
         distributionRoom: '', // 配电房
-        transformer: '' // 变压器
+        transformer: '', // 变压器
+        timer: new Date().getTime()
       },
       value3: '',
       lineChartData: {
-        expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91] // 负载率数据
+        expectedData: [] // 负载率数据
       },
-      transformerOptions: [ // 变压器下拉
-        {
-          value: '选项1',
-          label: '站点1'
-        }, {
-          value: '选项2',
-          label: '站点2'
-        }, {
-          value: '选项3',
-          label: '站点3'
+      transformerOptions: [], // 变压器下拉
+      distributionRoomOptions: [], // 配电房下拉
+      stateOptions: [] // 站点下拉
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      const result = await getRsubdistrictLaber()
+      this.stateOptions = result.data
+      // const res = await getRstationLaber()
+      // this.distributionRoomOptions = res.data
+      // const data = await getRtransformerLaber()
+      // this.transformerOptions = data.data
+    },
+    async changeRsubdistrict(val) {
+      const result = await getRstationLaber(val)
+      this.formInline.distributionRoom = ''
+      this.formInline.transformer = ''
+      this.transformerOptions = []
+      this.distributionRoomOptions = result.data
+    },
+    async changeRstation(val) {
+      const result = await getRtransformerLaber(val)
+      this.formInline.transformer = ''
+      this.transformerOptions = result.data
+    },
+    async onSubmit() {
+      if (this.formInline.transformer === '') {
+        this.$message({
+          message: '警告哦，这是一条警告消息',
+          type: 'warning'
+        })
+      } else {
+        const temp = {
+          trId: this.formInline.transformer,
+          collDate: this.formInline.timer
         }
-      ],
-      distributionRoomOptions: [ // 配电房下拉
-        {
-          value: '选项1',
-          label: '站点1'
-        }, {
-          value: '选项2',
-          label: '站点2'
-        }, {
-          value: '选项3',
-          label: '站点3'
-        }
-      ],
-      stateOptions: [ // 站点下拉
-        {
-          value: '选项1',
-          label: '站点1'
-        }, {
-          value: '选项2',
-          label: '站点2'
-        }, {
-          value: '选项3',
-          label: '站点3'
-        }
-      ]
+        const result = await getTranLoadrateDay(temp)
+        this.lineChartData.expectedData = result.data
+      }
     }
   }
 }

@@ -2,19 +2,19 @@
   <!-- tab 折线图 -->
   <div>
     <el-form ref="formInline" :model="formInline" class="demo-form-inline">
-      <el-form-item label="选择参数">
-        <el-checkbox-group v-model="formInline.checkList">
-          <el-checkbox label="P">有功功率</el-checkbox>
-          <el-checkbox label="Q">无功功率</el-checkbox>
-          <el-checkbox label="S">视在功率</el-checkbox>
-          <el-checkbox label="COSθ">功率因数</el-checkbox>
-          <el-checkbox label="MD">最大需量</el-checkbox>
-          <el-checkbox label="['Ua','Ub','Uc']">相电压</el-checkbox>
-          <el-checkbox label="['Uab','Ubc','Uac']">线电压</el-checkbox>
-          <el-checkbox label="['Ia','Ib','Ic']">电流</el-checkbox>
-          <el-checkbox label="['YWa','YWb','YWc']">油温</el-checkbox>
-        </el-checkbox-group>
-      </el-form-item>
+<!--      <el-form-item label="选择参数">-->
+<!--        <el-checkbox-group v-model="formInline.checkList">-->
+<!--          <el-checkbox label="P">有功功率</el-checkbox>-->
+<!--          <el-checkbox label="Q">无功功率</el-checkbox>-->
+<!--          <el-checkbox label="S">视在功率</el-checkbox>-->
+<!--          <el-checkbox label="COSθ">功率因数</el-checkbox>-->
+<!--          <el-checkbox label="MD">最大需量</el-checkbox>-->
+<!--          <el-checkbox label="['Ua','Ub','Uc']">相电压</el-checkbox>-->
+<!--          <el-checkbox label="['Uab','Ubc','Uac']">线电压</el-checkbox>-->
+<!--          <el-checkbox label="['Ia','Ib','Ic']">电流</el-checkbox>-->
+<!--          <el-checkbox label="['YWa','YWb','YWc']">油温</el-checkbox>-->
+<!--        </el-checkbox-group>-->
+<!--      </el-form-item>-->
       <el-form-item label="数据时间">
         <el-date-picker v-model="formInline.timer" value-format="timestamp" size="mini" placeholder="发生时间" style="width: 150px;" />
       </el-form-item>

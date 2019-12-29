@@ -14,3 +14,11 @@ export function getFiveMinuteData(data) {
     params: data
   })
 }
+
+export function getTranLoadrateDay(data) {
+  return request({
+    url: '/rMpDefinInfo/getTranLoadrateDay',
+    method: 'get',
+    params: data
+  })
+}
