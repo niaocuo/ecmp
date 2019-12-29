@@ -80,7 +80,7 @@
 .el-table--enable-row-hover .el-table__body tr>td{
   color: #fff !important;
 }
-.el-table--enable-row-hover .el-table__body tr:hover>td{
+.el-table--enable-row-hover .el-table__body tr:hover>td,.el-table__body tr.hover-row>td{
   background-color: #162b3c;
 }
 // .el-table td, .el-table th.is-leaf {
@@ -90,4 +90,10 @@
   color: #fff !important;
   border-color: aqua;
   background-color: transparent;
+}
+.el-dialog{
+  background-color: #162b3c;
+}
+.el-dialog__title{
+  color: #fff;
 }
