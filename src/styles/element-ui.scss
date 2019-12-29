@@ -66,14 +66,14 @@
 }
 .el-table{
   color: #fff;
-  background-color: #264861;
+  background-color: transparent;
    tr{
-    background-color: #264861;
+    background-color: transparent;
    }
    thead{
     .is-leaf {
       color: #fff !important;
-      background-color: #264861;
+      background-color: transparent;
     }
    }
 }
@@ -86,3 +86,8 @@
 // .el-table td, .el-table th.is-leaf {
 //   border-bottom: 1px solid #162b3c;
 // }
+.el-textarea__inner{
+  color: #fff !important;
+  border-color: aqua;
+  background-color: transparent;
+}
