@@ -51,7 +51,7 @@
           fit
           highlight-current-row
         >
-          <el-table-column align="center" label="序号" type="index" width="40" />
+          <el-table-column align="center" label="序号" type="index" width="50" />
           <el-table-column prop="rsubdistrict.consNo" align="center" label="用户编号" width="95" />
           <el-table-column prop="rsubdistrict.subdistrictName" align="center" label="用户名称" width="95" />
           <el-table-column prop="alarmDesc" align="center" label="告警描述" show-overflow-tooltip />
