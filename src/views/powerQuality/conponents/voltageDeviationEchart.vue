@@ -116,7 +116,7 @@ export default {
           /* 改变y轴颜色*/
           axisLine: {
             lineStyle: {
-              width: 0 // 这里是为了突出显示加上的
+              width: 1 // 这里是为了突出显示加上的
             }
           },
           axisLabel: {
