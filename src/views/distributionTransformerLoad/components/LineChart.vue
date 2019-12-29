@@ -64,7 +64,6 @@ export default {
 
     },
     setOptions({ expectedData } = {}) {
-      console.log(expectedData)
       this.chart.setOption({
         xAxis: {
           name: '',

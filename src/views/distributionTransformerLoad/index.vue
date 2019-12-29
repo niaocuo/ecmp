@@ -47,11 +47,11 @@
           placeholder="请选择日期"
         />
         <label class="info-label">变压器容量:</label>
-        <span>123</span>
+        <span>{{ capacity }}</span>
         <label class="info-label">平均负载率:</label>
-        <span>123</span>
+        <span>{{ avgRate }}</span>
         <label class="info-label">最大负载率:</label>
-        <span>123</span>
+        <span>{{ maxRate }}</span>
       </div>
 
       <LineChart :chart-data="lineChartData" />
@@ -66,13 +66,15 @@ export default {
   components: { LineChart },
   data() {
     return {
+      capacity: '',
+      avgRate: '',
+      maxRate: '',
       formInline: {
         statename: '', // 站点
         distributionRoom: '', // 配电房
         transformer: '', // 变压器
         timer: new Date().getTime()
       },
-      value3: '',
       lineChartData: {
         expectedData: [] // 负载率数据
       },
@@ -117,7 +119,17 @@ export default {
           collDate: this.formInline.timer
         }
         const result = await getTranLoadrateDay(temp)
-        this.lineChartData.expectedData = result.data
+        console.log(result.data)
+        if (result.data.baseData) {
+          this.capacity = result.data.baseData.capacity
+          this.avgRate = result.data.baseData.avgRate
+          this.maxRate = result.data.baseData.maxRate
+        } else {
+          this.capacity = ''
+          this.avgRate = ''
+          this.maxRate = ''
+        }
+        this.lineChartData.expectedData = result.data.dataList
       }
     }
   }
