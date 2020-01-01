@@ -98,7 +98,7 @@
 </template>
 <script>
 import PageLayout from '@/components/PageLayout'
-import BarChart from './BarChart'
+import BarChart from './components/BarChart'
 import { getStationTree } from '@/api/station'
 
 export default {

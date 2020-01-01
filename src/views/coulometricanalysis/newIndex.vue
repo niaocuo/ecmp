@@ -53,7 +53,7 @@
   </div>
 </template>
 <script>
-import BarChart from './BarChart'
+import BarChart from './components/BarChart'
 import pieEchart from './components/pieEchart'
 export default {
   components: { BarChart, pieEchart },
