@@ -101,7 +101,7 @@ export const constantRoutes = [
       {
         path: '/coulometricanalysis', // 电量分析
         name: 'coulometricanalysis',
-        component: () => import('@/views/coulometricanalysis/index'),
+        component: () => import('@/views/coulometricanalysis/newIndex'),
         hidden: true
       },
       {

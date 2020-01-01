@@ -35,9 +35,10 @@ export default {
       }
     },
     echartsValue: {
-      type: Array,
+      type: Object,
+      required: true,
       default() {
-        return [79, 52, 200]
+        return {}
       }
     }
   },
@@ -48,29 +49,68 @@ export default {
   },
   computed: {
     seriesData() {
-      if (this.barNumber !== 'one') {
-        return [
-          {
-            name: '电量',
-            type: 'bar',
-            stack: 'vistors',
-            barWidth: '20%',
-            data: this.echartsValue,
-            animationDuration
-          }
-        ]
-      } else {
-        return [
-          {
-            name: '电量',
-            type: 'bar',
-            stack: 'vistors',
-            barWidth: '30%',
-            data: this.echartsValue,
-            animationDuration
-          }
-        ]
-      }
+      return [
+        {
+          name: '谷',
+          type: 'bar',
+          yAxisIndex: 0,
+          stack: 'vistors',
+          barWidth: '20%',
+          itemStyle: {
+            normal: {
+              color: '#417336'
+            }
+          },
+          data: this.echartsValue.valley,
+          animationDuration
+        },
+        {
+          name: '峰',
+          type: 'bar',
+          stack: 'vistors',
+          yAxisIndex: 0,
+          barWidth: '20%',
+          itemStyle: {
+            normal: {
+              color: '#d1494d'
+            }
+          },
+          data: this.echartsValue.peak,
+          animationDuration
+        },
+        {
+          name: '平',
+          type: 'bar',
+          yAxisIndex: 0,
+          stack: 'vistors',
+          barWidth: '20%',
+          itemStyle: {
+            normal: {
+              color: '#23aae1'
+            }
+          },
+          data: this.echartsValue.flat,
+          animationDuration
+        },
+        {
+          name: '同比',
+          type: 'line',
+          symbol: 'none', // 去掉折线图中的节点
+          yAxisIndex: 1,
+          itemStyle: {
+            normal: {
+              color: '#e7b53c',
+              lineStyle: {
+                color: '#e7b53c',
+                width: 2
+              }
+            }
+          },
+          data: this.echartsValue.yearOnYear,
+          animationDuration: 2800,
+          animationEasing: 'quadraticOut'
+        }
+      ]
     }
   },
   mounted() {
@@ -111,12 +151,21 @@ export default {
           }
         }],
         yAxis: [{
-          name: '个',
+          name: 'kWh',
+          type: 'value',
+          axisTick: {
+            show: false
+          },
+          splitArea: { show: false }// 网格区域
+        },
+        {
+          name: '%',
           type: 'value',
           axisTick: {
             show: false
           }
-        }],
+        }
+        ],
         series: this.seriesData
       })
     }
