@@ -1,5 +1,7 @@
 <template>
-  <div ref="chart" :class="className" :style="{height:height,width:width}" />
+  <div>
+    <div ref="chart" :class="className" :style="{height:height,width:width}" />
+  </div>
 </template>
 
 <script>
@@ -29,6 +31,10 @@ export default {
     chartData: {
       type: Object,
       required: true
+    },
+    dateType: {
+      type: String,
+      default: 'date'
     }
   },
   data() {
@@ -37,11 +43,27 @@ export default {
       value3: ''
     }
   },
+  computed: {
+    legendText() {
+      if (this.dateType === 'date') {
+        return ['昨天', '今天']
+      } else if (this.dateType === 'month') {
+        return ['上月', '本月']
+      } else {
+        return ['去年', '今年']
+      }
+    }
+  },
   watch: {
     chartData: {
       deep: true,
       handler(val) {
         this.setOptions(val)
+      }
+    },
+    dateType: {
+      handler(val) {
+        this.initChart()
       }
     }
   },
@@ -68,12 +90,16 @@ export default {
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
         xAxis: {
-          name: 'h',
           data: ['1', '2', '3', '4', '5', '6', '7',
             '8 ', '9 ', '10 ', '11 ', '12 ', '13 ', '14 ',
             '15 ', '16 ', '9 ', '10 ', '11 ', '12 ', '13 ', '14 ',
             '15 ', '16 ', '17 ', '18 ', '19 ', '20 ', '21 ', '22 ', '17 ', '18 ', '19 ', '20 ', '21 ', '22 ', '23 ', '24 '],
           boundaryGap: false,
+          axisLabel: {
+            textStyle: {
+              color: '#fff' // 坐标的字体颜色
+            }
+          },
           axisTick: {
             show: false
           }
@@ -90,6 +116,7 @@ export default {
           axisPointer: {
             type: 'cross'
           },
+
           // formatter: function(par) {
           //   return `实际负荷</br>时间：${par[0].axisValue}</br> 负荷：${par[0].data}KW`
           // },
@@ -100,13 +127,21 @@ export default {
           axisTick: {
             show: false
           },
+          axisLabel: {
+            textStyle: {
+              color: '#fff' // 坐标的字体颜色
+            }
+          },
           splitLine: {
             show: false // 背景网格
           }
         },
         legend: {
-          data: ['今天', '昨天'],
-          x: '45%'
+          data: this.legendText,
+          x: '45%',
+          textStyle: {
+            color: '#fff'
+          }
         },
         dataZoom: [{ // 内置于坐标系中，使用户可以在坐标系上通过鼠标拖拽、鼠标滚轮、手指滑动（触屏上）来缩放或漫游坐标系
           type: 'inside',
@@ -127,7 +162,7 @@ export default {
           }
         }],
         series: [{
-          name: '今天', // expected
+          name: this.legendText[0], // expected
           symbol: 'none', // 去掉折线图中的节点
           itemStyle: {
             normal: {
@@ -148,7 +183,7 @@ export default {
           animationEasing: 'cubicInOut'
         },
         {
-          name: '昨天', // actual
+          name: this.legendText[1], // actual
           smooth: true,
           symbol: 'none', // 去掉折线图中的节点
           type: 'line',

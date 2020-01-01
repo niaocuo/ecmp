@@ -1,15 +1,7 @@
 <template>
   <!-- tab 折线图 -->
   <div>
-    <el-form ref="formInline" :inline="true" :model="formInline" class="demo-form-inline">
-      <el-form-item label="数据时间">
-        <el-date-picker v-model="formInline.timer" type="month" value-format="yyyy-MM" size="mini" placeholder="发生时间" style="width: 150px;" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" size="mini" @click="onSubmit">查询</el-button>
-      </el-form-item>
-    </el-form>
-    <LineChart :chart-data="lineChartData" />
+    <LineChart :chart-data="lineChartData" :date-type="dateType" />
   </div>
 </template>
 <script>
@@ -41,6 +33,10 @@ export default {
     treeNodeId: {
       type: Number,
       default: null
+    },
+    dateType: {
+      type: String,
+      default: 'date'
     }
   },
   data() {

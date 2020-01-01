@@ -137,7 +137,7 @@ export const constantRoutes = [
       {
         path: '/loadAnalysis', // 负荷分析
         name: 'loadAnalysis',
-        component: () => import('@/views/loadAnalysis/index'),
+        component: () => import('@/views/loadAnalysis/newIndex'),
         hidden: true
       }
     ]

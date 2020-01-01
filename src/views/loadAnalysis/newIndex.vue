@@ -6,11 +6,6 @@
         <el-form-item label="客户名称:">
           <el-input v-model="formInline.name" style="width:180px" size="mini" placeholder="客户名称" />
         </el-form-item>
-        <el-form-item label="计费电表:">
-          <el-select v-model="formInline.Watthour" size="mini" placeholder="计费电表">
-            <el-option value="1" />
-          </el-select>
-        </el-form-item>
         <div>
           <el-form-item label="数据时间:">
             <el-radio-group v-model="radioDate" size="mini" style="position: relative;top:-1px">
@@ -30,22 +25,27 @@
       <el-row :gutter="20">
         <el-col :span="20">
           <div class="item-block-bg">
-            <p style="padding-left:10px">年/月/日总电量</p>
-            <BarChart :axis-data="axisData" :echarts-value="echartsvalue" />
+            <TablineEcharts :date-type="radioDate" />
           </div>
         </el-col>
         <el-col :span="4">
           <div class="item-block-bg right-item mb20">
-            <span class="item-tit">年/月/日总电量</span>
+            <span class="item-tit">最大负荷</span>
             <p>564123Kwh</p>
             <div style="font-size:14px">
-              <span>同比 15% <i class="el-icon-bottom" /> </span>
-              <span>环比 15% <i class="el-icon-top" /></span>
+              <span>2018-12-23</span>
             </div>
           </div>
-          <div class="item-block-bg">
-            分时电量
-            <pieEchart />
+          <div class="item-block-bg right-item mb20">
+            <span class="item-tit">最小负荷</span>
+            <p>564123Kwh</p>
+            <div style="font-size:14px">
+              <span>2019-12-23</span>
+            </div>
+          </div>
+          <div class="item-block-bg right-item mb20">
+            <span class="item-tit">平均负荷</span>
+            <p style="line-height:40px">564123Kwh</p>
           </div>
         </el-col>
       </el-row>
@@ -53,10 +53,9 @@
   </div>
 </template>
 <script>
-import BarChart from './components/BarChart'
-import pieEchart from './components/pieEchart'
+import TablineEcharts from './TablineEcharts'
 export default {
-  components: { BarChart, pieEchart },
+  components: { TablineEcharts },
   data() {
     return {
       radioDate: 'date',
@@ -80,14 +79,13 @@ export default {
 .content{
   color: #fff;
   .right-item{
+  min-height: 127px;
     p{
       text-align: center;
       font-size: 20px;
     }
     div{
-      padding: 0 5px;
-      display: flex;
-      justify-content: space-between;
+      text-align: center;
     }
   }
 }
