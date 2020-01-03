@@ -139,6 +139,12 @@ export const constantRoutes = [
         name: 'loadAnalysis',
         component: () => import('@/views/loadAnalysis/newIndex'),
         hidden: true
+      },
+      {
+        path: '/electricityTariff', // 负荷分析
+        name: 'electricityTariff',
+        component: () => import('@/views/electricityTariff/index'),
+        hidden: true
       }
     ]
   }
