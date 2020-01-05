@@ -103,17 +103,15 @@ export default {
       switch (this.pathName) {
         case 'transformerMonitoring': // 配变监测
           tabsOption = transformerMonitoringTabOption
-          this.getAreaToEquipmentTree(3)
           break
         case 'linemonitoring': // 线路监测
           tabsOption = linemonitoringTabOption
-          this.getAreaToEquipmentTree(1)
           break
         case 'switchMonitoring': // 开关监测
           tabsOption = switchMonitoringTabOption
-          this.getAreaToEquipmentTree(2)
           break
       }
+      this.getAreaToEquipmentTree(0)
       return tabsOption
     }
   },

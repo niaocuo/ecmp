@@ -143,20 +143,8 @@ export const asyncRoutes = [
         hidden: true
       },
       {
-        path: '/transformerMonitoring', // 配变监测
-        name: 'transformerMonitoring',
-        component: () => import('@/views/transformerMonitoring/index'),
-        hidden: true
-      },
-      {
-        path: '/linemonitoring', // 线路监测
-        name: 'linemonitoring',
-        component: () => import('@/views/transformerMonitoring/index'),
-        hidden: true
-      },
-      {
-        path: '/switchMonitoring', // 开关监测
-        name: 'switchMonitoring',
+        path: '/equipmentMonitoring', // 设备监测
+        name: 'equipmentMonitoring',
         component: () => import('@/views/transformerMonitoring/index'),
         hidden: true
       },
@@ -201,7 +189,7 @@ export const asyncRoutes = [
         name: 'loadAnalysis',
         component: () => import('@/views/loadAnalysis/newIndex'),
         hidden: true
-      },
+      }
     ]
   },
   { path: '/',

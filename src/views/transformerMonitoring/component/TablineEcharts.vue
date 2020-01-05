@@ -2,13 +2,13 @@
   <!-- tab 折线图 -->
   <div>
     <el-form ref="formInline" :model="formInline" class="demo-form-inline">
-     <el-form-item label="选择参数">
-       <el-checkbox-group v-model="tabActiveName">
-          <el-checkbox class="checkbox-name" v-for="item in formInline.checkList" :key="item.name" :label="item">
-            {{item.name}}
-            </el-checkbox>
-       </el-checkbox-group>
-     </el-form-item>
+      <el-form-item label="选择参数">
+        <el-checkbox-group v-model="tabActiveName">
+          <el-checkbox v-for="item in formInline.checkList" :key="item.name" class="checkbox-name" :label="item">
+            {{ item.name }}
+          </el-checkbox>
+        </el-checkbox-group>
+      </el-form-item>
       <el-form-item label="数据时间">
         <el-date-picker v-model="formInline.timer" value-format="timestamp" size="mini" placeholder="发生时间" style="width: 150px;" />
       </el-form-item>
@@ -59,56 +59,61 @@ export default {
         timer: new Date().getTime(),
         checkList: [
           {
-            label:'YWa,YWb,YWc',
-            value:['配变油温A相', '配变油温B相', '配变油温C相'],
-            name:'油温'
+            label: 'YWa,YWb,YWc',
+            value: ['配变油温A相', '配变油温B相', '配变油温C相'],
+            name: '油温'
           },
           {
-            label:'P',
-            value:['有功功率'],
-            name:'有功功率'
+            label: 'P',
+            value: ['有功功率'],
+            name: '有功功率'
           },
           {
-            label:'Q',
-            value:['无功功率'],
-            name:'无功功率'
+            label: 'Q',
+            value: ['无功功率'],
+            name: '无功功率'
           },
           {
-            label:'S',
-            value:['视在功率'],
-            name:'视在功率'
+            label: 'S',
+            value: ['视在功率'],
+            name: '视在功率'
           },
           {
-            label:'COSθ',
-            value:['功率因数'],
-            name:'功率因数'
+            label: 'COSθ',
+            value: ['功率因数'],
+            name: '功率因数'
           },
           {
-            label:'MD',
-            value:['最大需量'],
-            name:'最大需量'
+            label: 'MD',
+            value: ['最大需量'],
+            name: '最大需量'
           },
           {
-            label:'Ua,Ub,Uc',
-            value:['A相电压', 'B相电压', 'C相电压'],
-            name:'相电压'
+            label: 'Ua,Ub,Uc',
+            value: ['A相电压', 'B相电压', 'C相电压'],
+            name: '相电压'
           },
           {
-            label:'Uab,Ubc,Uac',
-            value:['A相线电压', 'B相线电压', 'C相线电压'],
-            name:'线电压'
+            label: 'Uab,Ubc,Uca',
+            value: ['A相线电压', 'B相线电压', 'C相线电压'],
+            name: '线电压'
           },
           {
-            label:'Ia,Ib,Ic',
-            value:['A相电流', 'B相电流', 'C相电流'],
-            name:'电流'
+            label: 'Ia,Ib,Ic',
+            value: ['A相电流', 'B相电流', 'C相电流'],
+            name: '电流'
+          },
+          {
+            label: 'f',
+            value: ['频率'],
+            name: '频率'
           }
         ]
       },
       lineChartData: {},
       tabActiveName: [], // 折线图切换默认选中
       pathName: this.$route.name,
-      unit: '%' //
+      unit: '' //
     }
   },
   watch: {
@@ -135,7 +140,7 @@ export default {
     }
   },
   beforeMount() {
-    this.tabActiveName=[this.formInline.checkList[0]]
+    this.tabActiveName = [this.formInline.checkList[0]]
     // switch (this.pathName) {
     //   case 'transformerMonitoring': // 配变监测
     //     this.tabActiveName = '1'
@@ -158,13 +163,13 @@ export default {
       const data = {
         mtId: mtId,
         collDate: time,
-        mpCodes:[]
+        mpCodes: []
       }
       let keyNames = []
       activeName.forEach(element => {
         data.mpCodes = data.mpCodes.concat([...element.label.split(',')])
         keyNames = keyNames.concat([...element.value])
-      });
+      })
       // switch (activeName) {
       //   case '1':
       //     data.mpCodes = ['YWa', 'YWb', 'YWc']
@@ -214,7 +219,7 @@ export default {
       // }
       const result = await getFiveMinuteData(data)
       const lineChartData = {
-        valueName:data.mpCodes,
+        valueName: data.mpCodes,
         keyNames: keyNames,
         data: result.data
       }
