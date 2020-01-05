@@ -48,10 +48,15 @@ export default {
       handler(val) {
         const lineArr = []
         let index = 0
-        for (const key in val.data) {
+        let obj = {}
+        val.valueName.forEach(item=>{
+          obj[item] = val.data[item]
+        })
+        let lineArrObj = {}
+        for (const key in obj) {
           const lineArrObj = {}
           lineArrObj.name = val.keyNames[index]
-          lineArrObj.value = val.data[key]
+          lineArrObj.value = obj[key]
           lineArr.push(lineArrObj)
           index++
         }
