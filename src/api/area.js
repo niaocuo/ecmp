@@ -4,7 +4,5 @@ export function getAreaByAreaId(areaId) {
     url: '/area/getAreaByAreaId',
     method: 'get',
     params: { areaId }
-
-
   })
 }
