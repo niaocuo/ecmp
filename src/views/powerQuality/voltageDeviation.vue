@@ -9,6 +9,7 @@
         size="mini"
         class="dataMonth"
         placeholder="请选择日期"
+        value-format="timestamp"
       />
     </div>
     <voltageDeviationEchart :chart-data="lineChartData" />
@@ -18,23 +19,39 @@
 <script>
 import TopSelect from './conponents/topSelect'
 import voltageDeviationEchart from './conponents/voltageDeviationEchart' // 电压偏差折线
-
+import { getFiveMinuteData } from '@/api/rMpDefinInfo'
 export default {
   components: { TopSelect, voltageDeviationEchart },
   data() {
     return {
-      timer: '',
+      timer: new Date().getTime(),
       lineChartData: {
-        Ua: [100, 120, 161, 134, 105, 160, 165, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91], // ua
-        Ub: [320, 82, 91, 154, 162, 140, 145, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160], // ub
-        Uc: [120, 140, 171, 114, 145, 100, 135, 110, 22, 41, 114, 122, 170, 105, 110, 92, 101, 104, 182, 160, 105, 100, 102, 121, 104, 112, 180, 125, 140, 12, 81] // uc
+        Ua: [], // ua
+        Ub: [], // ub
+        Uc: [] // uc
       }
     }
   },
   methods: {
     // 监听头部下拉条件及查询按钮
-    topSelevtChange(data) {
-      console.log(data)
+    async topSelevtChange(val) {
+      if (val.watthourmeter === '') {
+        this.$message({
+          message: '请选择需要查询的电表！',
+          type: 'warning'
+        })
+      } else {
+        const data = {
+          mtId: val.watthourmeter,
+          collDate: this.timer,
+          mpCodes: ['Ua', 'Ub', 'Uc']
+        }
+        const result = await getFiveMinuteData(data)
+        this.lineChartData.Ua = result.data.Ua
+        this.lineChartData.Ub = result.data.Ub
+        this.lineChartData.Uc = result.data.Uc
+        console.log(result.data)
+      }
     }
   }
 }

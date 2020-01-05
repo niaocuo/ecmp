@@ -9,6 +9,7 @@
         size="mini"
         class="dataMonth"
         placeholder="请选择日期"
+        value-format="timestamp"
       />
     </div>
     <powerFactorEchart :chart-data="lineChartData" />
@@ -18,22 +19,36 @@
 <script>
 import TopSelect from './conponents/topSelect'
 import powerFactorEchart from './conponents/powerFactorEchart' // 功率因数折线
-
+import { getFiveMinuteData } from '@/api/rMpDefinInfo'
 export default {
   components: { TopSelect, powerFactorEchart },
   data() {
     return {
-      timer: '',
+      timer: new Date().getTime(),
       lineChartData: {
-        expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91], // 昨天数据
-        actualData: [320, 82, 91, 154, 162, 140, 145, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160]// 今天数据
+        expectedData: [],
+        actualData: []
       }
     }
   },
   methods: {
     // 监听头部下拉条件及查询按钮
-    topSelevtChange(data) {
-      console.log(data)
+    async topSelevtChange(val) {
+      if (val.watthourmeter === '') {
+        this.$message({
+          message: '请选择需要查询的电表！',
+          type: 'warning'
+        })
+      } else {
+        const data = {
+          mtId: val.watthourmeter,
+          collDate: this.timer,
+          mpCodes: ['COSθ', 'Q']
+        }
+        const result = await getFiveMinuteData(data)
+        this.lineChartData.expectedData = result.data.COSθ
+        this.lineChartData.actualData = result.data.Q
+      }
     }
   }
 }
