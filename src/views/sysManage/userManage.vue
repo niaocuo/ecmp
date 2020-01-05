@@ -33,7 +33,7 @@
     </el-form>
 
     <!-- 用户列表 -->
-    <el-table v-loading="listLoading" :data="userList" style="width: 100%;margin-top:30px;" border>
+    <el-table v-loading="listLoading" :data="userList" style="width: 100%;margin-top:30px;" stripe>
       <el-table-column prop="trueName" align="center" label="用户名称" width="120" />
       <el-table-column prop="updateTime" align="center" label="性别" width="120">
         <template slot-scope="scope">
