@@ -47,7 +47,6 @@
           :data="logTableList"
           element-loading-text="Loading"
           :style="`width:100%; min-height:${tableHeight}`"
-          border
           fit
           highlight-current-row
         >

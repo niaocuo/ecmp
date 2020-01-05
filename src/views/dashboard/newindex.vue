@@ -28,8 +28,8 @@
         </div>
       </el-col>
     </el-row>
-    <el-row style="padding:10px 10px 0;">
-      <table-sechar style="padding-left:10px" />
+    <el-row style="padding:10px 10px;" class="bg-item">
+        <table-sechar style="padding-left:10px" />
     </el-row>
     <Notification :warning-message="notifyWarningMessage" />
   </div>
@@ -89,6 +89,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.bg-item{
+  background: #264861;
+}
 .dashboard-editor-container {
   padding: 20px;
   padding-top:0;

@@ -71,6 +71,7 @@
     background-color: transparent;
    }
    thead{
+    background: #28455c;
     .is-leaf {
       color: #fff !important;
       background-color: transparent;
@@ -83,9 +84,9 @@
 .el-table--enable-row-hover .el-table__body tr:hover>td,.el-table__body tr.hover-row>td{
   background-color: #162b3c;
 }
-// .el-table td, .el-table th.is-leaf {
-//   border-bottom: 1px solid #162b3c;
-// }
+.el-table td, .el-table th.is-leaf {
+  border-bottom: 1px solid #6b6b6b;
+}
 .el-textarea__inner{
   color: #fff !important;
   border-color: aqua;
@@ -96,4 +97,13 @@
 }
 .el-dialog__title{
   color: #fff;
+}
+//   table样式
+.el-table--striped .el-table__body tr.el-table__row--striped td{
+  background-color: #28455c;
+}
+.el-table::before{
+  top: 0;
+  bottom: inherit;
+  background-color: #6b6b6b;
 }

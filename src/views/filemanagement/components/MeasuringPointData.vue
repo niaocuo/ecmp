@@ -18,9 +18,9 @@
 
     <el-table
       :data="tableData"
-      border
       :header-cell-style="headerStyle"
       :cell-style="headerStyle"
+      stripe
       :style="`width:100%; min-height:${tableHeight}`"
     >
       <el-table-column

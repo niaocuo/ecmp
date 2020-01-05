@@ -28,7 +28,7 @@
         <el-button type="primary" size="mini" @click="getRsubdistricts">查询</el-button>
       </el-form-item>
     </el-form>
-    <el-table v-loading="listLoading" border :header-cell-style="headerStyle" :cell-style="headerStyle" :data="tableData" size="mini">
+    <el-table v-loading="listLoading" stripe :header-cell-style="headerStyle" :cell-style="headerStyle" :data="tableData" size="mini">
       <el-table-column label="序号" width="80" type="index" />
       <el-table-column label="户号" prop="consNo" />
       <el-table-column label="用户名">
@@ -44,7 +44,7 @@
       <el-table-column label="用电地址" prop="subdistrictAddress" />
       <el-table-column label="坐标" prop="lng" width="80" />
     </el-table>
-    <div style="float: right">
+    <div style="float: right;margin-top:10px">
       <el-pagination
         :current-page="page.currentPage"
         :page-sizes="[5, 10, 20, 50]"
