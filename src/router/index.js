@@ -99,9 +99,15 @@ export const constantRoutes = [
         hidden: true
       },
       {
-        path: '/electricityTariff', // 负荷分析
+        path: '/electricityTariff', // 电量电费
         name: 'electricityTariff',
         component: () => import('@/views/electricityTariff/index'),
+        hidden: true
+      },
+      {
+        path: '/loadAnalysis', // 负荷分析
+        name: 'loadAnalysis',
+        component: () => import('@/views/loadAnalysis/newIndex'),
         hidden: true
       }
     ]
@@ -183,13 +189,8 @@ export const asyncRoutes = [
         name: 'powerQualityWave',
         component: () => import('@/views/powerQuality/powerQualityWave'),
         hidden: true
-      },
-      {
-        path: '/loadAnalysis', // 负荷分析
-        name: 'loadAnalysis',
-        component: () => import('@/views/loadAnalysis/newIndex'),
-        hidden: true
       }
+
     ]
   },
   { path: '/',
