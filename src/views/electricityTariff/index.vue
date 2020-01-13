@@ -17,12 +17,14 @@
               <el-radio-button label="date">今年</el-radio-button>
               <el-radio-button label="month">去年</el-radio-button>
             </el-radio-group>
-            <el-date-picker v-model="formInline.Timer"
+            <el-date-picker
+              v-model="formInline.Timer"
               range-separator="至"
               start-placeholder="开始月份"
               end-placeholder="结束月份"
-              type="monthrange" 
-              size="mini" />
+              type="monthrange"
+              size="mini"
+            />
           </el-form-item>
           <el-form-item label-width="0px">
             <el-button type="primary" size="mini" @click="onSubmit('treeform')">查询</el-button>
@@ -64,7 +66,7 @@
         </el-col>
       </el-row>
       <div class="item-block-bg">
-        <el-radio-group class="mb20" v-model="echartbutton" size="mini">
+        <el-radio-group v-model="echartbutton" class="mb20" size="mini">
           <el-radio-button label="date">总量费</el-radio-button>
           <el-radio-button label="month">基本电费</el-radio-button>
           <el-radio-button label="date1">电度电费</el-radio-button>
@@ -82,10 +84,10 @@ export default {
   data() {
     return {
       radioDate: 'date',
-      echartbutton:'date',
+      echartbutton: 'date',
       echartsvalue: {
-        yearOnYear: [79, 52, 200, 334, 390, 9, 52, 200, 334, 390, 9, 52,0], // 电费曲线
-        electricity: [9, 52, 200, 334, 390, 9, 52, 200, 33, 334, 390, 9], // 电量柱形
+        yearOnYear: [79, 52, 200, 334, 390, 9, 52, 200, 334, 390, 9, 52, 0], // 电费曲线
+        electricity: [9, 52, 200, 334, 390, 9, 52, 200, 33, 334, 390, 9] // 电量柱形
       }, // 电量数据
       axisData: ['2019-01', '2019-02', '2019-03', '2019-04', '2019-05', '2019-06', '2019-07', '2019-08', '2019-09', '2019-10', '2019-11', '2019-12'], // X轴坐标
       formInline: {
