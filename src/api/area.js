@@ -5,4 +5,5 @@ export function getAreaByAreaId(areaId) {
     method: 'get',
     params: { areaId }
   })
+
 }
