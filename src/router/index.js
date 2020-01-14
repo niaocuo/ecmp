@@ -93,9 +93,9 @@ export const constantRoutes = [
         hidden: true
       },
       {
-        path: '/panoramic3Dview', // 全景3D视图
-        name: 'panoramic3Dview',
-        component: () => import('@/views/panoramic3Dview/index'),
+        path: '/baiduMapView', // 百度地图
+        name: 'baiduMapView',
+        component: () => import('@/views/baiduMapView/index'),
         hidden: true
       },
       {
