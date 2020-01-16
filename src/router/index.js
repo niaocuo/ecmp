@@ -91,24 +91,6 @@ export const constantRoutes = [
         name: 'primarywiringdiagram',
         component: () => import('@/views/primarywiringdiagram/index'),
         hidden: true
-      },
-      {
-        path: '/baiduMapView', // 百度地图
-        name: 'baiduMapView',
-        component: () => import('@/views/baiduMapView/index'),
-        hidden: true
-      },
-      {
-        path: '/electricityTariff', // 电量电费
-        name: 'electricityTariff',
-        component: () => import('@/views/electricityTariff/index'),
-        hidden: true
-      },
-      {
-        path: '/loadAnalysis', // 负荷分析
-        name: 'loadAnalysis',
-        component: () => import('@/views/loadAnalysis/newIndex'),
-        hidden: true
       }
     ]
   }
@@ -189,8 +171,25 @@ export const asyncRoutes = [
         name: 'powerQualityWave',
         component: () => import('@/views/powerQuality/powerQualityWave'),
         hidden: true
+      },
+      {
+        path: '/baiduMapView', // 地图概览
+        name: 'baiduMapView',
+        component: () => import('@/views/baiduMapView/index'),
+        hidden: true
+      },
+      {
+        path: '/electricityTariff', // 电量电费
+        name: 'electricityTariff',
+        component: () => import('@/views/electricityTariff/index'),
+        hidden: true
+      },
+      {
+        path: '/loadAnalysis', // 负荷分析
+        name: 'loadAnalysis',
+        component: () => import('@/views/loadAnalysis/newIndex'),
+        hidden: true
       }
-
     ]
   },
   { path: '/',

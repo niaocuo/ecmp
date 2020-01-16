@@ -1,7 +1,7 @@
 <template>
   <!-- tab 折线图 -->
   <div>
-    <LineChart :chart-data="lineChartData" :date-type="dateType" />
+    <LineChart :chart-data="lineChartData" />
   </div>
 </template>
 <script>
@@ -10,10 +10,6 @@ const lineChartData = {
   newVisitis: {
     expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91, 154, 162, 140, 145, 120, 82, 91], // 昨天数据
     actualData: [120, 82, 91, 154, 162, 140, 145, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160, 165, 120, 82, 91, 134, 105, 160]// 今天数据
-  },
-  messages: {
-    expectedData: [200, 192, 120, 144, 160, 130, 140, 82, 91, 154, 162, 140, 145, 134, 105, 160, 165, 120, 82, 91, 154, 162, 140, 82],
-    actualData: [180, 160, 151, 106, 145, 150, 130, 20, 144, 160, 130, 140, 82, 91, 154, 162, 140, 145, 134, 105, 20, 144, 160, 130]
   }
 }
 // 查询折线数据
@@ -33,10 +29,6 @@ export default {
     treeNodeId: {
       type: Number,
       default: null
-    },
-    dateType: {
-      type: String,
-      default: 'date'
     }
   },
   data() {

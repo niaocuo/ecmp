@@ -31,10 +31,6 @@ export default {
     chartData: {
       type: Object,
       required: true
-    },
-    dateType: {
-      type: String,
-      default: 'date'
     }
   },
   data() {
@@ -43,27 +39,11 @@ export default {
       value3: ''
     }
   },
-  computed: {
-    legendText() {
-      if (this.dateType === 'date') {
-        return ['昨天', '今天']
-      } else if (this.dateType === 'month') {
-        return ['上月', '本月']
-      } else {
-        return ['去年', '今年']
-      }
-    }
-  },
   watch: {
     chartData: {
       deep: true,
       handler(val) {
         this.setOptions(val)
-      }
-    },
-    dateType: {
-      handler(val) {
-        this.initChart()
       }
     }
   },
@@ -84,16 +64,20 @@ export default {
       this.chart = echarts.init(this.$refs.chart, 'macarons')
       this.setOptions(this.chartData)
     },
-    onSubmit() {
-
-    },
-    setOptions({ expectedData, actualData } = {}) {
+    setOptions({ yesterday, today } = {}) {
+      console.log(yesterday, today)
       this.chart.setOption({
         xAxis: {
-          data: ['1', '2', '3', '4', '5', '6', '7',
-            '8 ', '9 ', '10 ', '11 ', '12 ', '13 ', '14 ',
-            '15 ', '16 ', '9 ', '10 ', '11 ', '12 ', '13 ', '14 ',
-            '15 ', '16 ', '17 ', '18 ', '19 ', '20 ', '21 ', '22 ', '17 ', '18 ', '19 ', '20 ', '21 ', '22 ', '23 ', '24 '],
+          data: ['1', '2', '3', '4', '5', '6', '7', '8 ', '9 ', '10 ',
+            '11 ', '12 ', '13 ', '14 ', '15 ', '16 ', '17 ', '18 ', '19 ', '20 ',
+            '21 ', '22 ', '23 ', '24 ', '25 ', '26 ', '27 ', '28 ', '29 ', '30 ',
+            '31 ', '32 ', '33 ', '34 ', '35 ', '36 ', '37 ', '38 ', '39 ', '40 ',
+            '41 ', '42 ', '43 ', '44 ', '45 ', '46 ', '47 ', '48 ', '49 ', '50 ',
+            '51 ', '52 ', '53 ', '54 ', '55 ', '56 ', '57 ', '58 ', '59 ', '60 ',
+            '61 ', '62 ', '63 ', '64 ', '65 ', '66 ', '67 ', '68 ', '69 ', '70 ',
+            '71 ', '72 ', '73 ', '74 ', '75 ', '76 ', '77 ', '78 ', '79 ', '80 ',
+            '81 ', '82 ', '83 ', '84 ', '85 ', '86 ', '87 ', '88 ', '89 ', '90 ',
+            '91 ', '92 ', '93 ', '94 ', '95 ', '96 '],
           boundaryGap: false,
           axisLabel: {
             textStyle: {
@@ -137,7 +121,7 @@ export default {
           }
         },
         legend: {
-          data: this.legendText,
+          data: ['昨天', '今天'],
           x: '45%',
           textStyle: {
             color: '#fff'
@@ -162,7 +146,7 @@ export default {
           }
         }],
         series: [{
-          name: this.legendText[0], // expected
+          name: '昨天', // expected
           symbol: 'none', // 去掉折线图中的节点
           itemStyle: {
             normal: {
@@ -178,12 +162,12 @@ export default {
           },
           smooth: true,
           type: 'line',
-          data: expectedData,
+          data: yesterday,
           animationDuration: 2800,
           animationEasing: 'cubicInOut'
         },
         {
-          name: this.legendText[1], // actual
+          name: '今天', // actual
           smooth: true,
           symbol: 'none', // 去掉折线图中的节点
           type: 'line',
@@ -199,7 +183,7 @@ export default {
               }
             }
           },
-          data: actualData,
+          data: today,
           animationDuration: 2800,
           animationEasing: 'quadraticOut'
         }]

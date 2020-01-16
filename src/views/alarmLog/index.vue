@@ -33,7 +33,17 @@
             </el-select>
           </el-form-item>
           <el-form-item label="发生时间">
-            <el-date-picker v-model="rightformInline.alarmStartTime" value-format="timestamp" size="mini" placeholder="发生时间" style="width: 150px;" />
+            <el-date-picker
+              v-model="rightformInline.alarmStartTime"
+              type="daterange"
+              value-format="timestamp"
+              size="mini"
+              style="width: 250px;"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              :picker-options="pickerOptions"
+            />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" size="mini" @click="onSubmit()">查询</el-button>
@@ -162,6 +172,11 @@ export default {
   },
   data() {
     return {
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now() - 8.64e6
+        }
+      },
       treeData: [],
       showDeviceType: true,
       formInline: {
@@ -172,7 +187,7 @@ export default {
         alarmLevel: '0', // 告警级别
         alarmType: '', // 告警类别
         deviceType: '', // 设备类型
-        alarmStartTime: '' // 发生时间
+        alarmStartTime: [] // 发生时间
       },
       logTypeList: [],
       equipmentTypeList: [],

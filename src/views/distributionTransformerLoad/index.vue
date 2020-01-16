@@ -59,81 +59,81 @@
   </div>
 </template>
 <script>
-  import LineChart from './components/LineChart'
-  import { getRsubdistrictLaber, getRstationLaber, getRtransformerLaber } from '@/api/common'
-  import { getTranLoadrateDay } from '@/api/rMpDefinInfo'
-  export default {
-    components: { LineChart },
-    data() {
-      return {
-        capacity: '',
-        avgRate: '',
-        maxRate: '',
-        formInline: {
-          statename: '', // 站点
-          distributionRoom: '', // 配电房
-          transformer: '', // 变压器
-          timer: new Date().getTime()
-        },
-        lineChartData: {
-          expectedData: [] // 负载率数据
-        },
-        transformerOptions: [], // 变压器下拉
-        distributionRoomOptions: [], // 配电房下拉
-        stateOptions: [] // 站点下拉
-      }
+import LineChart from './components/LineChart'
+import { getRsubdistrictLaber, getRstationLaber, getRtransformerLaber } from '@/api/common'
+import { getTranLoadrateDay } from '@/api/rMpDefinInfo'
+export default {
+  components: { LineChart },
+  data() {
+    return {
+      capacity: '',
+      avgRate: '',
+      maxRate: '',
+      formInline: {
+        statename: '', // 站点
+        distributionRoom: '', // 配电房
+        transformer: '', // 变压器
+        timer: new Date().getTime()
+      },
+      lineChartData: {
+        expectedData: [] // 负载率数据
+      },
+      transformerOptions: [], // 变压器下拉
+      distributionRoomOptions: [], // 配电房下拉
+      stateOptions: [] // 站点下拉
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      const result = await getRsubdistrictLaber()
+      this.stateOptions = result.data
+      // const res = await getRstationLaber()
+      // this.distributionRoomOptions = res.data
+      // const data = await getRtransformerLaber()
+      // this.transformerOptions = data.data
     },
-    mounted() {
-      this.init()
+    async changeRsubdistrict(val) {
+      const result = await getRstationLaber(val)
+      this.formInline.distributionRoom = ''
+      this.formInline.transformer = ''
+      this.transformerOptions = []
+      this.distributionRoomOptions = result.data
     },
-    methods: {
-      async init() {
-        const result = await getRsubdistrictLaber()
-        this.stateOptions = result.data
-        // const res = await getRstationLaber()
-        // this.distributionRoomOptions = res.data
-        // const data = await getRtransformerLaber()
-        // this.transformerOptions = data.data
-      },
-      async changeRsubdistrict(val) {
-        const result = await getRstationLaber(val)
-        this.formInline.distributionRoom = ''
-        this.formInline.transformer = ''
-        this.transformerOptions = []
-        this.distributionRoomOptions = result.data
-      },
-      async changeRstation(val) {
-        const result = await getRtransformerLaber(val)
-        this.formInline.transformer = ''
-        this.transformerOptions = result.data
-      },
-      async onSubmit() {
-        if (this.formInline.transformer === '') {
-          this.$message({
-            message: '请选择需要查询的变压器！',
-            type: 'warning'
-          })
-        } else {
-          const temp = {
-            trId: this.formInline.transformer,
-            collDate: this.formInline.timer
-          }
-          const result = await getTranLoadrateDay(temp)
-          console.log(result.data)
-          if (result.data.baseData) {
-            this.capacity = result.data.baseData.capacity
-            this.avgRate = result.data.baseData.avgRate
-            this.maxRate = result.data.baseData.maxRate
-          } else {
-            this.capacity = ''
-            this.avgRate = ''
-            this.maxRate = ''
-          }
-          this.lineChartData.expectedData = result.data.dataList
+    async changeRstation(val) {
+      const result = await getRtransformerLaber(val)
+      this.formInline.transformer = ''
+      this.transformerOptions = result.data
+    },
+    async onSubmit() {
+      if (this.formInline.transformer === '') {
+        this.$message({
+          message: '请选择需要查询的变压器！',
+          type: 'warning'
+        })
+      } else {
+        const temp = {
+          trId: this.formInline.transformer,
+          collDate: this.formInline.timer
         }
+        const result = await getTranLoadrateDay(temp)
+        console.log(result.data)
+        if (result.data.baseData) {
+          this.capacity = result.data.baseData.capacity
+          this.avgRate = result.data.baseData.avgRate
+          this.maxRate = result.data.baseData.maxRate
+        } else {
+          this.capacity = ''
+          this.avgRate = ''
+          this.maxRate = ''
+        }
+        this.lineChartData.expectedData = result.data.dataList
       }
     }
   }
+}
 </script>
 <style lang="scss">
   // html{
