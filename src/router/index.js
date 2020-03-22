@@ -94,6 +94,7 @@ export const constantRoutes = [
       }
     ]
   }
+
 ]
 /**
  * asyncRoutes
@@ -203,6 +204,33 @@ export const asyncRoutes = [
         component: () => import('@/views/construction/index'),
         meta: { title: '建设中...', icon: 'construction' }
       }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: '基本信息',
+    meta: { title: '基本信息', icon: 'BaseInfo' },
+    children: [
+      {
+        path: '/acquisitionEquipment',
+        name: '采集设备',
+        component: () => import('@/views/basicInformation/acquisitionEquipment'),
+        meta: { title: '采集设备', icon: 'userManage' } // 采集设备
+      },
+      {
+        path: '/customerManagement',
+        name: '客户管理',
+        component: () => import('@/views/basicInformation/customerManagement'),
+        meta: { title: '客户管理', icon: 'userManage' } // 客户管理
+      },
+      {
+        path: '/distributionEquipment',
+        name: '配电设备',
+        component: () => import('@/views/basicInformation/distributionEquipment'),
+        meta: { title: '配电设备', icon: 'userManage' } // 配电设备
+      }
+
     ]
   },
   // 所有角色都可以访问404页必须放在末尾！！！

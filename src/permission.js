@@ -41,8 +41,8 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           const accessRoutes = await store.dispatch('user/getInfo')
-          router.addRoutes(accessRoutes)
           // hack方法以确保addroutes是完整的
+          router.addRoutes(accessRoutes)
           // 设置replace:true，这样导航就不会留下历史记录
           next({ ...to, replace: true })
           // next()

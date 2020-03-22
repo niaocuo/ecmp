@@ -43,67 +43,103 @@
   }
 }
 
-.el-form-item__label,.el-date-editor .el-range-separator,.el-breadcrumb__inner a{
+.el-form-item__label,
+.el-date-editor .el-range-separator,
+.el-breadcrumb__inner a {
   color: #ffffff
 }
-.el-pager li,.el-pagination .btn-next, .el-pagination .btn-prev,.el-tree{
+
+.el-pager li,
+.el-pagination .btn-next,
+.el-pagination .btn-prev,
+.el-tree {
   background-color: transparent !important;
   color: #ffffff;
 }
-.el-input__inner,.el-date-editor .el-range-input{
+
+.el-input__inner,
+.el-date-editor .el-range-input {
   background: transparent;
   color: #ffffff;
   border-color: aqua
 }
-.el-select .el-input .el-select__caret{
+
+.el-select .el-input .el-select__caret {
   color: #ffffff
 }
-.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content,.el-tree-node__content:hover,.el-tree-node:focus>.el-tree-node__content {
+
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content,
+.el-tree-node__content:hover,
+.el-tree-node:focus>.el-tree-node__content {
   background-color: #6b8098;
 }
-.el-tabs__item{
+
+.el-tabs__item {
   color: #fff;
 }
-.el-table{
+
+.el-table {
   color: #fff;
   background-color: transparent;
-   tr{
+
+  tr {
     background-color: transparent;
-   }
-   thead{
+  }
+
+  thead {
     background: #28455c;
+
     .is-leaf {
       color: #fff !important;
       background-color: transparent;
     }
-   }
+  }
 }
-.el-table--enable-row-hover .el-table__body tr>td{
+
+.el-table--enable-row-hover .el-table__body tr>td {
   color: #fff !important;
 }
-.el-table--enable-row-hover .el-table__body tr:hover>td,.el-table__body tr.hover-row>td{
+
+.el-table--enable-row-hover .el-table__body tr:hover>td,
+.el-table__body tr.hover-row>td {
   background-color: #162b3c;
 }
-.el-table td, .el-table th.is-leaf {
+
+.el-table td,
+.el-table th.is-leaf {
   border-bottom: 1px solid #6b6b6b;
 }
-.el-textarea__inner{
+
+.el-textarea__inner {
   color: #fff !important;
   border-color: aqua;
   background-color: transparent;
 }
-.el-dialog{
+
+.el-dialog {
   background-color: #162b3c;
 }
-.el-dialog__title{
+
+.el-dialog__title {
   color: #fff;
 }
+
 //   table样式
-.el-table--striped .el-table__body tr.el-table__row--striped td{
+.el-table--striped .el-table__body tr.el-table__row--striped td {
   background-color: #28455c;
 }
-.el-table::before{
+
+.el-table__body tr.current-row>td {
+  background-color: #162b3c;
+}
+
+.el-table::before {
   top: 0;
   bottom: inherit;
   background-color: #6b6b6b;
+}
+.bg-item{
+  background: #264861;
+  border-radius: 10px;
+  padding: 15px;
 }

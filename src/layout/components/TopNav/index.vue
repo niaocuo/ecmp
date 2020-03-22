@@ -59,10 +59,7 @@ export default {
       return !this.sidebar.opened
     }
   },
-  mounted() {
-    // console.log(this.permission_routes)
-  },
-  created() {
+  beforeMount() {
     this.init()
   },
   methods: {
