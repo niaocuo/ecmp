@@ -35,11 +35,15 @@
         highlight-current-row
       >
         <el-table-column align="center" label="序号" type="index" width="50" />
-        <el-table-column prop="rsubdistrict.consNo" align="center" label="资产编号" width="150" />
-        <el-table-column prop="rsubdistrict.consNo" align="center" label="终端名称" />
-        <el-table-column prop="rsubdistrict.consNo" align="center" label="安装位置" />
-        <el-table-column prop="rsubdistrict.consNo" align="center" label="终端类型" />
-        <el-table-column prop="rsubdistrict.consNo" align="center" label="所属网关" width="95" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="户号" width="50" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="客户名称" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="客户代码" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="所属行业" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="用电地址" width="95" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="联系人" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="联系电话" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="所属地区" />
+        <el-table-column prop="rsubdistrict.consNo" align="center" label="业务配置" />
       </el-table>
     </div>
   </div>

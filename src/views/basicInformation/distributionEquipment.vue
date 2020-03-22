@@ -38,11 +38,13 @@
           highlight-current-row
         >
           <el-table-column align="center" label="序号" type="index" width="50" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="资产编号" width="150" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="终端名称" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="安装位置" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="终端类型" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="所属网关" width="95" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="资产编号" width="95" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="变压器名称" width="150" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="变压器类型" width="150" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="变压器卷数" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="容量" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="生产厂家" width="50" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="运行状态" width="95" />
         </el-table>
       </div>
       <div class="bg-item">
@@ -74,10 +76,10 @@
         >
           <el-table-column align="center" label="序号" type="index" width="50" />
           <el-table-column prop="rsubdistrict.consNo" align="center" label="资产编号" width="150" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="终端名称" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="安装位置" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="终端类型" />
-          <el-table-column prop="rsubdistrict.consNo" align="center" label="所属网关" width="95" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="线路名称" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="线路类型" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="电压等级" />
+          <el-table-column prop="rsubdistrict.consNo" align="center" label="运行状态" width="95" />
         </el-table>
       </div>
     </div>
