@@ -216,19 +216,19 @@ export const asyncRoutes = [
         path: '/acquisitionEquipment',
         name: '采集设备',
         component: () => import('@/views/basicInformation/acquisitionEquipment'),
-        meta: { title: '采集设备', icon: 'userManage' } // 采集设备
+        meta: { title: '采集设备', icon: 'userManage' } // 采集设备 path:acquisitionEquipment
       },
       {
         path: '/customerManagement',
         name: '客户管理',
         component: () => import('@/views/basicInformation/customerManagement'),
-        meta: { title: '客户管理', icon: 'userManage' } // 客户管理
+        meta: { title: '客户管理', icon: 'userManage' } // 客户管理 path:customerManagement
       },
       {
         path: '/distributionEquipment',
         name: '配电设备',
         component: () => import('@/views/basicInformation/distributionEquipment'),
-        meta: { title: '配电设备', icon: 'userManage' } // 配电设备
+        meta: { title: '配电设备', icon: 'userManage' } // 配电设备 path:distributionEquipment
       }
 
     ]
