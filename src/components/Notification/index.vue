@@ -2,33 +2,53 @@
   <div />
 </template>
 <script>
+import { getToken } from '@/utils/auth'
 export default {
-  props: {
-    warningMessage: {
-      type: String,
-      default: '重大警告测试'
-    }
-  },
   data() {
     return {
+      websock: null,
       notifyInstance: ''
     }
   },
   created() {
-    this.openNotify()
+    this.initWebSocket()
   },
   destroyed() {
+    this.websock.close()
     this.notifyInstance.close()
   },
   methods: {
-    openNotify() {
+    initWebSocket() {
+      this.websock = new WebSocket(`ws://${location.host}/wsUrl/websocket/${getToken()}`)
+      this.websock.onmessage = this.websocketMessage
+      this.websock.onopen = this.websocketOpen
+      this.websock.onerror = this.websocketError
+      this.websock.onclose = this.websocketClose
+    },
+    websocketOpen() { // 连接建立之后执行send方法发送数据
+      this.websocketSend('test')
+    },
+    websocketError() { // 连接建立失败重连
+      this.initWebSocket()
+    },
+    websocketMessage(e) { // 数据接收
+      console.log(e.data)
+      this.openNotify(e.data)
+    },
+    websocketSend(Data) { // 数据发送
+      this.websock.send(Data)
+    },
+    websocketClose(e) { // 关闭
+      console.log('断开连接', e)
+    },
+    openNotify(data) {
       this.notifyInstance = this.$notify({
         title: '告警窗口',
         position: 'bottom-right',
         duration: 0,
         customClass: 'ecmp-notify-warning',
         dangerouslyUseHTMLString: true,
-        message: `<p>${this.warningMessage}</p>`
+        message: `<p>${data}</p>`
       })
     }
   }
