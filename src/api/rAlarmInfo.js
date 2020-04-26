@@ -7,3 +7,9 @@ export function getRAlarmInfo(rAlarmInfo) {
     data: rAlarmInfo
   })
 }
+export function getAllRAlarmInfo() {
+  return request({
+    url: '/rAlarmInfo/getAllRAlarmInfo',
+    method: 'get'
+  })
+}

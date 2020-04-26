@@ -3,6 +3,7 @@
 </template>
 <script>
 import { getToken } from '@/utils/auth'
+import { getAllRAlarmInfo } from '@/api/rAlarmInfo'
 export default {
   data() {
     return {
@@ -26,7 +27,8 @@ export default {
       this.websock.onclose = this.websocketClose
     },
     websocketOpen() { // 连接建立之后执行send方法发送数据
-      this.websocketSend('test')
+      this.getAllNotify()
+      // this.websocketSend('test')
     },
     websocketError() { // 连接建立失败重连
       this.initWebSocket()
@@ -34,11 +36,14 @@ export default {
     websocketMessage(e) { // 数据接收
       this.openNotify(e.data)
     },
-    websocketSend(Data) { // 数据发送
-      this.websock.send(Data)
-    },
+    // websocketSend(Data) { // 数据发送
+    //   this.websock.send(Data)
+    // },
     websocketClose(e) { // 关闭
       console.log('断开连接', e)
+    },
+    async getAllNotify() {
+      await getAllRAlarmInfo()
     },
     openNotify(data) {
       this.notifyInstance = this.$notify({
