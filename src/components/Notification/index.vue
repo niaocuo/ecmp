@@ -32,7 +32,6 @@ export default {
       this.initWebSocket()
     },
     websocketMessage(e) { // 数据接收
-      console.log(e.data)
       this.openNotify(e.data)
     },
     websocketSend(Data) { // 数据发送
