@@ -93,6 +93,24 @@ export const constantRoutes = [
         hidden: true
       }
     ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: '一次图',
+    meta: { title: '一次图', icon: 'sysManage' },
+    children: [
+      {
+        path: '/editOsWorkFLow', // 编辑一次图
+        name: 'EditOsWorkFLows',
+        component: () => import('@/views/osWorkFLows/EditOsWorkFLows')
+      },
+      {
+        path: '/showOsWorkFlows', // 展示一次图
+        name: 'ShowOsWorkFlows',
+        component: () => import('@/views/osWorkFLows/ShowOsWorkFlow')
+      }
+    ]
   }
 
 ]
