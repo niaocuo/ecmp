@@ -93,24 +93,6 @@ export const constantRoutes = [
         hidden: true
       }
     ]
-  },
-  {
-    path: '/',
-    component: Layout,
-    name: '一次图',
-    meta: { title: '一次图', icon: 'sysManage' },
-    children: [
-      {
-        path: '/editOsWorkFLow', // 编辑一次图
-        name: 'EditOsWorkFLows',
-        component: () => import('@/views/osWorkFLows/EditOsWorkFLows')
-      },
-      {
-        path: '/showOsWorkFlows', // 展示一次图
-        name: 'ShowOsWorkFlows',
-        component: () => import('@/views/osWorkFLows/ShowOsWorkFlow')
-      }
-    ]
   }
 
 ]
@@ -221,6 +203,26 @@ export const asyncRoutes = [
         name: 'Construction',
         component: () => import('@/views/construction/index'),
         meta: { title: '建设中...', icon: 'construction' }
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    name: '一次图',
+    meta: { title: '一次图', icon: 'sysManage' },
+    children: [
+      {
+        path: '/editOsWorkFLow', // 编辑一次图
+        name: 'EditOsWorkFLow',
+        component: () => import('@/views/osWorkFLows/EditOsWorkFLows'),
+        meta: { title: '编辑一次图', icon: 'userManage' }
+      },
+      {
+        path: '/showOsWorkFlows', // 展示一次图
+        name: 'ShowOsWorkFlows',
+        component: () => import('@/views/osWorkFLows/ShowOsWorkFlow'),
+        meta: { title: '展示一次图', icon: 'userManage' }
       }
     ]
   },
