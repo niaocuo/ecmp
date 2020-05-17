@@ -6,3 +6,12 @@ export function getAreaByAreaId(areaId) {
     params: { areaId }
   })
 }
+
+export function getAreaCascadeById(areaId) {
+  return request({
+    url: '/area/getAreaCascadeById',
+    method: 'get',
+    params: { areaId }
+  })
+}
+

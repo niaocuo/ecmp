@@ -15,14 +15,24 @@
         </el-select>
       </el-form-item>
       <el-form-item label="地区">
-        <el-select v-model="formInline.areaId" filterable clearable size="mini" placeholder="请选择">
-          <el-option
-            v-for="item in areas"
-            :key="item.areaId"
-            :label="item.areaName"
-            :value="item.areaId"
-          />
-        </el-select>
+
+        <el-cascader
+          v-model="areaId"
+          size="mini"
+          placeholder="请选择"
+          :options="areas"
+          :props="{ checkStrictly: true }"
+          clearable
+        />
+
+        <!--        <el-select v-model="formInline.areaId" filterable clearable size="mini" placeholder="请选择">-->
+        <!--          <el-option-->
+        <!--            v-for="item in areas"-->
+        <!--            :key="item.areaId"-->
+        <!--            :label="item.areaName"-->
+        <!--            :value="item.areaId"-->
+        <!--          />-->
+        <!--        </el-select>-->
       </el-form-item>
       <el-form-item>
         <el-button type="primary" size="mini" @click="getRsubdistricts">查询</el-button>
@@ -36,7 +46,7 @@
           <el-link type="primary" @click="jumpExhibition(scope.row.subdistrictId)">{{ scope.row.subdistrictName }}</el-link>
         </template>
       </el-table-column>
-      <el-table-column label="行业" prop="industry" />
+      <el-table-column label="行业" prop="bseInd" />
       <el-table-column label="申报需量" prop="decCapacity" width="120" />
       <el-table-column label="联系人" prop="linkmanName" width="120" />
       <el-table-column label="电话" prop="linkmanPhone" />
@@ -61,13 +71,14 @@
 <script>
 import { getRsubdistricts } from '@/api/subdistricts'
 import { getCodeByCodeSortId } from '@/api/pcode'
-import { getAreaByAreaId } from '@/api/area'
+import { getAreaCascadeById } from '@/api/area'
 export default {
   data() {
     return {
       // 下拉表
       industrys: [],
       areas: [],
+      areaId: [],
       // 查询条件表单
       formInline: {
         areaId: '',
@@ -93,21 +104,23 @@ export default {
   mounted() {
     this.getCodeByCodeSortId()
     this.getRsubdistricts()
-    this.getAreaByAreaId()
+    this.getAreaCascadeById()
   },
   methods: {
     async getCodeByCodeSortId() {
       const res = await getCodeByCodeSortId(10084)
       this.industrys = res.data
     },
-    async getAreaByAreaId() {
-      const result = await getAreaByAreaId(1)
+    async getAreaCascadeById() {
+      const result = await getAreaCascadeById(1)
       this.areas = result.data
     },
     async getRsubdistricts() {
       this.listLoading = true
-      const rsubdistrict = Object.assign(this.page, this.formInline)
-      const res = await getRsubdistricts(rsubdistrict)
+      if (this.areaId.length > 0) {
+        this.formInline.areaId = this.areaId[this.areaId.length - 1]
+      }
+      const res = await getRsubdistricts(Object.assign(this.page, this.formInline))
       this.listLoading = false
       this.tableData = res.data.listData
       this.total = res.data.total
